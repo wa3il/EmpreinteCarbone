@@ -6,6 +6,6 @@ job1:
     - ci/setup-mvn-proxy.sh
     - chmod 400 $CI_SSH_KEY
   script:
-    - cd app
+    - cd appec
     - mvn clean package
     - scp -o StrictHostKeyChecking=no -i $CI_SSH_KEY target/todos.war gitlabci@192.168.75.106:/opt/tomcat/webapps/ROOT.war
