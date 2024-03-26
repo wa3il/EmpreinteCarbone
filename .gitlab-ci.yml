@@ -1,0 +1,11 @@
+job1:
+  image: maven:3-openjdk-17 # docker image with Maven
+  only:
+    - main
+  before_script: 
+    - ci/setup-mvn-proxy.sh
+    - chmod 400 $CI_SSH_KEY
+  script:
+    - cd tp4
+    - mvn clean package
+    - scp -o StrictHostKeyChecking=no -i $CI_SSH_KEY target/todos.war gitlabci@192.168.75.106:/opt/tomcat/webapps/ROOT.war
