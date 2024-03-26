@@ -1,4 +1,4 @@
-package fr.univlyon1.m1if.m1if10.app;
+package fr.univlyon1.m1if.m1if10.appec;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -7,7 +7,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(AppApplication.class);
+		return application.sources(AppecApplication.class);
 	}
 
 }
