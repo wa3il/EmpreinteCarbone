@@ -8,4 +8,4 @@ job1:
   script:
     - cd appec
     - mvn clean package
-    - scp -o StrictHostKeyChecking=no -i $CI_SSH_KEY target/todos.war gitlabci@192.168.75.106:/opt/tomcat/webapps/ROOT.war
+    - scp -o StrictHostKeyChecking=no -i $CI_SSH_KEY target/appec.war gitlabci@192.168.75.106:/opt/tomcat/webapps/ROOT.war
