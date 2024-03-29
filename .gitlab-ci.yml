@@ -53,7 +53,7 @@ sonarqube-vulnerability-report:
   stage: sonarqube-vulnerability-report
   before_script: 
     - ci/setup-mvn-proxy.sh
-    - apt install curl
+    - apt-get install -y curl
   script:
     - 'curl -u "${SONAR_TOKEN}:" "${SONAR_HOST_URL}/api/issues/gitlab_sast_export?projectKey=multimif_multimif-8_AY6FQPc7u4zgX3p-IR2I&branch=${CI_COMMIT_BRANCH}&pullRequest=${CI_MERGE_REQUEST_IID}" -o gl-sast-sonar-report.json'
   allow_failure: true
