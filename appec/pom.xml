@@ -16,6 +16,9 @@
 	<description>application sur l&apos;empreinte carbone</description>
 	<properties>
 		<java.version>17</java.version>
+		<sonar.projectKey>groupe12_multi-mif12_AY6KW_wzu4zgX3p-IR5I</sonar.projectKey>
+		<sonar.projectName>multi-mif12</sonar.projectName>
+		<sonar.qualitygate.wait>true</sonar.qualitygate.wait>
 	</properties>
 	<dependencies>
 		<dependency>
