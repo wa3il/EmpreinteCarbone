@@ -1,4 +1,28 @@
+stages:
+  - deploy
+  - sonarqube-check
+  - sonarqube-vulnerability-report
+
+# Cache downloaded dependencies and plugins between builds.
+# Not strictly necessary, but speeds up the builds.
+cache:
+  key: "$CI_JOB_NAME"
+  paths:
+    # Must be within the repository under test hence we can't use the
+    # default ~/.m2
+    - .m2/repository
+    - .sonar/cache
+variables:
+  # Use the cached directory above.
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  PACKAGE_NAME: ""
+  BACK_DIR: ""
+  IP_ADDRESS: "192.168.75.106"
+  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"
+  GIT_DEPTH: "0"
+
 job1:
+  stage: deploy
   image: maven:3-openjdk-17 # docker image with Maven
   only:
     - main
@@ -8,4 +32,34 @@ job1:
   script:
     - cd appec
     - mvn clean package
-    - scp -o StrictHostKeyChecking=no -i $CI_SSH_KEY target/appec.war gitlabci@192.168.75.106:/opt/tomcat/webapps/ROOT.war
+    - scp -o StrictHostKeyChecking=no -i $CI_SSH_KEY target/appec.war gitlabci@$IP_ADDRESS:/opt/tomcat/webapps/ROOT.war
+
+sonarqube-check:
+  stage: sonarqube-check
+  image: maven:3-openjdk-17
+  script: 
+    - cd appec/
+    - mvn verify sonar:sonar
+  allow_failure: true
+  only:
+    - merge_requests
+    - master
+    - main
+    - develop
+
+sonarqube-vulnerability-report:
+  stage: sonarqube-vulnerability-report
+  script:
+    - 'curl -u "${SONAR_TOKEN}:" "${SONAR_HOST_URL}/api/issues/gitlab_sast_export?projectKey=multimif_multimif-8_AY6FQPc7u4zgX3p-IR2I&branch=${CI_COMMIT_BRANCH}&pullRequest=${CI_MERGE_REQUEST_IID}" -o gl-sast-sonar-report.json'
+  allow_failure: true
+  only:
+    - merge_requests
+    - master
+    - main
+    - develop
+  artifacts:
+    expire_in: 1 day
+    reports:
+      sast: gl-sast-sonar-report.json
+  dependencies:
+    - sonarqube-check
