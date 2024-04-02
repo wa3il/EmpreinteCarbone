@@ -1,20 +1,23 @@
 package fr.univlyon1.m1if.m1if10.appec.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "utilisateur")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long utilisateurId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "utilisateurid")
+    private Integer uid;
+
+    @Column(name = "nom")
     private String name;
+
+    @Column(name = "mdp")
     private String password;
+
+    @Column(name = "email")
     private String email;
 
     public User() {
@@ -26,8 +29,8 @@ public class User {
         this.email = email;
     }
 
-    public long getUtilisateurId() {
-        return utilisateurId;
+    public long getUid() {
+        return uid;
     }
 
     public String getName() {
