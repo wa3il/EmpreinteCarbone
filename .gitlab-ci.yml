@@ -31,15 +31,17 @@ job1:
     - chmod 400 $CI_SSH_KEY
   script:
     - cd appec
-    - mvn clean package -DskipTests
+    - mvn clean package
     - scp -o StrictHostKeyChecking=no -i $CI_SSH_KEY target/appec.war gitlabci@$IP_ADDRESS:/opt/tomcat/webapps/ROOT.war
 
 sonarqube-check:
   stage: sonarqube-check
   image: maven:3-openjdk-17
+  before_script: 
+    - ci/setup-mvn-proxy.sh
   script: 
     - cd appec/
-    - mvn verify sonar:sonar -DskipTests
+    - mvn verify sonar:sonar
   allow_failure: true
   only:
     - merge_requests
@@ -47,19 +49,22 @@ sonarqube-check:
     - main
     - develop
 
-sonarqube-vulnerability-report:
-  stage: sonarqube-vulnerability-report
-  script:
-    - 'curl -u "${SONAR_TOKEN}:" "${SONAR_HOST_URL}/api/issues/gitlab_sast_export?projectKey=multimif_multimif-8_AY6FQPc7u4zgX3p-IR2I&branch=${CI_COMMIT_BRANCH}&pullRequest=${CI_MERGE_REQUEST_IID}" -o gl-sast-sonar-report.json'
-  allow_failure: true
-  only:
-    - merge_requests
-    - master
-    - main
-    - develop
-  artifacts:
-    expire_in: 1 day
-    reports:
-      sast: gl-sast-sonar-report.json
-  dependencies:
-    - sonarqube-check
+#sonarqube-vulnerability-report:
+#  stage: sonarqube-vulnerability-report
+#  before_script: 
+#    - ci/setup-mvn-proxy.sh
+#    - apt-get install -y curl
+#  script:
+#    - 'curl -u "${SONAR_TOKEN}:" "${SONAR_HOST_URL}/api/issues/gitlab_sast_export?projectKey=multimif_multimif-8_AY6FQPc7u4zgX3p-IR2I&branch=${CI_COMMIT_BRANCH}&pullRequest=${CI_MERGE_REQUEST_IID}" -o gl-sast-sonar-report.json'
+#  allow_failure: true
+#  only:
+#    - merge_requests
+#    - master
+#    - main
+#    - develop
+#  artifacts:
+#    expire_in: 1 day
+#    reports:
+#      sast: gl-sast-sonar-report.json
+#  dependencies:
+#    - sonarqube-check
