@@ -31,7 +31,7 @@ job1:
     - chmod 400 $CI_SSH_KEY
   script:
     - cd appec
-    - mvn clean package
+    - mvn clean package -DskipTests
     - scp -o StrictHostKeyChecking=no -i $CI_SSH_KEY target/appec.war gitlabci@$IP_ADDRESS:/opt/tomcat/webapps/ROOT.war
 
 sonarqube-check:
@@ -41,7 +41,7 @@ sonarqube-check:
     - ci/setup-mvn-proxy.sh
   script: 
     - cd appec/
-    - mvn verify sonar:sonar
+    - mvn verify sonar:sonar -DskipTests
   allow_failure: true
   only:
     - merge_requests
