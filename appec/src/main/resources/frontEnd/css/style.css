@@ -16,6 +16,18 @@
     visibility: collapse;
 }
 
+
+/* background color */
+
+.child1 {
+    z-index: 0;
+}
+
+.child2 {
+    position: absolute;
+    z-index: 1;
+}
+
 /*** Spinner Start ***/
 #spinner {
     opacity: 0;

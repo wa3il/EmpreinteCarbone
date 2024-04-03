@@ -10,15 +10,12 @@ const baseUrl = "https://192.168.75.67/api/v3/";
  * @param hash une chaîne de caractères (trouvée a priori dans le hash) contenant un sélecteur CSS indiquant un élément à rendre visible.
  */
 function show(hash) {
-    console.log(hash);
     const oldActiveElement = document.querySelector(".active");
     oldActiveElement.classList.remove("active");
     oldActiveElement.classList.add("inactive");
     const newActiveElement = document.querySelector(hash);
     newActiveElement.classList.remove("inactive");
     newActiveElement.classList.add("active");
-    console.log('ancien : '+oldActiveElement.classList.toString());
-    console.log('nouveau : '+newActiveElement.classList.toString());
 }
 
 /**
@@ -55,6 +52,5 @@ function displayConnected(isConnected) {
 }
 
 window.addEventListener('hashchange', () => {
-    console.log(window.location.hash); 
     show(window.location.hash);
 });

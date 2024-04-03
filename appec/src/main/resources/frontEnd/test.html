@@ -44,9 +44,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
-                    <li class="notRequiresConnection"><a href='#index' class="nav-item nav-link text-white">Accueil</a></li>
+                    <li class="notRequiresConnection"><a href='#index' class="nav-item nav-link text-white">Accueil</a>
+                    </li>
                     <li class="notRequiresConnection"><a href='#' class="nav-item nav-link text-white">Produits</a></li>
-                    <li class="notRequiresConnection"><a href='#compte' class="nav-item nav-link text-white">Mon compte</a></li>
+                    <li class="notRequiresConnection"><a href='#compte' class="nav-item nav-link text-white">Mon
+                            compte</a></li>
                     <li class="requiresConnection"><a href='#' class="nav-item nav-link text-white">Ma liste</a></li>
                 </div>
             </div>
@@ -242,18 +244,42 @@
 
     <!-- Page de connexion Start -->
     <section id='connexion' class='inactive'>
-        <div class="container-fluid py-5 mb-5 hero-header">
-            <div class="justify-content-center container py-5">
-                <div class="align-items-center text-center">
-                    <h1 class="mb-5 display-3 text-primary">Connexion</h1>
-                    <div class="mx-auto">
-                        <button type="submit"
-                            class="btn btn-primary border-2 border-secondary py-3 px-4 rounded-pill text-white h-100"
-                            style="top: 0; right: 25%;">Faire le test</button>
+        <div class="container-fluid contact py-5 mb-5">
+            <div class="container py-5 mb-5">
+                <div class="p-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-3">
+                                <!-- Utilisation de col-4 pour que la div occupe 20% de la largeur de l'écran (20% de 12 colonnes) -->
+                                <div class="rounded bg-dark text-center p-2 mt-n3 child2">
+                                    <h3 class="display-7 text-light">Me connecter</h3>
+                                </div>
+                            </div>
+                            <div class="rounded bg-light p-4 mt-4 child1">
+                                <div class="row justify-content-center">
+                                    <div class="col-3 pt-3">
+                                        <form action="/login" method="post">
+                                            <div class="p-2">
+                                                <label for="email">E-mail:     </label>
+                                                <input type="email" id="email" name="email" required>
+                                            </div>
+                                            <div class="p-2">
+                                                <label for="password">Mot de passe:</label>
+                                                <input type="password" id="password" name="password" required>
+                                            </div>
+                                            <div class="p-4">
+                                                <button type="submit">Se connecter</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </section>
     <!-- Page de connexion End -->
 
