@@ -6,6 +6,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,11 +29,13 @@ public class JpaUserDao implements Dao<User> {
         return query.getResultList();
     }
 
+    @Transactional
     @Override
     public void save(User user) {
-        executeInsideTransaction(entityManager -> entityManager.persist(user));
+        entityManager.persist(user);
     }
 
+    @Transactional
     @Override
     public void update(User user, String[] params) {
         Objects.requireNonNull(params, "Params cannot be null");
@@ -43,24 +46,13 @@ public class JpaUserDao implements Dao<User> {
         user.setName(params[0]);
         user.setPassword(params[1]);
         user.setEmail(params[2]);
-        executeInsideTransaction(entityManager -> entityManager.merge(user));
+        entityManager.merge(user);
     }
 
+    @Transactional
     @Override
     public void delete(User user) {
-        executeInsideTransaction(entityManager -> entityManager.remove(user));
-    }
-
-    private void executeInsideTransaction(Consumer<EntityManager> action) {
-        EntityTransaction tx = entityManager.getTransaction();
-        try {
-            tx.begin();
-            action.accept(entityManager);
-            tx.commit();
-        } catch (RuntimeException e) {
-            tx.rollback();
-            throw e;
-        }
+        entityManager.remove(user);
     }
 
 }
