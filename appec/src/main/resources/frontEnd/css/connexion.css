@@ -1,0 +1,61 @@
+
+body {
+    background-image: url("https://inventiv-it.fr/wp-content/uploads/reduire_impact_carbone_du_numerique.jpg");
+    background-size: cover;
+    background-position: center;
+  }
+  .container {
+    width: 500px;
+    height: 450px;
+    text-align: center; 
+    margin : auto;
+    background-color: rgba(19, 42, 32, 0.8);
+    margin-top: 150px;
+    border-radius: 5px;
+  }
+  img {
+    width: 150px;
+    hight:150px;
+    border-radius:50%;
+    margin-top:-70px;
+    margin-bottom: 30px;
+  }
+   input {
+    height: 40px;
+    width: 300px;
+    font-size: 18px;
+    font-family: "Lato";
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding-left: 35px;
+  }
+  .form-input {
+    position:relative;
+  }
+  .fa-lock, .fa-user, .fa-envelope {
+    position:absolute;
+    top: 5px;
+    left: 88px;
+    color:#3BA8A5;
+  }
+  
+  #submit {
+    width: 170px;
+    height: 40px;
+    padding: 5px;
+    background-color: #D6D6D6;
+    boder-style: none;
+    margin-top: 30px;
+    margin-bottom: 30px
+  }
+  #submit:hover {
+    cursor: pointer;
+    background-color: #575C56;
+    color: white;
+  }
+  p{
+    color: white;
+  }
+  a {
+    color: white;
+  }
