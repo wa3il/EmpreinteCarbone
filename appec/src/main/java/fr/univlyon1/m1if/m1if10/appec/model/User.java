@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.springframework.lang.Nullable;
 
 /**
  * User entity.
@@ -21,17 +22,16 @@ public class User {
     @Column(name = "utilisateurid")
     private Integer uid;
 
-    @Column(name = "nom")
+    @Column(name = "nom", nullable = false)
     private String name;
 
-    @Column(name = "mdp")
+    @Column(name = "mdp", nullable = false)
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    public User() {
-    }
+    public User() {}
 
     public User(String name, String password, String email) {
         this.name = name;
@@ -39,9 +39,7 @@ public class User {
         this.email = email;
     }
 
-    public long getUid() {
-        return uid;
-    }
+    //public long getUid() {return uid;}
 
     public String getName() {
         return name;
