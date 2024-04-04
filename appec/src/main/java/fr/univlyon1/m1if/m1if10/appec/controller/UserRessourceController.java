@@ -1,6 +1,5 @@
 package fr.univlyon1.m1if.m1if10.appec.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.univlyon1.m1if.m1if10.appec.dao.Dao;
 import fr.univlyon1.m1if.m1if10.appec.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
