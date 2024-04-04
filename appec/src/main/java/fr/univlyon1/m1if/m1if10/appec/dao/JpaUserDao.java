@@ -2,7 +2,6 @@ package fr.univlyon1.m1if.m1if10.appec.dao;
 
 import fr.univlyon1.m1if.m1if10.appec.model.User;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
@@ -11,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 @Repository
 public class JpaUserDao implements Dao<User> {
