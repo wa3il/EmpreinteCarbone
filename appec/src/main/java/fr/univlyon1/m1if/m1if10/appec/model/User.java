@@ -28,7 +28,7 @@ public class User {
     @Column(name = "mdp", nullable = false)
     private String password;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "login", nullable = false)
     private String email;
 
     public User() {}

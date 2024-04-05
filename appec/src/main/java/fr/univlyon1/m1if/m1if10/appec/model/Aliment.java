@@ -8,13 +8,13 @@ public class Aliment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "alimentID")
+    @Column(name = "alimentid")
     private Integer alimentId;
 
-    @Column(name = "nomLegume", nullable = false)
+    @Column(name = "nomlegume", nullable = false)
     private String nomLegume;
 
-    @Column(name = "EC", nullable = false)
+    @Column(name = "ec", nullable = false)
     private Float ec;
 
     @Column(name = "groupe", nullable = false)

@@ -19,7 +19,9 @@ public class ConfigurationSecurityApplication {
             http
                 .csrf(AbstractHttpConfigurer::disable)
                     .authorizeHttpRequests(
-                        (authorize) -> authorize.requestMatchers(POST,"/users").permitAll()
+                        (authorize) -> authorize
+                                .requestMatchers(POST,"/users").permitAll()
+                                .requestMatchers("/Aliments").permitAll()
                             .anyRequest().authenticated()
                     )
                 .build();
