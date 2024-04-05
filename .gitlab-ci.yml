@@ -30,10 +30,9 @@ job1:
     - ci/setup-mvn-proxy.sh
     - chmod 400 $CI_SSH_KEY
   script:
-    - cd appec
+    - cd client
     - mvn clean package -DskipTests
-    - scp -o StrictHostKeyChecking=no -i $CI_SSH_KEY target/appec.war gitlabci@$IP_ADDRESS:/opt/tomcat/webapps/ROOT.war
-    - scp -o StrictHostKeyChecking=no -i $CI_SSH_KEY target/appec.war gitlabci@$IP_ADDRESS:/opt/tomcat/webapps/ROOT.war
+    - scp -o StrictHostKeyChecking=no -i $CI_SSH_KEY target/client.war gitlabci@$IP_ADDRESS:/opt/tomcat/webapps/client.war
 
 sonarqube-check:
   stage: sonarqube-check
