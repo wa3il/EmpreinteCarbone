@@ -1,7 +1,18 @@
 package fr.univlyon1.m1if.m1if10.appec.model;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.springframework.lang.Nullable;
 
+/**
+ * User entity.
+ */
+@JacksonXmlRootElement(localName = "user")
 @Entity
 @Table(name = "utilisateur")
 public class User {
@@ -11,17 +22,16 @@ public class User {
     @Column(name = "utilisateurid")
     private Integer uid;
 
-    @Column(name = "nom")
+    @Column(name = "nom", nullable = false)
     private String name;
 
-    @Column(name = "mdp")
+    @Column(name = "mdp", nullable = false)
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "login", nullable = false)
     private String email;
 
-    public User() {
-    }
+    public User() {}
 
     public User(String name, String password, String email) {
         this.name = name;
@@ -29,9 +39,7 @@ public class User {
         this.email = email;
     }
 
-    public long getUid() {
-        return uid;
-    }
+    //public long getUid() {return uid;}
 
     public String getName() {
         return name;
@@ -56,10 +64,5 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
-
-
-
 
 }

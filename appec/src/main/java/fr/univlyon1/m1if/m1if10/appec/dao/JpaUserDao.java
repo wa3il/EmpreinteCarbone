@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * JPA implementation of the DAO for User.
+ */
 @Repository
 public class JpaUserDao implements Dao<User> {
 
