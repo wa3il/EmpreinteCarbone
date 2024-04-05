@@ -33,6 +33,7 @@ job1:
     - cd appec
     - mvn clean package -DskipTests
     - scp -o StrictHostKeyChecking=no -i $CI_SSH_KEY target/appec.war gitlabci@$IP_ADDRESS:/opt/tomcat/webapps/ROOT.war
+    - scp -o StrictHostKeyChecking=no -i $CI_SSH_KEY target/appec.war gitlabci@$IP_ADDRESS:/opt/tomcat/webapps/ROOT.war
 
 sonarqube-check:
   stage: sonarqube-check
