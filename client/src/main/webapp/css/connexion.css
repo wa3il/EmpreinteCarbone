@@ -1,5 +1,4 @@
-
-body {
+  body {
     background-image: url("https://inventiv-it.fr/wp-content/uploads/reduire_impact_carbone_du_numerique.jpg");
     background-size: cover;
     background-position: center;
@@ -15,12 +14,12 @@ body {
   }
   img {
     width: 150px;
-    hight:150px;
+    height:150px;
     border-radius:50%;
     margin-top:-70px;
     margin-bottom: 30px;
   }
-   input {
+  input {
     height: 40px;
     width: 300px;
     font-size: 18px;
@@ -38,13 +37,12 @@ body {
     left: 88px;
     color:#3BA8A5;
   }
-  
   #submit {
     width: 170px;
     height: 40px;
     padding: 5px;
     background-color: #D6D6D6;
-    boder-style: none;
+    border-style: none;
     margin-top: 30px;
     margin-bottom: 30px
   }
@@ -59,3 +57,10 @@ body {
   a {
     color: white;
   }
+<<<<<<< Updated upstream
+  btn-submit {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+=======
+>>>>>>> Stashed changes

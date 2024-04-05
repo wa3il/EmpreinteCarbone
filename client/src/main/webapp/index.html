@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Esprit Carbone</title>
+
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +21,6 @@
     <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
-
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -28,33 +28,48 @@
     <link href="css/style.css" rel="stylesheet">
 
     <script type="application/javascript" src="js/spa.js"></script>
+    <script type="application/javascript" src="js/empreinte.js"></script>
+
+    <script crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-
     <!-- Navbar start -->
     <div class="container-fluid bg-primary fixed-top">
         <nav class="navbar navbar-light bg-primary navbar-expand-xl">
-            <a href='#index' class="navbar-brand px-5">
+            <a href='#' id="accueil1" class="navbar-brand px-5">
                 <h1 class="display-6 text-white">Esprit Carbone</h1>
             </a>
             <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse">
-                <span class="fa fa-bars text-primary"></span>
+                data-bs-target="#navbarCollapse"><span class="fa fa-bars text-primary"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
-                    <li class="notRequiresConnection"><a href='#index' class="nav-item nav-link text-white">Accueil</a>
+                    <li class="notRequiresConnection">
+                        <a href="#" id="accueil2" class="nav-item nav-link text-white">Accueil</a>
                     </li>
-                    <li class="notRequiresConnection"><a href='#' class="nav-item nav-link text-white">Produits</a></li>
-                    <li class="notRequiresConnection"><a href='#compte' class="nav-item nav-link text-white">Mon
-                            compte</a></li>
-                    <li class="requiresConnection"><a href='#' class="nav-item nav-link text-white">Ma liste</a></li>
+                    <li class="notRequiresConnection">
+                        <a href="#" id="produits" class="nav-item nav-link text-white">Produits</a>
+                    </li>
+                    <li class="notRequiresConnection">
+                        <a href="#" id="compte" class="nav-item nav-link text-white">Mon compte</a>
+                    </li>
+                    <li class="requiresConnection">
+                        <a href="#" id="liste" class="nav-item nav-link text-white">Ma liste</a>
+                    </li>
+                    <li class="notRequiresConnection">
+                        <a href="#" id="empreinte" class="nav-item nav-link text-white">Mes empreintes</a>
+                    </li>
                 </div>
             </div>
             <div class="d-flex justify-content-center align-items-center m-3 me-3">
-                <a class="notConnection d-flex m-2 px-2 py-2 bg-light rounded-pill" href="#connexion">
-                    <span class="text-primary">Connection</span>
+                <a class="notConnection d-flex m-2 px-2 py-2 bg-light rounded-pill" href="#">
+                    <span id="connexion1" class="text-primary">Connexion</span>
                 </a>
             </div>
 
@@ -63,7 +78,7 @@
     <!-- Navbar End -->
 
     <!-- Index Start -->
-    <section id='index' class='active'>
+    <section id='sectionAccueil' class='active'>
         <!-- Hero Start -->
         <div class="container-fluid py-5 mb-5 hero-header">
             <div class="justify-content-center container py-5">
@@ -97,9 +112,13 @@
                 <p><strong id="nbProduits">...</strong> produits.</p>
             </div>
         </div>
+    </section>
+    <!-- Index End -->
 
+    <!-- Page de produits start -->
+    <section id='sectionProduits' class='inactive'>
         <!-- TODO a remplacer par un template mustach ? -->
-        <div class="container-fluid">
+        <div class="container-fluid py-5 mb-5 hero-header">
             <div class="container px-0 py-3">
                 <div id="tab-1" class="tab-pane fade show p-0">
                     <div class="row g-4">
@@ -239,11 +258,24 @@
                 </div>
             </div>
         </div>
+
+        <div class="center-container"> <!-- Ajout d'une classe pour le conteneur central -->
+            <div class="justify-content-center container px-0">
+                <div class="align-items-center position-relative mx-auto">
+                    <input class="form-control border-2 border-secondary w-100 py-3 px-4 rounded-pill" type="text"
+                        placeholder="Rechercher...">
+                    <button type="submit"
+                        class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100"
+                        style="top: 0; right: 0%;">Rechercher</button>
+                </div>
+            </div>
+        </div>
+
     </section>
-    <!-- Index End -->
+    <!-- Page de produits End -->
 
     <!-- Page de connexion Start -->
-    <section id='connexion' class='inactive'>
+    <section id='sectionConnexion' class='ma-section inactive'>
         <div class="container-fluid contact py-5 mb-5">
             <div class="container py-5 mb-5">
                 <div class="p-5">
@@ -275,7 +307,7 @@
                                                             style="top: 0; right: 25%;">Je me connecte</button>
                                                     </div>
                                                     <div class="pt-2 ps-1">
-                                                        <p>pas encore inscrit? <a href="#inscription">Créer mon
+                                                        <p>pas encore inscrit? <a href="#" id="inscription">Créer mon
                                                                 compte</a></p>
                                                     </div>
                                                 </div>
@@ -293,7 +325,7 @@
     <!-- Page de connexion End -->
 
     <!-- Page d'inscription Start -->
-    <section id='inscription' class='inactive'>
+    <section id='sectionInscription' class='ma-section1 inactive'>
         <div class="container-fluid contact py-5 mb-5">
             <div class="container py-5 mb-5">
                 <div class="p-5">
@@ -329,7 +361,8 @@
                                                             style="top: 0; right: 25%;">Je crée mon compte</button>
                                                     </div>
                                                     <div class="pt-2 text-center">
-                                                        <p>déjà utilisateur ? <a href="#connexion">Me connecter</a></p>
+                                                        <p>déjà utilisateur ? <a href="#" id="connexion2">Me
+                                                                connecter</a></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -346,30 +379,57 @@
     <!-- Page d'inscription End -->
 
     <!-- Page du compte de l'utilisateur Start -->
-    <section id='compte' class='inactive'>
+    <section id='sectionCompte' class='inactive'>
         <div class="container-fluid py-5 mb-5">
-            <div class="py-5">
-                <div class="row g-4 py-3">
+            <div class="py-5 px-5">
+                <div class="row g-4 py-5">
                     <div class="col-lg-3">
                         <div class="row g-4">
                             <div class="col-12 mt-4">
-                                <div class="mb-3">
-                                    <h4>Mon compte</h4>
+                                <div class="mb-3 border-bottom">
+                                    <h4>
+                                        <a href="#" id="compte2">Mon compte</a>
+                                    </h4>
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <h4 class="mb-2">Ma consommation</h4>
+                                <div class="mb-3 border-bottom">
+                                    <h4>
+                                        <a href="#" id="consommation">Ma consommation</a>
+                                    </h4>
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <h4 class="mb-2">Mes listes</h4>
+                                <div class="mb-3 border-bottom">
+                                    <h4>
+                                        <a href="#" id="listes">Mes listes</a>
+                                    </h4>
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <h4 class="mb-2">Déconnexion</h4>
+                                <div class="mb-3 border-bottom">
+                                    <h4>
+                                        <a href="#" id="deco">Déconnexion</a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 px-5">
+                        <div class="compte">
+                            <div class="rounded bg-primary p-5">
+                                <div class="text-center">
+                                    <h1 class="text-light"> Mes informations </h1>
+                                </div>
+                                <div class="info py-2">
+                                    <p>Prenom : Théo</p>
+                                    <p>Email : Théo@gmail.com</p>
+                                    <p>Changer de mot de passe : </p>
+                                    <div class="form-input p-2 ps-5">
+                                        <input type="password" placeholder="Ancien mot de passe" required />
+                                        <input type="password" placeholder="Nouveau mot de passe" required />
+                                        <input type="password" placeholder="Confirmer mot de passe" required />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -380,12 +440,99 @@
     </section>
     <!-- Page de compte de l'utilisateur End -->
 
+    <!-- Page pour les empreintes precedentes Start -->
 
+
+
+
+    <!-- Page pour les empreintes precedentes End -->
+
+    <!-- Page pour les empreintes precedentes Start -->
+    <script>
+        function hiddendiv() {
+            $("#div_annee").attr("hidden", true);
+            $("#div_mois").attr("hidden", true);
+            $("#div_jour").attr("hidden", true);
+        }
+
+        $(function () {
+            hiddendiv();
+            for (let i = 2010; i < 2025; i++) {
+                $("#annee").append(`<option value="${i}">${i}</option>`);
+            }
+            $('#slc_option').change(function () {
+                hiddendiv();
+                let val = $(this).val();
+                console.log(val);
+                if (val == 1) {
+                    $("#div_jour").attr("hidden", false);
+                } else if (val == 2) {
+                    $("#div_mois").attr("hidden", false);
+                } else if (val == 3) {
+                    $("#div_annee").attr("hidden", false);
+                }
+            });
+        });
+    </script>
+
+    <section id='sectionEmpreinte' class='inactive'>
+        <div class="justify-content-center container px-0">
+            <h1 class="mb-5 display-3 text-primary">Mes empreintes carbones precedentes</h1>
+            <div class="position-relative mx-auto">
+            </div>
+        </div>
+
+        <div class="nav-item dropdown">
+            <select id="slc_option" class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
+                <option selected>Rechercher</option>
+                <option value="1">Jour</option>
+                <option value="2">Mois</option>
+                <option value="3">Annee</option>
+            </select>
+        </div>
+        <div class="nav-item dropdown" id="div_jour">
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
+                <option value="1">Lundi</option>
+                <option value="2">Mardi</option>
+                <option value="3">Mercredi</option>
+                <option value="4">Jeudi</option>
+                <option value="5">Vendredi</option>
+                <option value="6">Samedi</option>
+                <option value="7">Dimanche</option>
+            </select>
+        </div>
+        <div class="nav-item dropdown" id="div_mois">
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
+                <option value="1">Janvier</option>
+                <option value="2">Fevrier</option>
+                <option value="3">Mars</option>
+                <option value="4">Avril</option>
+                <option value="5">Mai</option>
+                <option value="6">Juin</option>
+                <option value="7">Juillet</option>
+                <option value="8">Aout</option>
+                <option value="9">Septembre</option>
+                <option value="10">Octobre</option>
+                <option value="11">Novembre</option>
+                <option value="12">Decembre</option>
+            </select>
+        </div>
+        <div class="nav-item dropdown" id="div_annee">
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm" id="annee">
+            </select>
+        </div>
+
+        <div class="mx-auto">
+            <button type="submit"
+                class="btn btn-primary border-2 border-secondary py-3 px-4 rounded-pill text-white h-100"
+                style="top: 0; right: 25%;">Calculer mon empreinte</button>
+        </div>
+    </section>
+    <!-- page pour les empreintes precedentes End -->
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
             class="fa fa-arrow-up"></i></a>
-
 
     <!-- JavaScript Libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -397,9 +544,6 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-
-
-
 
     <!-- Inclure Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
