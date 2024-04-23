@@ -1,7 +1,7 @@
 /**
  * Placez ici les scripts qui seront exécutés côté client pour rendre l'application côté client fonctionnelle.
  */
-const baseUrl = "https://192.168.75.67/api/v3/";
+const baseUrl = "https://192.168.75.106/api/";
 
 // <editor-fold desc="Gestion de l'affichage">
 /**
@@ -131,4 +131,63 @@ function displayConnected(isConnected) {
 window.addEventListener('hashchange', () => {
     show(window.location.hash);
 });
+
+function getProperties(url) {
+    console.log('debut getProperties');
+    const headers = new Headers();
+    headers.append("Accept", "application/json");
+    const requestConfig = {
+        method: "GET",
+        headers: headers,
+        mode: "cors"
+    };
+
+    console.log('fin getProperties');
+    console.log(baseUrl+url);
+    return fetch(baseUrl +url, requestConfig)
+        .then((response) => {
+            if(response.ok) {
+                console.log(response.type);
+                return response.json();
+            } else {
+                throw new Error("Response is error (" + response.status + ") or does not contain JSON (" + response.headers.get("Content-Type") + ").");
+            }
+        })
+        .catch((err) => {
+            console.error("In getProperties: " + err);
+        });
+}
+
+function renderListAliment() {
+    console.log('début fct list aliment');
+    getProperties("aliments").then( async (res) => {
+        if(Array.isArray(res)) {
+
+            console.log('jobtiens un tableau');
+            let aliments = [];
+            for(const id of res) {
+                let aliment = await getProperties("aliments/" + id);
+                aliments.push(aliment);
+            }
+            const template = document.getElementById('list_aliments_template');
+            if (!template){
+                console.error("l'élément n'existe pas...");
+                return;
+            }
+            const templ = template.innerText;
+            const rendered = Mustache.render(templ, { aliments: aliment});
+            const elem = document.getElementById('listAliments');
+            if (!elem){
+                console.error("l'élément n'existe pas...");
+                return;
+            }
+            elem.innerHTML = rendered;
+        }else{
+            console.log('jobtiens pas de tableau');
+        }
+    }).catch((err) => {
+        console.error("In renderListAliment: " + err);
+    });
+    console.log('fin fct');
+}
 

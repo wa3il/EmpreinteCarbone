@@ -53,7 +53,7 @@
                         <a href="#" id="accueil2" class="nav-item nav-link text-white">Accueil</a>
                     </li>
                     <li class="notRequiresConnection">
-                        <a href="#" id="produits" class="nav-item nav-link text-white">Produits</a>
+                        <a href="#" id="produits" class="nav-item nav-link text-white" onclick="renderListAliment()">Produits</a>
                     </li>
                     <li class="notRequiresConnection">
                         <a href="#" id="compte" class="nav-item nav-link text-white">Mon compte</a>
@@ -132,6 +132,14 @@
                 </button>
             </div>
         </div>
+    </div>
+    <script id="list_aliments_template" type="x-tmpl-mustache">
+        {{#aliments}}
+            <li>{{nomlegume}}</li>
+        {{/aliments}}
+    </script>
+    <div>Aliments :
+        <ul id="listAliments"></ul>
     </div>
     <div class="container px-0 py-3">
         <div id="tab-1" class="tab-pane fade show p-0">
