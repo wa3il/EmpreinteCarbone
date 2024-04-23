@@ -166,8 +166,8 @@ function renderListAliment() {
             console.log('jobtiens un tableau');
             let aliments = [];
             for(const id of res) {
-                let aliment = await getProperties("aliments/" + id);
-                aliments.push(aliment);
+                //let aliment = await getProperties("aliments/" + id);
+                //aliments.push(aliment);
             }
             const template = document.getElementById('list_aliments_template');
             if (!template){
