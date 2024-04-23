@@ -25,14 +25,14 @@ public class AlimentRessourceController {
 
     @GetMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<?> getAllUser() {
+    public ResponseEntity<?> getAllAliment() {
         return ResponseEntity.ok(jpaAlimentDao.getAll());
     }
 
     @GetMapping(value = "/{id}",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<?> getUser(@PathVariable("id") final Integer id) {
+    public ResponseEntity<?> getAliment(@PathVariable("id") final Integer id) {
         Optional<Aliment> aliment = jpaAlimentDao.get(id);
         if(aliment.isPresent()){
             return ResponseEntity.ok(aliment.get());
