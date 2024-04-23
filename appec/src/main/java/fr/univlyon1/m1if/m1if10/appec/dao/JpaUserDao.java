@@ -42,11 +42,9 @@ public class JpaUserDao implements Dao<User> {
         Objects.requireNonNull(params, "Params cannot be null");
         Objects.requireNonNull(params[0], "Name cannot be null");
         Objects.requireNonNull(params[1], "Password cannot be null");
-        Objects.requireNonNull(params[2], "Email cannot be null");
 
         user.setName(params[0]);
         user.setPassword(params[1]);
-        user.setEmail(params[2]);
         entityManager.merge(user);
     }
 

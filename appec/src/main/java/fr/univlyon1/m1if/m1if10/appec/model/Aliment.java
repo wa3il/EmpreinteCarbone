@@ -1,7 +1,17 @@
 package fr.univlyon1.m1if.m1if10.appec.model;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+/**
+ * Aliment entity.
+ */
+@JacksonXmlRootElement(localName = "aliment")
 @Entity
 @Table(name = "aliments")
 public class Aliment {
@@ -23,8 +33,7 @@ public class Aliment {
     @Column(name = "sous_groupe", nullable = false)
     private String sousGroupe;
 
-    public Aliment() {
-    }
+    public Aliment() {}
 
     public Aliment(String nomLegume, Float ec, String groupe, String sousGroupe) {
         this.nomLegume = nomLegume;
@@ -41,31 +50,16 @@ public class Aliment {
         return nomLegume;
     }
 
-    public void setNomLegume(String nomLegume) {
-        this.nomLegume = nomLegume;
-    }
-
     public Float getEc() {
         return ec;
-    }
-
-    public void setEc(Float ec) {
-        this.ec = ec;
     }
 
     public String getGroupe() {
         return groupe;
     }
 
-    public void setGroupe(String groupe) {
-        this.groupe = groupe;
-    }
-
     public String getSousGroupe() {
         return sousGroupe;
     }
 
-    public void setSousGroupe(String sousGroupe) {
-        this.sousGroupe = sousGroupe;
-    }
 }

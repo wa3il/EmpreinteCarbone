@@ -1,7 +1,10 @@
 package fr.univlyon1.m1if.m1if10.appec.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.univlyon1.m1if.m1if10.appec.dao.Dao;
+import fr.univlyon1.m1if.m1if10.appec.dao.UserDao;
+import fr.univlyon1.m1if.m1if10.appec.dto.user.AuthenticationResponse;
+import fr.univlyon1.m1if.m1if10.appec.dto.user.UserRequestDto;
 import fr.univlyon1.m1if.m1if10.appec.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 import java.util.Optional;
 
-import static fr.univlyon1.m1if.m1if10.appec.controller.Mapdata.extractFormData;
+import static fr.univlyon1.m1if.m1if10.appec.controller.Mapdata.*;
 
 /**
  * Controller for user resource.
@@ -32,8 +35,15 @@ import static fr.univlyon1.m1if.m1if10.appec.controller.Mapdata.extractFormData;
 public class UserRessourceController {
 
     @Autowired
-    private Dao<User> jpaUserDao;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private UserDao UserDao;
+
+
+    private final AuthenticationService authService;
+
+    @Autowired
+    public UserRessourceController(AuthenticationService authService) {
+        this.authService = authService;
+    }
 
     /**
      * Get all users.
@@ -43,7 +53,7 @@ public class UserRessourceController {
     @GetMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<?> getAllUser() {
-        return ResponseEntity.ok(jpaUserDao.getAll());
+        return ResponseEntity.ok(UserDao.getAll());
     }
 
     /**
@@ -56,7 +66,7 @@ public class UserRessourceController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<?> getUser(@PathVariable("id") final Integer id) {
-        Optional<User> user = jpaUserDao.get(id);
+        Optional<User> user = UserDao.get(id);
         if(user.isPresent()){
             return ResponseEntity.ok(user.get());
         }
@@ -71,41 +81,12 @@ public class UserRessourceController {
      * @return the response entity
      */
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-    public ResponseEntity<?> createUser(@RequestBody String requestBody, @RequestHeader("Content-Type") String contentType) {
-        if (contentType.contains(MediaType.APPLICATION_JSON_VALUE)) {
-            try {
-                User user = objectMapper.readValue(requestBody, User.class);
-                if (user.getName() == null || user.getEmail() == null || user.getPassword() == null) {
-                    return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Tous les paramètres sont requis.");
-                }
-
-                jpaUserDao.save(user);
-                return ResponseEntity.status(HttpStatus.CREATED).body("Utilisateur créé.");
-            } catch (Exception e) {
-                e.printStackTrace();
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erreur lors de la lecture des données JSON.");
-            }
-        } else if (contentType.contains(MediaType.APPLICATION_FORM_URLENCODED_VALUE)) {
-            try {
-                Map<String, String> formData = extractFormData(requestBody);
-                String name = formData.get("name");
-                String email = formData.get("email");
-                String password = formData.get("password");
-                if (name == null || email == null || password == null) {
-                    return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Tous les paramètres sont requis.");
-                }
-                User user = new User();
-                user.setName(name);
-                user.setEmail(email);
-                user.setPassword(password);
-                jpaUserDao.save(user);
-                return ResponseEntity.status(HttpStatus.CREATED).body("Utilisateur créé.");
-            } catch (Exception e) {
-                e.printStackTrace();
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erreur lors de la lecture des données URL encodées.");
-            }
+    public ResponseEntity<AuthenticationResponse> createUser(@RequestBody String requestBody, @RequestHeader("Content-Type") String contentType) throws JsonProcessingException {
+        Optional<UserRequestDto> userRequestDto = getUserDtoRequest(requestBody, contentType);
+        if (userRequestDto.isPresent()) {
+            return ResponseEntity.ok(authService.register(userRequestDto.get()));
         } else {
-            return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body("Type de média non pris en charge.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
@@ -123,34 +104,16 @@ public class UserRessourceController {
             @RequestBody String requestBody,
             @RequestHeader("Content-Type") String contentType) {
         try {
-            if (contentType.contains(MediaType.APPLICATION_JSON_VALUE)) {
-                // Si le type de contenu est JSON
-                User user = objectMapper.readValue(requestBody, User.class);
-                // Vérifier si les paramètres requis sont présents
-                if (user.getEmail() == null || user.getEmail().isEmpty() || user.getName() == null ||
-                        user.getName().isEmpty() || user.getPassword() == null || user.getPassword().isEmpty()) {
-                    return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Tous les paramètres sont requis.");
+            Optional<UserRequestDto> requestDto = getUserDtoRequest(requestBody, contentType);
+            if (requestDto.isPresent()) {
+                Optional<User> user = UserDao.get(id);
+                if (user.isPresent()) {
+                    UserRequestDto userdto = requestDto.get();
+                    UserDao.update(user.get(),new String[]{userdto.getName(), userdto.getPassword(), userdto.getLogin()});
+                    return ResponseEntity.ok("Utilisateur mis à jour");
+                } else {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");
                 }
-                jpaUserDao.update(user, new String[]{user.getName(), user.getPassword(), user.getEmail()});
-                return ResponseEntity.status(HttpStatus.OK).body("Utilisateur mis à jour.");
-
-            } else if (contentType.contains(MediaType.APPLICATION_FORM_URLENCODED_VALUE)) {
-                // Si le type de contenu est URL encodé
-                Map<String, String> formData = extractFormData(requestBody);
-                String name = formData.get("name");
-                String email = formData.get("email");
-                String password = formData.get("password");
-                // Vérifier si les paramètres requis sont présents
-                if (name == null || name.isEmpty() || email == null || email.isEmpty() || password == null || password.isEmpty()) {
-                    return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Tous les paramètres sont requis.");
-                }
-                User user = new User();
-                user.setName(name);
-                user.setEmail(email);
-                user.setPassword(password);
-                jpaUserDao.update(user, new String[]{name, password, email});
-                return ResponseEntity.status(HttpStatus.OK).body("Utilisateur mis à jour.");
-
             } else {
                 return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body("Type de média non pris en charge.");
             }
@@ -168,9 +131,9 @@ public class UserRessourceController {
     @DeleteMapping(value = "/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ResponseEntity<?> deleteUser(@PathVariable("id") final Integer id) {
         try {
-            Optional<User> user = jpaUserDao.get(id);
+            Optional<User> user = UserDao.get(id);
             if (user.isPresent()) {
-                jpaUserDao.delete(user.get());
+                UserDao.delete(user.get());
                 return ResponseEntity.ok("Utilisateur supprimé");
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");
@@ -180,3 +143,4 @@ public class UserRessourceController {
         }
     }
 }
+
