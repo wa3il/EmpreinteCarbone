@@ -50,8 +50,7 @@ public class UserRessourceController {
      *
      * @return a list of users
      */
-    @GetMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<?> getAllUser() {
         return ResponseEntity.ok(UserDao.getAll());
     }
@@ -63,7 +62,6 @@ public class UserRessourceController {
      * @return the user
      */
     @GetMapping(value = "/{id}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<?> getUser(@PathVariable("id") final Integer id) {
         Optional<User> user = UserDao.get(id);
@@ -80,7 +78,9 @@ public class UserRessourceController {
      * @param contentType the content type
      * @return the response entity
      */
-    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    @PostMapping(
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<AuthenticationResponse> createUser(@RequestBody String requestBody, @RequestHeader("Content-Type") String contentType) throws JsonProcessingException {
         Optional<UserRequestDto> userRequestDto = getUserDtoRequest(requestBody, contentType);
         if (userRequestDto.isPresent()) {
