@@ -26,7 +26,8 @@ public class AlimentRessourceController {
      *
      * @return a list of aliments
      */
-    @CrossOrigin(origins = {"http://localhost/", "http://192.168.75.106/", "https://192.168.75.106/"})
+    //@CrossOrigin(origins = {"http://localhost/", "http://192.168.75.106/", "https://192.168.75.106/"})
+    @CrossOrigin
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<?> getAllAliment() {
         return ResponseEntity.ok(jpaAlimentDao.getAll());
