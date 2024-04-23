@@ -10,11 +10,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
+            rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
@@ -31,665 +31,668 @@
     <script type="application/javascript" src="js/empreinte.js"></script>
 
     <script crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script crossorigin="anonymous" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
     <script crossorigin="anonymous" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+            src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <!-- Navbar start -->
-    <div class="container-fluid bg-primary fixed-top">
-        <nav class="navbar navbar-light bg-primary navbar-expand-xl">
-            <a href='#' id="accueil1" class="navbar-brand px-5">
-                <h1 class="display-6 text-white">Esprit Carbone</h1>
-            </a>
-            <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
+<!-- Navbar start -->
+<div class="container-fluid bg-primary fixed-top">
+    <nav class="navbar navbar-light bg-primary navbar-expand-xl">
+        <a href='#' id="accueil1" class="navbar-brand px-5">
+            <h1 class="display-6 text-white">Esprit Carbone</h1>
+        </a>
+        <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarCollapse"><span class="fa fa-bars text-primary"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav mx-auto">
-                    <li class="notRequiresConnection">
-                        <a href="#" id="accueil2" class="nav-item nav-link text-white">Accueil</a>
-                    </li>
-                    <li class="notRequiresConnection">
-                        <a href="#" id="produits" class="nav-item nav-link text-white">Produits</a>
-                    </li>
-                    <li class="notRequiresConnection">
-                        <a href="#" id="compte" class="nav-item nav-link text-white">Mon compte</a>
-                    </li>
-                    <li class="requiresConnection">
-                        <a href="#" id="liste" class="nav-item nav-link text-white">Ma liste</a>
-                    </li>
-                    <li class="notRequiresConnection">
-                        <a href="#" id="empreinte" class="nav-item nav-link text-white">Mes empreintes</a>
-                    </li>
-                </div>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav mx-auto">
+                <li class="notRequiresConnection">
+                    <a href="#" id="accueil2" class="nav-item nav-link text-white">Accueil</a>
+                </li>
+                <li class="notRequiresConnection">
+                    <a href="#" id="produits" class="nav-item nav-link text-white">Produits</a>
+                </li>
+                <li class="notRequiresConnection">
+                    <a href="#" id="compte" class="nav-item nav-link text-white">Mon compte</a>
+                </li>
+                <li class="requiresConnection">
+                    <a href="#" id="liste" class="nav-item nav-link text-white">Ma liste</a>
+                </li>
+                <li class="notRequiresConnection">
+                    <a href="#" id="empreinte" class="nav-item nav-link text-white">Mes empreintes</a>
+                </li>
             </div>
-            <div class="d-flex justify-content-center align-items-center m-3 me-3">
-                <a class="notConnection d-flex m-2 px-2 py-2 bg-light rounded-pill" href="#">
-                    <span id="connexion1" class="text-primary">Connexion</span>
-                </a>
-            </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center m-3 me-3">
+            <a class="notConnection d-flex m-2 px-2 py-2 bg-light rounded-pill" href="#">
+                <span id="connexion1" class="text-primary">Connexion</span>
+            </a>
+        </div>
 
-        </nav>
-    </div>
-    <!-- Navbar End -->
+    </nav>
+</div>
+<!-- Navbar End -->
 
-    <!-- Index Start -->
-    <section id='sectionAccueil' class='active'>
-        <!-- Hero Start -->
-        <div class="container-fluid py-5 mb-5 hero-header">
-            <div class="justify-content-center container py-5">
-                <div class="align-items-center text-center">
-                    <h1 class="mb-5 display-3 text-primary">Connaissez-vous votre empreinte carbone ?</h1>
-                    <div class="mx-auto">
-                        <button type="submit"
+<!-- Index Start -->
+<section id='sectionAccueil' class='active'>
+    <!-- Hero Start -->
+    <div class="container-fluid py-5 mb-5 hero-header">
+        <div class="justify-content-center container py-5">
+            <div class="align-items-center text-center">
+                <h1 class="mb-5 display-3 text-primary">Connaissez-vous votre empreinte carbone ?</h1>
+                <div class="mx-auto">
+                    <button type="submit"
                             class="btn btn-primary border-2 border-secondary py-3 px-4 rounded-pill text-white h-100"
-                            style="top: 0; right: 25%;">Faire le test</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Hero End -->
-
-        <div class="center-container"> <!-- Ajout d'une classe pour le conteneur central -->
-            <div class="justify-content-center container px-0">
-                <div class="align-items-center position-relative mx-auto">
-                    <input class="form-control border-2 border-secondary w-100 py-3 px-4 rounded-pill" type="text"
-                        placeholder="Rechercher...">
-                    <button type="submit"
-                        class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100"
-                        style="top: 0; right: 0%;">Rechercher</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="container-fluid">
-            <div class="container px-0 py-3">
-                <!-- TODO Nombre de produits qui correspond à la recherche(totalité des produits si pas de recherche)-->
-                <p><strong id="nbProduits">...</strong> produits.</p>
-            </div>
-        </div>
-    </section>
-    <!-- Index End -->
-
-    <!-- Page de produits start -->
-    <section id='sectionProduits' class='inactive'>
-        <!-- TODO a remplacer par un template mustach ? -->
-        <div class="container-fluid py-3 mb-5" style="margin-top: 150px;">
-            <div class="justify-content-center container px-0">
-                <div class="align-items-center position-relative mx-auto">
-                    <input class="form-control border-2 border-secondary w-100 py-3 px-4 rounded-pill" type="text"
-                           placeholder="Rechercher...">
-                    <button type="submit"
-                            class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100"
-                            style="top: 0; right: 0%;">Rechercher
+                            style="top: 0; right: 25%;">Faire le test
                     </button>
                 </div>
             </div>
         </div>
-        <div class="container px-0 py-3">
-            <div id="tab-1" class="tab-pane fade show p-0">
-                <div class="row g-4">
-                    <div class="col-lg-12">
-                        <div class="row g-3">
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="rounded position-relative fruite-item">
-                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                         style="top: 10px; left: 10px;">Type de produit
-                                    </div>
-                                    <div class="p-4 border border-secondary rounded-bottom">
-                                        <h4 style="margin-top: 25px;">Nom du produit 1</h4>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
-                                            <a href="#"
-                                               class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
-                                                liste </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="rounded position-relative fruite-item">
-                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                         style="top: 10px; left: 10px;">Type de produit
-                                    </div>
-                                    <div class="p-4 border border-secondary rounded-bottom">
-                                        <h4 style="margin-top: 25px;">Nom du produit 2</h4>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
-                                            <a href="#"
-                                               class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
-                                                liste </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="rounded position-relative fruite-item">
-                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                         style="top: 10px; left: 10px;">Type de produit
-                                    </div>
-                                    <div class="p-4 border border-secondary rounded-bottom">
-                                        <h4 style="margin-top: 25px;">Nom du produit 3</h4>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
-                                            <a href="#"
-                                               class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
-                                                liste </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="rounded position-relative fruite-item">
-                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                         style="top: 10px; left: 10px;">Type de produit
-                                    </div>
-                                    <div class="p-4 border border-secondary rounded-bottom">
-                                        <h4 style="margin-top: 25px;">Nom du produit 4</h4>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
-                                            <a href="#"
-                                               class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
-                                                liste </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="rounded position-relative fruite-item">
-                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                         style="top: 10px; left: 10px;">Type de produit
-                                    </div>
-                                    <div class="p-4 border border-secondary rounded-bottom">
-                                        <h4 style="margin-top: 25px;">Nom du produit 5</h4>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
-                                            <a href="#"
-                                               class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
-                                                liste </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="rounded position-relative fruite-item">
-                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                         style="top: 10px; left: 10px;">Type de produit
-                                    </div>
-                                    <div class="p-4 border border-secondary rounded-bottom">
-                                        <h4 style="margin-top: 25px;">Nom du produit 6</h4>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
-                                            <a href="#"
-                                               class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
-                                                liste </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="rounded position-relative fruite-item">
-                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                         style="top: 10px; left: 10px;">Type de produit
-                                    </div>
-                                    <div class="p-4 border border-secondary rounded-bottom">
-                                        <h4 style="margin-top: 25px;">Nom du produit 7</h4>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
-                                            <a href="#"
-                                               class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
-                                                liste </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="rounded position-relative fruite-item">
-                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                         style="top: 10px; left: 10px;">Type de produit
-                                    </div>
-                                    <div class="p-4 border border-secondary rounded-bottom">
-                                        <h4 style="margin-top: 25px;">Nom du produit 8</h4>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
-                                            <a href="#"
-                                               class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
-                                                liste </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="rounded position-relative fruite-item">
-                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                         style="top: 10px; left: 10px;">Type de produit
-                                    </div>
-                                    <div class="p-4 border border-secondary rounded-bottom">
-                                        <h4 style="margin-top: 25px;">Nom du produit 9</h4>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
-                                            <a href="#"
-                                               class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
-                                                liste </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="rounded position-relative fruite-item">
-                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                         style="top: 10px; left: 10px;">Type de produit
-                                    </div>
-                                    <div class="p-4 border border-secondary rounded-bottom">
-                                        <h4 style="margin-top: 25px;">Nom du produit 10</h4>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
-                                            <a href="#"
-                                               class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
-                                                liste </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="rounded position-relative fruite-item">
-                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                         style="top: 10px; left: 10px;">Type de produit
-                                    </div>
-                                    <div class="p-4 border border-secondary rounded-bottom">
-                                        <h4 style="margin-top: 25px;">Nom du produit 11</h4>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
-                                            <a href="#"
-                                               class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
-                                                liste </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="rounded position-relative fruite-item">
-                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                         style="top: 10px; left: 10px;">Type de produit
-                                    </div>
-                                    <div class="p-4 border border-secondary rounded-bottom">
-                                        <h4 style="margin-top: 25px;">Nom du produit 12</h4>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
-                                            <a href="#"
-                                               class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
-                                                liste </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4 col-xl-3">
-                                <div class="rounded position-relative fruite-item">
-                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                         style="top: 10px; left: 10px;">Type de produit
-                                    </div>
-                                    <div class="p-4 border border-secondary rounded-bottom">
-                                        <h4 style="margin-top: 25px;">Nom du produit 13</h4>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
-                                            <a href="#"
-                                               class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
-                                                liste </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Page de produits End -->
+    </div>
+    <!-- Hero End -->
 
-    <!-- Page de connexion Start -->
-    <section id='sectionConnexion' class='inactive'>
-        <div class="container-fluid contact py-5 mb-5">
-            <div class="container py-5 mb-5">
-                <div class="p-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-3">
-                                <!-- Utilisation de col-4 pour que la div occupe 20% de la largeur de l'écran (20% de 12 colonnes) -->
-                                <div class="rounded bg-dark text-center p-2 mt-n3 child2">
-                                    <h3 class="display-7 text-light">Me connecter</h3>
-                                </div>
-                            </div>
-                            <div class="rounded bg-light p-4 mt-4 child1">
-                                <div class="row justify-content-center">
-                                    <div class="col-4 pt-3">
-                                        <form>
-                                            <div class="container py-5 mb-5">
-                                                <div class="form-input p-2">
-                                                    <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
-                                                    <input type="text" placeholder="Email" required/>
-                                                </div>
-                                                <div class="form-input p-2">
-                                                    <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
-                                                    <input type="password" placeholder="Mot de passe" required/>
-                                                </div>
-                                                <div class="row justify-content-center py-4">
-                                                    <div class=" col-8 mx-auto">
-                                                        <button type="submit"
-                                                                class="btn btn-primary border-2 border-secondary py-1 px-4 rounded-pill text-white h-100"
-                                                                style="top: 0; right: 25%;">Je me connecte
-                                                        </button>
-                                                    </div>
-                                                    <div class="pt-2 ps-1">
-                                                        <p>pas encore inscrit? <a href="#" id="inscription">Créer mon
-                                                            compte</a></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Page de connexion End -->
-
-    <!-- Page de connexion Start -->
-    <section id='sectionConnexion' class='ma-section inactive'>
-        <div class="container-fluid contact py-5 mb-5">
-            <div class="container py-5 mb-5">
-                <div class="p-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-3">
-                                <!-- Utilisation de col-4 pour que la div occupe 20% de la largeur de l'écran (20% de 12 colonnes) -->
-                                <div class="rounded bg-dark text-center p-2 mt-n3 child2">
-                                    <h3 class="display-7 text-light">Me connecter</h3>
-                                </div>
-                            </div>
-                            <div class="rounded bg-light p-4 mt-4 child1">
-                                <div class="row justify-content-center">
-                                    <div class="col-4 pt-3">
-                                        <form>
-                                            <div class="container py-5 mb-5">
-                                                <div class="form-input p-2">
-                                                    <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
-                                                    <input type="text" placeholder="Email" required />
-                                                </div>
-                                                <div class="form-input p-2">
-                                                    <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
-                                                    <input type="password" placeholder="Mot de passe" required />
-                                                </div>
-                                                <div class="row justify-content-center py-4">
-                                                    <div class=" col-8 mx-auto">
-                                                        <button type="submit"
-                                                            class="btn btn-primary border-2 border-secondary py-1 px-4 rounded-pill text-white h-100"
-                                                            style="top: 0; right: 25%;">Je me connecte</button>
-                                                    </div>
-                                                    <div class="pt-2 ps-1">
-                                                        <p>pas encore inscrit? <a href="#" id="inscription">Créer mon
-                                                                compte</a></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Page de connexion End -->
-
-    <!-- Page d'inscription Start -->
-    <section id='sectionInscription' class='ma-section1 inactive'>
-        <div class="container-fluid contact py-5 mb-5">
-            <div class="container py-5 mb-5">
-                <div class="p-5">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-3">
-                                <!-- Utilisation de col-4 pour que la div occupe 20% de la largeur de l'écran (20% de 12 colonnes) -->
-                                <div class="rounded bg-dark text-center p-2 mt-n3 child2">
-                                    <h3 class="display-7 text-light">Créer mon compte</h3>
-                                </div>
-                            </div>
-                            <div class="rounded bg-light p-4 mt-4 child1">
-                                <div class="row justify-content-center">
-                                    <div class="col-4 pt-3">
-                                        <form>
-                                            <div class="container py-5 mb-5">
-                                                <div class="form-input p-2 ps-5">
-                                                    <i class="fas fa-user fa-2x" aria-hidden="true"></i>
-                                                    <input type="text" placeholder="Prenom" required />
-                                                </div>
-                                                <div class="form-input p-2 ps-5">
-                                                    <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
-                                                    <input type="text" placeholder="Email" required />
-                                                </div>
-                                                <div class="form-input p-2 ps-5">
-                                                    <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
-                                                    <input type="password" placeholder="Mot de passe" required />
-                                                </div>
-                                                <div class="row justify-content-center py-4 ps-4">
-                                                    <div class=" col-8 mx-auto">
-                                                        <button type="submit"
-                                                            class="btn btn-primary border-2 border-secondary py-1 px-4 rounded-pill text-white h-100"
-                                                            style="top: 0; right: 25%;">Je crée mon compte</button>
-                                                    </div>
-                                                    <div class="pt-2 text-center">
-                                                        <p>déjà utilisateur ? <a href="#" id="connexion2">Me
-                                                                connecter</a></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Page d'inscription End -->
-
-    <!-- Page du compte de l'utilisateur Start -->
-    <section id='sectionCompte' class='inactive'>
-        <div class="container-fluid py-5 mb-5">
-            <div class="py-5 px-5">
-                <div class="row g-4 py-5">
-                    <div class="col-lg-3">
-                        <div class="row g-4">
-                            <div class="col-12 mt-4">
-                                <div class="mb-3 border-bottom">
-                                    <h4>
-                                        <a href="#" id="compte2">Mon compte</a>
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="mb-3 border-bottom">
-                                    <h4>
-                                        <a href="#" id="consommation">Ma consommation</a>
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="mb-3 border-bottom">
-                                    <h4>
-                                        <a href="#" id="listes">Mes listes</a>
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="mb-3 border-bottom">
-                                    <h4>
-                                        <a href="#" id="deco">Déconnexion</a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-9 px-5">
-                        <div class="compte">
-                            <div class="rounded bg-primary p-5">
-                                <div class="text-center">
-                                    <h1 class="text-light"> Mes informations </h1>
-                                </div>
-                                <div class="info py-2">
-                                    <p>Prenom : Théo</p>
-                                    <p>Email : Théo@gmail.com</p>
-                                    <p>Changer de mot de passe : </p>
-                                    <div class="form-input p-2 ps-5">
-                                        <input type="password" placeholder="Ancien mot de passe" required />
-                                        <input type="password" placeholder="Nouveau mot de passe" required />
-                                        <input type="password" placeholder="Confirmer mot de passe" required />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Page de compte de l'utilisateur End -->
-
-    <!-- Page pour les empreintes precedentes Start -->
-
-
-
-
-    <!-- Page pour les empreintes precedentes End -->
-
-    <!-- Page pour les empreintes precedentes Start -->
-    <script>
-        function hiddendiv() {
-            $("#div_annee").attr("hidden", true);
-            $("#div_mois").attr("hidden", true);
-            $("#div_jour").attr("hidden", true);
-        }
-
-        $(function () {
-            hiddendiv();
-            for (let i = 2010; i < 2025; i++) {
-                $("#annee").append(`<option value="${i}">${i}</option>`);
-            }
-            $('#slc_option').change(function () {
-                hiddendiv();
-                let val = $(this).val();
-                console.log(val);
-                if (val == 1) {
-                    $("#div_jour").attr("hidden", false);
-                } else if (val == 2) {
-                    $("#div_mois").attr("hidden", false);
-                } else if (val == 3) {
-                    $("#div_annee").attr("hidden", false);
-                }
-            });
-        });
-    </script>
-
-    <section id='sectionEmpreinte' class='inactive'>
+    <div class="center-container"> <!-- Ajout d'une classe pour le conteneur central -->
         <div class="justify-content-center container px-0">
-            <h1 class="mb-5 display-3 text-primary">Mes empreintes carbones precedentes</h1>
-            <div class="position-relative mx-auto">
+            <div class="align-items-center position-relative mx-auto">
+                <input class="form-control border-2 border-secondary w-100 py-3 px-4 rounded-pill" type="text"
+                       placeholder="Rechercher...">
+                <button type="submit"
+                        class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100"
+                        style="top: 0; right: 0%;">Rechercher
+                </button>
             </div>
         </div>
+    </div>
 
-        <div class="nav-item dropdown">
-            <select id="slc_option" class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
-                <option selected>Rechercher</option>
-                <option value="1">Jour</option>
-                <option value="2">Mois</option>
-                <option value="3">Annee</option>
-            </select>
+    <div class="container-fluid">
+        <div class="container px-0 py-3">
+            <!-- TODO Nombre de produits qui correspond à la recherche(totalité des produits si pas de recherche)-->
+            <p><strong id="nbProduits">...</strong> produits.</p>
         </div>
-        <div class="nav-item dropdown" id="div_jour">
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
-                <option value="1">Lundi</option>
-                <option value="2">Mardi</option>
-                <option value="3">Mercredi</option>
-                <option value="4">Jeudi</option>
-                <option value="5">Vendredi</option>
-                <option value="6">Samedi</option>
-                <option value="7">Dimanche</option>
-            </select>
-        </div>
-        <div class="nav-item dropdown" id="div_mois">
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
-                <option value="1">Janvier</option>
-                <option value="2">Fevrier</option>
-                <option value="3">Mars</option>
-                <option value="4">Avril</option>
-                <option value="5">Mai</option>
-                <option value="6">Juin</option>
-                <option value="7">Juillet</option>
-                <option value="8">Aout</option>
-                <option value="9">Septembre</option>
-                <option value="10">Octobre</option>
-                <option value="11">Novembre</option>
-                <option value="12">Decembre</option>
-            </select>
-        </div>
-        <div class="nav-item dropdown" id="div_annee">
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm" id="annee">
-            </select>
-        </div>
+    </div>
+</section>
+<!-- Index End -->
 
-        <div class="mx-auto">
-            <button type="submit"
+<!-- Page de produits start -->
+<section id='sectionProduits' class='inactive'>
+    <!-- TODO a remplacer par un template mustach ? -->
+    <div class="container-fluid py-3 mb-5" style="margin-top: 150px;">
+        <div class="justify-content-center container px-0">
+            <div class="align-items-center position-relative mx-auto">
+                <input class="form-control border-2 border-secondary w-100 py-3 px-4 rounded-pill" type="text"
+                       placeholder="Rechercher...">
+                <button type="submit"
+                        class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100"
+                        style="top: 0; right: 0%;">Rechercher
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="container px-0 py-3">
+        <div id="tab-1" class="tab-pane fade show p-0">
+            <div class="row g-4">
+                <div class="col-lg-12">
+                    <div class="row g-3">
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="rounded position-relative fruite-item">
+                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                     style="top: 10px; left: 10px;">Type de produit
+                                </div>
+                                <div class="p-4 border border-secondary rounded-bottom">
+                                    <h4 style="margin-top: 25px;">Nom du produit 1</h4>
+                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                        <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
+                                        <a href="#"
+                                           class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
+                                            liste </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="rounded position-relative fruite-item">
+                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                     style="top: 10px; left: 10px;">Type de produit
+                                </div>
+                                <div class="p-4 border border-secondary rounded-bottom">
+                                    <h4 style="margin-top: 25px;">Nom du produit 2</h4>
+                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                        <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
+                                        <a href="#"
+                                           class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
+                                            liste </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="rounded position-relative fruite-item">
+                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                     style="top: 10px; left: 10px;">Type de produit
+                                </div>
+                                <div class="p-4 border border-secondary rounded-bottom">
+                                    <h4 style="margin-top: 25px;">Nom du produit 3</h4>
+                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                        <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
+                                        <a href="#"
+                                           class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
+                                            liste </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="rounded position-relative fruite-item">
+                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                     style="top: 10px; left: 10px;">Type de produit
+                                </div>
+                                <div class="p-4 border border-secondary rounded-bottom">
+                                    <h4 style="margin-top: 25px;">Nom du produit 4</h4>
+                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                        <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
+                                        <a href="#"
+                                           class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
+                                            liste </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="rounded position-relative fruite-item">
+                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                     style="top: 10px; left: 10px;">Type de produit
+                                </div>
+                                <div class="p-4 border border-secondary rounded-bottom">
+                                    <h4 style="margin-top: 25px;">Nom du produit 5</h4>
+                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                        <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
+                                        <a href="#"
+                                           class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
+                                            liste </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="rounded position-relative fruite-item">
+                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                     style="top: 10px; left: 10px;">Type de produit
+                                </div>
+                                <div class="p-4 border border-secondary rounded-bottom">
+                                    <h4 style="margin-top: 25px;">Nom du produit 6</h4>
+                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                        <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
+                                        <a href="#"
+                                           class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
+                                            liste </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="rounded position-relative fruite-item">
+                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                     style="top: 10px; left: 10px;">Type de produit
+                                </div>
+                                <div class="p-4 border border-secondary rounded-bottom">
+                                    <h4 style="margin-top: 25px;">Nom du produit 7</h4>
+                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                        <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
+                                        <a href="#"
+                                           class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
+                                            liste </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="rounded position-relative fruite-item">
+                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                     style="top: 10px; left: 10px;">Type de produit
+                                </div>
+                                <div class="p-4 border border-secondary rounded-bottom">
+                                    <h4 style="margin-top: 25px;">Nom du produit 8</h4>
+                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                        <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
+                                        <a href="#"
+                                           class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
+                                            liste </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="rounded position-relative fruite-item">
+                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                     style="top: 10px; left: 10px;">Type de produit
+                                </div>
+                                <div class="p-4 border border-secondary rounded-bottom">
+                                    <h4 style="margin-top: 25px;">Nom du produit 9</h4>
+                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                        <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
+                                        <a href="#"
+                                           class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
+                                            liste </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="rounded position-relative fruite-item">
+                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                     style="top: 10px; left: 10px;">Type de produit
+                                </div>
+                                <div class="p-4 border border-secondary rounded-bottom">
+                                    <h4 style="margin-top: 25px;">Nom du produit 10</h4>
+                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                        <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
+                                        <a href="#"
+                                           class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
+                                            liste </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="rounded position-relative fruite-item">
+                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                     style="top: 10px; left: 10px;">Type de produit
+                                </div>
+                                <div class="p-4 border border-secondary rounded-bottom">
+                                    <h4 style="margin-top: 25px;">Nom du produit 11</h4>
+                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                        <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
+                                        <a href="#"
+                                           class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
+                                            liste </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="rounded position-relative fruite-item">
+                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                     style="top: 10px; left: 10px;">Type de produit
+                                </div>
+                                <div class="p-4 border border-secondary rounded-bottom">
+                                    <h4 style="margin-top: 25px;">Nom du produit 12</h4>
+                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                        <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
+                                        <a href="#"
+                                           class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
+                                            liste </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 col-xl-3">
+                            <div class="rounded position-relative fruite-item">
+                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                     style="top: 10px; left: 10px;">Type de produit
+                                </div>
+                                <div class="p-4 border border-secondary rounded-bottom">
+                                    <h4 style="margin-top: 25px;">Nom du produit 13</h4>
+                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                        <p class="text-dark fs-5 fw-bold mb-2">3.12 gC02 / kg</p>
+                                        <a href="#"
+                                           class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                                class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma
+                                            liste </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page de produits End -->
+
+<!-- Page de connexion Start -->
+<section id='sectionConnexion' class='inactive'>
+    <div class="container-fluid contact py-5 mb-5">
+        <div class="container py-5 mb-5">
+            <div class="p-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-3">
+                            <!-- Utilisation de col-4 pour que la div occupe 20% de la largeur de l'écran (20% de 12 colonnes) -->
+                            <div class="rounded bg-dark text-center p-2 mt-n3 child2">
+                                <h3 class="display-7 text-light">Me connecter</h3>
+                            </div>
+                        </div>
+                        <div class="rounded bg-light p-4 mt-4 child1">
+                            <div class="row justify-content-center">
+                                <div class="col-4 pt-3">
+                                    <form>
+                                        <div class="container py-5 mb-5">
+                                            <div class="form-input p-2">
+                                                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+                                                <input type="text" placeholder="Email" required/>
+                                            </div>
+                                            <div class="form-input p-2">
+                                                <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
+                                                <input type="password" placeholder="Mot de passe" required/>
+                                            </div>
+                                            <div class="row justify-content-center py-4">
+                                                <div class=" col-8 mx-auto">
+                                                    <button type="submit"
+                                                            class="btn btn-primary border-2 border-secondary py-1 px-4 rounded-pill text-white h-100"
+                                                            style="top: 0; right: 25%;">Je me connecte
+                                                    </button>
+                                                </div>
+                                                <div class="pt-2 ps-1">
+                                                    <p>pas encore inscrit? <a href="#" id="inscription">Créer mon
+                                                        compte</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page de connexion End -->
+
+<!-- Page de connexion Start -->
+<section id='sectionConnexion' class='ma-section inactive'>
+    <div class="container-fluid contact py-5 mb-5">
+        <div class="container py-5 mb-5">
+            <div class="p-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-3">
+                            <!-- Utilisation de col-4 pour que la div occupe 20% de la largeur de l'écran (20% de 12 colonnes) -->
+                            <div class="rounded bg-dark text-center p-2 mt-n3 child2">
+                                <h3 class="display-7 text-light">Me connecter</h3>
+                            </div>
+                        </div>
+                        <div class="rounded bg-light p-4 mt-4 child1">
+                            <div class="row justify-content-center">
+                                <div class="col-4 pt-3">
+                                    <form>
+                                        <div class="container py-5 mb-5">
+                                            <div class="form-input p-2">
+                                                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+                                                <input type="text" placeholder="Email" required/>
+                                            </div>
+                                            <div class="form-input p-2">
+                                                <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
+                                                <input type="password" placeholder="Mot de passe" required/>
+                                            </div>
+                                            <div class="row justify-content-center py-4">
+                                                <div class=" col-8 mx-auto">
+                                                    <button type="submit"
+                                                            class="btn btn-primary border-2 border-secondary py-1 px-4 rounded-pill text-white h-100"
+                                                            style="top: 0; right: 25%;">Je me connecte
+                                                    </button>
+                                                </div>
+                                                <div class="pt-2 ps-1">
+                                                    <p>pas encore inscrit? <a href="#" id="inscription">Créer mon
+                                                        compte</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page de connexion End -->
+
+<!-- Page d'inscription Start -->
+<section id='sectionInscription' class='ma-section1 inactive'>
+    <div class="container-fluid contact py-5 mb-5">
+        <div class="container py-5 mb-5">
+            <div class="p-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-3">
+                            <!-- Utilisation de col-4 pour que la div occupe 20% de la largeur de l'écran (20% de 12 colonnes) -->
+                            <div class="rounded bg-dark text-center p-2 mt-n3 child2">
+                                <h3 class="display-7 text-light">Créer mon compte</h3>
+                            </div>
+                        </div>
+                        <div class="rounded bg-light p-4 mt-4 child1">
+                            <div class="row justify-content-center">
+                                <div class="col-4 pt-3">
+                                    <form>
+                                        <div class="container py-5 mb-5">
+                                            <div class="form-input p-2 ps-5">
+                                                <i class="fas fa-user fa-2x" aria-hidden="true"></i>
+                                                <input type="text" placeholder="Prenom" required/>
+                                            </div>
+                                            <div class="form-input p-2 ps-5">
+                                                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+                                                <input type="text" placeholder="Email" required/>
+                                            </div>
+                                            <div class="form-input p-2 ps-5">
+                                                <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
+                                                <input type="password" placeholder="Mot de passe" required/>
+                                            </div>
+                                            <div class="row justify-content-center py-4 ps-4">
+                                                <div class=" col-8 mx-auto">
+                                                    <button type="submit"
+                                                            class="btn btn-primary border-2 border-secondary py-1 px-4 rounded-pill text-white h-100"
+                                                            style="top: 0; right: 25%;">Je crée mon compte
+                                                    </button>
+                                                </div>
+                                                <div class="pt-2 text-center">
+                                                    <p>déjà utilisateur ? <a href="#" id="connexion2">Me
+                                                        connecter</a></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page d'inscription End -->
+
+<!-- Page du compte de l'utilisateur Start -->
+<section id='sectionCompte' class='inactive'>
+    <div class="container-fluid py-5 mb-5">
+        <div class="py-5 px-5">
+            <div class="row g-4 py-5">
+                <div class="col-lg-3">
+                    <div class="row g-4">
+                        <div class="col-12 mt-4">
+                            <div class="mb-3 border-bottom">
+                                <h4>
+                                    <a href="#" id="compte2">Mon compte</a>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3 border-bottom">
+                                <h4>
+                                    <a href="#" id="consommation">Ma consommation</a>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3 border-bottom">
+                                <h4>
+                                    <a href="#" id="listes">Mes listes</a>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3 border-bottom">
+                                <h4>
+                                    <a href="#" id="deco">Déconnexion</a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 px-5">
+                    <div class="compte">
+                        <div class="rounded bg-primary p-5">
+                            <div class="text-center">
+                                <h1 class="text-light"> Mes informations </h1>
+                            </div>
+                            <div class="info py-2">
+                                <p>Prenom : Théo</p>
+                                <p>Email : Théo@gmail.com</p>
+                                <p>Changer de mot de passe : </p>
+                                <div class="form-input p-2 ps-5">
+                                    <input type="password" placeholder="Ancien mot de passe" required/>
+                                    <input type="password" placeholder="Nouveau mot de passe" required/>
+                                    <input type="password" placeholder="Confirmer mot de passe" required/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Page de compte de l'utilisateur End -->
+
+<!-- Page pour les empreintes precedentes Start -->
+
+
+<!-- Page pour les empreintes precedentes End -->
+
+<!-- Page pour les empreintes precedentes Start -->
+<script>
+    function hiddendiv() {
+        $("#div_annee").attr("hidden", true);
+        $("#div_mois").attr("hidden", true);
+        $("#div_jour").attr("hidden", true);
+    }
+
+    $(function () {
+        hiddendiv();
+        for (let i = 2010; i < 2025; i++) {
+            $("#annee").append(`<option value="${i}">${i}</option>`);
+        }
+        $('#slc_option').change(function () {
+            hiddendiv();
+            let val = $(this).val();
+            console.log(val);
+            if (val == 1) {
+                $("#div_jour").attr("hidden", false);
+            } else if (val == 2) {
+                $("#div_mois").attr("hidden", false);
+            } else if (val == 3) {
+                $("#div_annee").attr("hidden", false);
+            }
+        });
+    });
+</script>
+
+<section id='sectionEmpreinte' class='inactive'>
+    <div class="justify-content-center container px-0">
+        <h1 class="mb-5 display-3 text-primary">Mes empreintes carbones precedentes</h1>
+        <div class="position-relative mx-auto">
+        </div>
+    </div>
+
+    <div class="nav-item dropdown">
+        <select id="slc_option" class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
+            <option selected>Rechercher</option>
+            <option value="1">Jour</option>
+            <option value="2">Mois</option>
+            <option value="3">Annee</option>
+        </select>
+    </div>
+    <div class="nav-item dropdown" id="div_jour">
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
+            <option value="1">Lundi</option>
+            <option value="2">Mardi</option>
+            <option value="3">Mercredi</option>
+            <option value="4">Jeudi</option>
+            <option value="5">Vendredi</option>
+            <option value="6">Samedi</option>
+            <option value="7">Dimanche</option>
+        </select>
+    </div>
+    <div class="nav-item dropdown" id="div_mois">
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
+            <option value="1">Janvier</option>
+            <option value="2">Fevrier</option>
+            <option value="3">Mars</option>
+            <option value="4">Avril</option>
+            <option value="5">Mai</option>
+            <option value="6">Juin</option>
+            <option value="7">Juillet</option>
+            <option value="8">Aout</option>
+            <option value="9">Septembre</option>
+            <option value="10">Octobre</option>
+            <option value="11">Novembre</option>
+            <option value="12">Decembre</option>
+        </select>
+    </div>
+    <div class="nav-item dropdown" id="div_annee">
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm" id="annee">
+        </select>
+    </div>
+
+    <div class="mx-auto">
+        <button type="submit"
                 class="btn btn-primary border-2 border-secondary py-3 px-4 rounded-pill text-white h-100"
-                style="top: 0; right: 25%;">Calculer mon empreinte</button>
-        </div>
-    </section>
-    <!-- page pour les empreintes precedentes End -->
+                style="top: 0; right: 25%;">Calculer mon empreinte
+        </button>
+    </div>
+</section>
+<!-- page pour les empreintes precedentes End -->
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
-            class="fa fa-arrow-up"></i></a>
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
+        class="fa fa-arrow-up"></i></a>
 
-    <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<!-- JavaScript Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/lightbox/js/lightbox.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
 
-    <!-- Inclure Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Inclure Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
