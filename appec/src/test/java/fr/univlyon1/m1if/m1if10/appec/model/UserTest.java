@@ -30,13 +30,8 @@ class UserTest {
     }
 
     @Test
-    void getEmail() {
-        assertEquals(user.getEmail(), "Xyz");
+    void getUserMain() {
+        assertEquals(user.getUsername(), "Xyz");
     }
 
-    @Test
-    void setEmail() {
-        user.setEmail("Axyz");
-        assertEquals(user.getEmail(), "Axyz");
-    }
 }
