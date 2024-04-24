@@ -158,6 +158,7 @@ function getProperties(url) {
 function renderListAliment() {
     getProperties("aliments").then( async (res) => {
         if(Array.isArray(res)) {
+            document.getElementById("nbProduits").innerText = res.length;
             let aliments = [];
             console.log(res[0]);
             console.log("nom legume : ");
@@ -185,3 +186,4 @@ function renderListAliment() {
     });
 }
 
+renderListAliment();
