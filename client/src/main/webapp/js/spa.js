@@ -161,6 +161,9 @@ function renderListAliment() {
     getProperties("aliments").then( async (res) => {
         if(Array.isArray(res)) {
             let aliments = [];
+            console.log(res[0]);
+            console.log("nom legume : ");
+            console.log(res[0].nomLegume);
             for (var i = 0; i < res.length; i++) {
                 let aliment = res[i];
                 aliments.push(aliment);
