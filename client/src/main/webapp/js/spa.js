@@ -160,17 +160,10 @@ function renderListAliment() {
     console.log('début fct list aliment');
     getProperties("aliments").then( async (res) => {
         if(Array.isArray(res)) {
-            console.log(res);
-            console.log("test");
-            console.log(res[0]);
-            for (var i = 0; i < res.length; i++) {
-                console.log(res[i]);
-            }
-            /*console.log('jobtiens un tableau');
             let aliments = [];
-            for(const id of res) {
-                //let aliment = await getProperties("aliments/" + id);
-                //aliments.push(aliment);
+            for (var i = 0; i < res.length; i++) {
+                let aliment = res[i];
+                aliments.push(aliment);
             }
             const template = document.getElementById('list_aliments_template');
             if (!template){
@@ -184,9 +177,7 @@ function renderListAliment() {
                 console.error("l'élément n'existe pas...");
                 return;
             }
-            elem.innerHTML = rendered;*/
-        }else{
-            console.log('jobtiens pas de tableau');
+            elem.innerHTML = rendered;          
         }
     }).catch((err) => {
         console.error("In renderListAliment: " + err);
