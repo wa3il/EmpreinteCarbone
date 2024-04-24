@@ -280,4 +280,40 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Connection d'un utilisateur 
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+
+        
+        if (email === '' || password === '') {
+            alert('Veuillez remplir tous les champs.');
+            return;
+        }
+
+        fetch('https://192.168.75.106/api/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: email, password: password })
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = 'index.html';
+            } else {
+                throw new Error('Erreur lors de la connexion.');
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error.message);
+            alert('Erreur lors de la connexion. Veuillez réessayer.');
+        });
+    });
+});
+
+
 
