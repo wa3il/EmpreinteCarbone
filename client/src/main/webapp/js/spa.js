@@ -146,7 +146,6 @@ function getProperties(url) {
     return fetch(baseUrl +url, requestConfig)
         .then((response) => {
             if(response.ok) {
-                console.log(response.json());
                 return response.json();
             } else {
                 throw new Error("Response is error (" + response.status + ") or does not contain JSON (" + response.headers.get("Content-Type") + ").");
