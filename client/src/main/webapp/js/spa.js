@@ -163,6 +163,9 @@ function renderListAliment() {
             console.log(res);
             console.log("test");
             console.log(res[0]);
+            res.forEach(function(element) {
+                console.log(element);
+            });
             /*console.log('jobtiens un tableau');
             let aliments = [];
             for(const id of res) {
