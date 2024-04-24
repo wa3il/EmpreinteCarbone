@@ -171,7 +171,7 @@ function renderListAliment() {
                 return;
             }
             const templ = template.innerText;
-            const rendered = Mustache.render(templ, { aliments: aliment});
+            const rendered = Mustache.render(templ, { aliments: aliments});
             const elem = document.getElementById('listAliments');
             if (!elem){
                 console.error("l'élément n'existe pas...");
