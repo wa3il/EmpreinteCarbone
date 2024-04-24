@@ -133,7 +133,6 @@ window.addEventListener('hashchange', () => {
 });
 
 function getProperties(url) {
-    console.log('debut getProperties');
     const headers = new Headers();
     headers.append("Accept", "application/json");
     const requestConfig = {
@@ -157,7 +156,6 @@ function getProperties(url) {
 }
 
 function renderListAliment() {
-    console.log('début fct list aliment');
     getProperties("aliments").then( async (res) => {
         if(Array.isArray(res)) {
             let aliments = [];
@@ -185,6 +183,5 @@ function renderListAliment() {
     }).catch((err) => {
         console.error("In renderListAliment: " + err);
     });
-    console.log('fin fct');
 }
 
