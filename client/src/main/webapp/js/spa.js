@@ -160,15 +160,15 @@ function renderListAliment() {
     console.log('début fct list aliment');
     getProperties("aliments").then( async (res) => {
         if(Array.isArray(res)) {
-            
-            console.log('jobtiens un tableau');
+            console.log(res);
+            console.log("test");
+            console.log(res[0]);
+            /*console.log('jobtiens un tableau');
             let aliments = [];
             for(const id of res) {
-                console.log(id);
                 //let aliment = await getProperties("aliments/" + id);
                 //aliments.push(aliment);
             }
-            /*
             const template = document.getElementById('list_aliments_template');
             if (!template){
                 console.error("l'élément n'existe pas...");
