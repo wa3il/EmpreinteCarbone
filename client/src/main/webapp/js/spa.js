@@ -141,13 +141,12 @@ function getProperties(url) {
         headers: headers,
         mode: "cors"
     };
-
-    console.log('fin getProperties');
+    
     console.log(baseUrl+url);
     return fetch(baseUrl +url, requestConfig)
         .then((response) => {
             if(response.ok) {
-                console.log(response.type);
+                console.log(response.json());
                 return response.json();
             } else {
                 throw new Error("Response is error (" + response.status + ") or does not contain JSON (" + response.headers.get("Content-Type") + ").");
@@ -162,8 +161,8 @@ function renderListAliment() {
     console.log('début fct list aliment');
     getProperties("aliments").then( async (res) => {
         if(Array.isArray(res)) {
-
-            console.log('jobtiens un tableau');
+            console.log(res);
+            /*console.log('jobtiens un tableau');
             let aliments = [];
             for(const id of res) {
                 //let aliment = await getProperties("aliments/" + id);
@@ -181,7 +180,7 @@ function renderListAliment() {
                 console.error("l'élément n'existe pas...");
                 return;
             }
-            elem.innerHTML = rendered;
+            elem.innerHTML = rendered;*/
         }else{
             console.log('jobtiens pas de tableau');
         }
