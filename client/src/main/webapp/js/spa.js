@@ -207,3 +207,77 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('rechercher').addEventListener('click', rechercherAliment);
 });
+
+// Validation des Entrées Utilisateur
+function validateForm() {
+    const name = document.getElementById('inputName').value.trim();
+    const email = document.getElementById('inputEmail').value.trim();
+    const password = document.getElementById('inputPassword').value.trim();
+
+    if (name === '' || email === '' || password === '') {
+        alert('Veuillez remplir tous les champs.');
+        return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Veuillez saisir une adresse e-mail valide.');
+        return false;
+    }
+
+    if (password.length < 8) {
+        alert('Le mot de passe doit contenir au moins 8 caractères.');
+        return false;
+    }
+
+    return true;
+}
+
+// Soumission du formulaire création utilisateur 
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('formCreateUser').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+
+        if (validateForm()) {
+            const name = document.getElementById('inputName').value;
+            const email = document.getElementById('inputEmail').value;
+            const password = document.getElementById('inputPassword').value;
+    
+            const newUser = {
+                name: name,
+                login: email,
+                password: password
+            };
+    
+            document.getElementById('formCreateUser').classList.add('disabled');
+
+            fetch('https://192.168.75.106/api/users ', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newUser)
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erreur lors de la création de l\'utilisateur');
+                }
+            })
+            .then(data => {
+                document.getElementById('formCreateUser').classList.remove('disabled');    
+                console.log('Utilisateur créé avec succès:', data);
+                alert('Utilisateur créé avec succès.');
+            })
+            .catch(error => {
+                console.error('Erreur:', error.message);
+                document.getElementById('formCreateUser').classList.remove('disabled');
+                alert('Une erreur est survenue lors de la création de l\'utilisateur. Veuillez réessayer.');
+            });
+        }
+        
+    });
+});
+
+
