@@ -712,57 +712,76 @@
     </script>
 
     <section id='sectionEmpreinte' class='inactive'>
-        <div class="justify-content-center container px-0">
-            <h1 class="mb-5 display-3 text-primary">Mes empreintes carbones precedentes</h1>
-            <div class="position-relative mx-auto">
+        <div class="container-fluid py-5 mb-5">
+            <div class="py-5 px-5">
+                <div class="row g-4 py-5">
+                    <div class="col-lg-3">
+                        <div class="row g-4">
+                            <div class="col-12 mt-4">
+                                <div class="mb-3 border-bottom">
+                                    <h1>Mes empreintes carbones precedentes</h1>
+                                </div>
+                            </div>   
+                        </div>
+                    </div>     
+                    <div class="col-lg-9 px-5">
+                        <div class="compte">
+                            <div class="rounded bg-primary p-5">
+                                <div class="nav-item dropdown">
+                                    <select id="slc_option" class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
+                                        <option selected>Rechercher</option>
+                                        <option value="1">Jour</option>
+                                        <option value="2">Mois</option>
+                                        <option value="3">Annee</option>
+                                    </select>
+                                </div>
+
+                                <div class="nav-item dropdown" id="div_jour">
+                                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
+                                        <option value="1">Lundi</option>
+                                        <option value="2">Mardi</option>
+                                        <option value="3">Mercredi</option>
+                                        <option value="4">Jeudi</option>
+                                        <option value="5">Vendredi</option>
+                                        <option value="6">Samedi</option>
+                                        <option value="7">Dimanche</option>
+                                    </select>
+                                </div>
+
+                                <div class="nav-item dropdown" id="div_mois">
+                                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
+                                        <option value="1">Janvier</option>
+                                        <option value="2">Fevrier</option>
+                                        <option value="3">Mars</option>
+                                        <option value="4">Avril</option>
+                                        <option value="5">Mai</option>
+                                        <option value="6">Juin</option>
+                                        <option value="7">Juillet</option>
+                                        <option value="8">Aout</option>
+                                        <option value="9">Septembre</option>
+                                        <option value="10">Octobre</option>
+                                        <option value="11">Novembre</option>
+                                        <option value="12">Decembre</option>
+                                    </select>
+                                </div>
+
+                                <div class="nav-item dropdown" id="div_annee">
+                                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm" id="annee">
+                                    </select>
+                                </div>
+                    
+                                <div class="mx-auto">
+                                    <button type="submit"
+                                        class="btn btn-primary border-2 border-secondary py-3 px-1 rounded-pill text-white h-100"
+                                        style="top: 0; right: 0%;">Calculer mon empreinte</button>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="nav-item dropdown">
-            <select id="slc_option" class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
-                <option selected>Rechercher</option>
-                <option value="1">Jour</option>
-                <option value="2">Mois</option>
-                <option value="3">Annee</option>
-            </select>
-        </div>
-        <div class="nav-item dropdown" id="div_jour">
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
-                <option value="1">Lundi</option>
-                <option value="2">Mardi</option>
-                <option value="3">Mercredi</option>
-                <option value="4">Jeudi</option>
-                <option value="5">Vendredi</option>
-                <option value="6">Samedi</option>
-                <option value="7">Dimanche</option>
-            </select>
-        </div>
-        <div class="nav-item dropdown" id="div_mois">
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
-                <option value="1">Janvier</option>
-                <option value="2">Fevrier</option>
-                <option value="3">Mars</option>
-                <option value="4">Avril</option>
-                <option value="5">Mai</option>
-                <option value="6">Juin</option>
-                <option value="7">Juillet</option>
-                <option value="8">Aout</option>
-                <option value="9">Septembre</option>
-                <option value="10">Octobre</option>
-                <option value="11">Novembre</option>
-                <option value="12">Decembre</option>
-            </select>
-        </div>
-        <div class="nav-item dropdown" id="div_annee">
-            <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm" id="annee">
-            </select>
-        </div>
-
-        <div class="mx-auto">
-            <button type="submit"
-                class="btn btn-primary border-2 border-secondary py-3 px-4 rounded-pill text-white h-100"
-                style="top: 0; right: 25%;">Calculer mon empreinte</button>
-        </div>
+                                                                        
     </section>
     <!-- page pour les empreintes precedentes End -->
 
