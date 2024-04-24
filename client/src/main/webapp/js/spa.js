@@ -189,17 +189,21 @@ function renderListAliment() {
 renderListAliment();
 
 document.addEventListener('DOMContentLoaded', function() {
-function rechercherAliment() {
-    var recherche = document.querySelector('.form-control').value.trim().toLowerCase();
-    var aliments = document.querySelectorAll('.aliment');
-    aliments.forEach(function(aliment) {
-    var nomLegume = aliment.querySelector('.nomLegume').textContent.toLowerCase();
-    if (nomLegume.includes(recherche)) {
-        aliment.style.display = 'block';
-    } else {
-        aliment.style.display = 'none';
-        }
-    });
-}
-document.getElementById('rechercher').addEventListener('click', rechercherAliment);
+    function rechercherAliment() {
+        var recherche = document.querySelector('.form-control').value.trim().toLowerCase();
+        var aliments = document.querySelectorAll('.aliment');
+        
+        aliments.forEach(function(aliment) {
+            aliment.style.display = 'block';
+        });
+
+        aliments.forEach(function(aliment) {
+            var nomLegume = aliment.querySelector('.nomLegume').textContent.toLowerCase();
+            if (!nomLegume.includes(recherche)) {
+                aliment.style.display = 'none';
+            }
+        });
+    }
+
+    document.getElementById('rechercher').addEventListener('click', rechercherAliment);
 });
