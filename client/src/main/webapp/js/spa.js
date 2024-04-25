@@ -228,6 +228,7 @@ function validateForm() {
 }
 
 function register() {
+    console.log("fct register");
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     const body = {
