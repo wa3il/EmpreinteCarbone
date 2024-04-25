@@ -240,6 +240,9 @@ function register() {
         name : document.getElementById('inputName').value,
         password : document.getElementById('inputPassword').value
     };
+    console.log (document.getElementById('inputLogin').value);
+    console.log(document.getElementById('inputName').value);
+    console.log(document.getElementById('inputPassword').value);
     const requestConfig = {
         method: "POST",
         headers: headers,
