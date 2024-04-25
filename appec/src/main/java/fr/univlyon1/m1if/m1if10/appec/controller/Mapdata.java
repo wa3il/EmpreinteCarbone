@@ -74,8 +74,8 @@ public class Mapdata {
         if (contentType.contains(MediaType.APPLICATION_FORM_URLENCODED_VALUE)) {
             Map<String, String> formData = extractFormData(requestBody);
             String login = formData.get("login");
-            String password = formData.get("password");
             String name = formData.get("name");
+            String password = formData.get("password");
 
             UserRequestDto userRequest = new UserRequestDto();
             userRequest.setLogin(login);

@@ -250,7 +250,7 @@ function register() {
         mode: "cors" 
     };
     fetch('https://192.168.75.106/api/users' , requestConfig)
-        .then(async(response) => {
+        .then((response) => {
             if (response.status === 200) {
                 console.log("Utilisateur créé.");
                 //displayRequestResult("Utilisateur créé.", "alert-info");
