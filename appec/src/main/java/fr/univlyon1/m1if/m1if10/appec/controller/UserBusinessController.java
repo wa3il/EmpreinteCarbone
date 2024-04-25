@@ -49,11 +49,14 @@ public class UserBusinessController {
         }
     }
 
-    @PostMapping(value = "/logout",
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    @PostMapping(value = "/logout")
     public ResponseEntity<?> logout() {
-        return ResponseEntity.ok().build();
+        try {
+            authenticationService.deconnexion();
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 
 }

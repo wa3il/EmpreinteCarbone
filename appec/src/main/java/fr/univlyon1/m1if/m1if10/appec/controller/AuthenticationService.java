@@ -1,16 +1,20 @@
 package fr.univlyon1.m1if.m1if10.appec.controller;
 
+import fr.univlyon1.m1if.m1if10.appec.dao.JwtDao;
 import fr.univlyon1.m1if.m1if10.appec.dao.UserDao;
 import fr.univlyon1.m1if.m1if10.appec.dto.user.AuthenticationResponse;
 import fr.univlyon1.m1if.m1if10.appec.dto.user.UserRequestDto;
+import fr.univlyon1.m1if.m1if10.appec.model.Jwt;
 import fr.univlyon1.m1if.m1if10.appec.model.User;
 import fr.univlyon1.m1if.m1if10.appec.securite.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.Utilities;
 import java.util.Optional;
 
 @Service
@@ -21,13 +25,15 @@ public class AuthenticationService {
     private final JwtService jwtService;
 
     private final AuthenticationManager authenticationManager;
+    private final JwtDao jwtDao;
 
     @Autowired
-    public AuthenticationService(UserDao userDao, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager) {
+    public AuthenticationService(UserDao userDao, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager, JwtDao jwtDao) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
+        this.jwtDao = jwtDao;
     }
 
 
@@ -44,10 +50,26 @@ public class AuthenticationService {
                         userRequestDto.getPassword()
                 ));
         Optional<User> user = userDao.findByLogin(userRequestDto.getLogin());
+
         if(user.isEmpty()) {
             throw new RuntimeException("User not found");
-        }else {
-            return new AuthenticationResponse(jwtService.generateToken(user.get()));
         }
+        else if(user.isPresent()){
+            Optional<Jwt> jwt = jwtDao.findTokenByUser(user.get());
+            if(jwt.isPresent() && !jwt.get().isExpire() && !jwt.get().isDesactive()){
+                return new AuthenticationResponse(jwt.get().getToken());
+            }else {
+                return new AuthenticationResponse(jwtService.generateToken(user.get()));
+            }
+
+        }else{
+            throw new RuntimeException("User not found");
+        }
+
+    }
+
+    public void deconnexion() {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        this.jwtService.desactiveToken(user);
     }
 }

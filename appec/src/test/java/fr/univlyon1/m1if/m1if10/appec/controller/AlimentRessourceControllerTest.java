@@ -1,4 +1,4 @@
-package fr.univlyon1.m1if.m1if10.appec;
+package fr.univlyon1.m1if.m1if10.appec.controller;
 import fr.univlyon1.m1if.m1if10.appec.controller.AlimentRessourceController;
 import fr.univlyon1.m1if.m1if10.appec.dao.Dao;
 import fr.univlyon1.m1if.m1if10.appec.model.Aliment;
