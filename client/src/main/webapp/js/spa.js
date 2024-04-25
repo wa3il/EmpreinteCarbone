@@ -45,11 +45,6 @@ const baseUrl = "https://192.168.75.106/api/";
             showSection('sectionCompte');
         });
 
-        document.getElementById('liste').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionListe');
-        });
-
         document.getElementById('connexion1').addEventListener('click', function(event) {
             event.preventDefault();
             showSection('sectionConnexion');
