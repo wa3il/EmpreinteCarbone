@@ -1,7 +1,6 @@
 package fr.univlyon1.m1if.m1if10.appec.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.univlyon1.m1if.m1if10.appec.dao.UserDao;
 import fr.univlyon1.m1if.m1if10.appec.dto.user.AuthenticationResponse;
 import fr.univlyon1.m1if.m1if10.appec.dto.user.UserRequestDto;

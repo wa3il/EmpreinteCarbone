@@ -2,7 +2,6 @@ package fr.univlyon1.m1if.m1if10.appec.dao;
 
 import fr.univlyon1.m1if.m1if10.appec.model.User;
 import org.antlr.v4.runtime.misc.NotNull;
-import org.hibernate.annotations.Comment;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

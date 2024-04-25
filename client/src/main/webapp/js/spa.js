@@ -141,7 +141,6 @@ function getProperties(url) {
         mode: "cors"
     };
     
-    console.log(baseUrl+url);
     return fetch(baseUrl +url, requestConfig)
         .then((response) => {
             if(response.ok) {
@@ -237,26 +236,29 @@ function register() {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     const body = {
+        login : document.getElementById('inputLogin').value,
         name : document.getElementById('inputName').value,
-        email : document.getElementById('inputEmail').value,
         password : document.getElementById('inputPassword').value
     };
     const requestConfig = {
         method: "POST",
         headers: headers,
-        body: JSON.stringify(body),
-        mode: "cors" 
+        body: JSON.stringify(body)
     };
     fetch('https://192.168.75.106/api/users' , requestConfig)
         .then((response) => {
-            if (response.status === 201) {
-                displayRequestResult("Utilisateur créé.", "alert-info");
+            if (response.status === 200) {
+                console.log("Utilisateur créé.");
+                //displayRequestResult("Utilisateur créé.", "alert-info");
             } else if (response.status === 400) {
-                displayRequestResult("Paramètres de la requête non acceptables", "alert-warning");
+                console.log("Paramètres de la requête non acceptables");
+                //displayRequestResult("Paramètres de la requête non acceptables", "alert-warning");
             } else if (response.status === 409) {
-                displayRequestResult("Un utilisateur avec ce login existe déjà", "alert-warning");
+                console.log("Un utilisateur avec ce login existe déjà");
+                //displayRequestResult("Un utilisateur avec ce login existe déjà", "alert-warning");
             } else {
-                displayRequestResult("Connexion refusée ou impossible, code erreur : " + response.status, "alert-danger");
+                console.log("Connexion refusée ou impossible, code erreur : ");
+                //displayRequestResult("Connexion refusée ou impossible, code erreur : " + response.status, "alert-danger");
                 throw new Error("Bad response code (" + response.status + ").");
             }
         })
