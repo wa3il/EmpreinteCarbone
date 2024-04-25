@@ -55,7 +55,7 @@ public class AuthenticationService {
             throw new RuntimeException("User not found");
         }
         else if(user.isPresent()){
-            Optional<Jwt> jwt = jwtDao.findTokenByUser(user.get());
+            Optional<Jwt> jwt = jwtDao.findTokenValidByUser(user.get());
             if(jwt.isPresent() && !jwt.get().isExpire() && !jwt.get().isDesactive()){
                 return new AuthenticationResponse(jwt.get().getToken());
             }else {

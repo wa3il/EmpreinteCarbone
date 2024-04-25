@@ -68,6 +68,13 @@ public class JwtService {
 
     public boolean isTokenValid(String jwt, UserDetails userDetails) {
         final String userlogin = extractUserLogin(jwt);
+        if (!isTokenExpired(jwt)){
+            Optional<Jwt> jwt1 = jwtDao.findByValue(jwt);
+            if (jwt1.isPresent()){
+                    jwt1.setDesactive(true);
+                    jwtDao.update(jwt1, new String[]{"true", "true"});
+            }
+        }
         return (userlogin.equals(userDetails.getUsername()) && !isTokenExpired(jwt));
     }
 
@@ -91,9 +98,6 @@ public class JwtService {
 
     public void desactiveToken(User user) {
         Optional<Jwt> jwt = jwtDao.findTokenValidByUser(user);
-        jwt.ifPresent(jwt1 -> {
-            jwt1.setDesactive(true);
-            jwtDao.update(jwt1, new String[]{String.valueOf(jwt1.isDesactive()), String.valueOf(jwt1.isExpire())});
-        });
+        jwt.ifPresent(value -> jwtDao.update(value, new String[]{"true", "true"}));
     }
 }
