@@ -33,28 +33,15 @@ public class JpaAlimentDao implements Dao<Aliment> {
     @Transactional
     @Override
     public void save(Aliment aliment) {
-        // entityManager.persist(aliment);
     }
 
     @Transactional
     @Override
     public void update(Aliment aliment, String[] params) {
-        // Objects.requireNonNull(params, "Params cannot be null");
-        // Objects.requireNonNull(params[0], "NomLegume cannot be null");
-        // Objects.requireNonNull(params[1], "EC cannot be null");
-        // Objects.requireNonNull(params[2], "Groupe cannot be null");
-        // Objects.requireNonNull(params[3], "SousGroupe cannot be null");
-
-        // aliment.setNomLegume(params[0]);
-        // aliment.setEc(Float.parseFloat(params[1]));
-        // aliment.setGroupe(params[2]);
-        // aliment.setSousGroupe(params[3]);
-        // entityManager.merge(aliment);
     }
 
     @Transactional
     @Override
     public void delete(Aliment aliment) {
-        //entityManager.remove(aliment);
     }
 }

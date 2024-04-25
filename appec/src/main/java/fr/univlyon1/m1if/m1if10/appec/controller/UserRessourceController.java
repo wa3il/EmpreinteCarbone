@@ -1,6 +1,7 @@
 package fr.univlyon1.m1if.m1if10.appec.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+
 import fr.univlyon1.m1if.m1if10.appec.dao.UserDao;
 import fr.univlyon1.m1if.m1if10.appec.dto.user.AuthenticationResponse;
 import fr.univlyon1.m1if.m1if10.appec.dto.user.UserRequestDto;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import java.util.Map;
 import java.util.Optional;
 
 import static fr.univlyon1.m1if.m1if10.appec.controller.Mapdata.*;
@@ -34,7 +34,7 @@ import static fr.univlyon1.m1if.m1if10.appec.controller.Mapdata.*;
 public class UserRessourceController {
 
     @Autowired
-    private UserDao UserDao;
+    private UserDao userdao;
 
 
     private final AuthenticationService authService;
@@ -51,7 +51,7 @@ public class UserRessourceController {
      */
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<?> getAllUser() {
-        return ResponseEntity.ok(UserDao.getAll());
+        return ResponseEntity.ok(userdao.getAll());
     }
 
     /**
@@ -63,7 +63,7 @@ public class UserRessourceController {
     @GetMapping(value = "/{id}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<?> getUser(@PathVariable("id") final Integer id) {
-        Optional<User> user = UserDao.get(id);
+        Optional<User> user = userdao.get(id);
         if(user.isPresent()){
             return ResponseEntity.ok(user.get());
         }
@@ -105,10 +105,10 @@ public class UserRessourceController {
         try {
             Optional<UserRequestDto> requestDto = getUserDtoRequest(requestBody, contentType);
             if (requestDto.isPresent()) {
-                Optional<User> user = UserDao.get(id);
+                Optional<User> user = userdao.get(id);
                 if (user.isPresent()) {
                     UserRequestDto userdto = requestDto.get();
-                    UserDao.update(user.get(),new String[]{userdto.getName(), userdto.getPassword(), userdto.getLogin()});
+                    userdao.update(user.get(),new String[]{userdto.getName(), userdto.getPassword(), userdto.getLogin()});
                     return ResponseEntity.ok("Utilisateur mis à jour");
                 } else {
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");
@@ -130,9 +130,9 @@ public class UserRessourceController {
     @DeleteMapping(value = "/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ResponseEntity<?> deleteUser(@PathVariable("id") final Integer id) {
         try {
-            Optional<User> user = UserDao.get(id);
+            Optional<User> user = userdao.get(id);
             if (user.isPresent()) {
-                UserDao.delete(user.get());
+                userdao.delete(user.get());
                 return ResponseEntity.ok("Utilisateur supprimé");
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");

@@ -3,7 +3,6 @@ package fr.univlyon1.m1if.m1if10.appec.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.univlyon1.m1if.m1if10.appec.dto.user.UserRequestDto;
-import fr.univlyon1.m1if.m1if10.appec.model.User;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
