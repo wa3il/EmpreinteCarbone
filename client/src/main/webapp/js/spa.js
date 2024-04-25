@@ -297,7 +297,7 @@ function connect() {
 
                 location.hash = "#index";
             } else {
-                console.log("Connexion refusée ou impossible");
+                console.log("Connexion refusée impossible");
                 //displayRequestResult("Connexion refusée ou impossible", "alert-danger");
                 throw new Error("Bad response code (" + response.status + ").");
             }
