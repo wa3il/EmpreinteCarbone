@@ -141,7 +141,6 @@ function getProperties(url) {
         mode: "cors"
     };
     
-    console.log(baseUrl+url);
     return fetch(baseUrl +url, requestConfig)
         .then((response) => {
             if(response.ok) {
@@ -237,8 +236,8 @@ function register() {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     const body = {
+        login : document.getElementById('inputLogin').value,
         name : document.getElementById('inputName').value,
-        email : document.getElementById('inputEmail').value,
         password : document.getElementById('inputPassword').value
     };
     const requestConfig = {
