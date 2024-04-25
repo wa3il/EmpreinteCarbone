@@ -1,26 +1,16 @@
 package fr.univlyon1.m1if.m1if10.appec.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.univlyon1.m1if.m1if10.appec.dao.Dao;
-import fr.univlyon1.m1if.m1if10.appec.dao.JpaUserDao;
-import fr.univlyon1.m1if.m1if10.appec.dao.UserDao;
 import fr.univlyon1.m1if.m1if10.appec.dto.user.AuthenticationResponse;
 import fr.univlyon1.m1if.m1if10.appec.dto.user.UserRequestDto;
-import fr.univlyon1.m1if.m1if10.appec.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-import java.util.Map;
 import java.util.Optional;
 
 import static fr.univlyon1.m1if.m1if10.appec.controller.Mapdata.*;
-import static org.springframework.security.config.Elements.JWT;
 
 /**
  * Controller for user business.
