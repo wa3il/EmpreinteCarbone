@@ -1,12 +1,7 @@
 package fr.univlyon1.m1if.m1if10.appec.model;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -34,7 +29,8 @@ public class User implements UserDetails {
     @Column(name = "login", nullable = false)
     private String login;
 
-    public User() {}
+    public User() {
+    }
 
     public User(String name, String password, String login) {
         this.name = name;
@@ -49,9 +45,13 @@ public class User implements UserDetails {
         return login;
     }
 
-    public void setUsername(String login) {this.login = login;}
+    public void setUsername(String login) {
+        this.login = login;
+    }
 
-    public String getName() { return name;}
+    public String getName() {
+        return name;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -65,8 +65,6 @@ public class User implements UserDetails {
     public String getPassword() {
         return password;
     }
-
-
 
 
     @Override
