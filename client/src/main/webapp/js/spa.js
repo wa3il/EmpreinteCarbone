@@ -263,4 +263,46 @@ function register() {
         })
 }
 
+function connect() {
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    const body = {
+        login: document.getElementById("loginEmail").value,
+        password: document.getElementById("loginPassword").value
+    };
+    const requestConfig = {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+        mode: "cors" 
+    };
+    fetch('https://192.168.75.106/api/users/login', requestConfig)
+        .then((response) => {
+            bearerToken = response.headers.get("Authorization");
+            if (bearerToken != null){
+                localStorage.setItem("token", bearerToken);
+                localStorage.setItem("login", body.login);
+                headers.append("Authorization", bearerToken);
+            }else{
+                console.log("PAS DE TOKEN PB");
+            }
+            if (response.status === 204) {
+                displayConnected(true);
+                console.log("Connexion réussie");
+                //displayRequestResult("Connexion réussie", "alert-success");
+                //console.log("In login: Authorization = " + response.headers.get("Authorization"));
+                getProperties("users/"+localStorage.getItem("login")).then(res => {
+                    document.getElementById("namePage").innerText = res.name;
+                });
 
+                location.hash = "#index";
+            } else {
+                console.log("Connexion refusée ou impossible");
+                //displayRequestResult("Connexion refusée ou impossible", "alert-danger");
+                throw new Error("Bad response code (" + response.status + ").");
+            }
+        })
+        .catch((err) => {
+            console.error("In login: " + err);
+        })
+}
