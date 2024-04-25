@@ -240,14 +240,10 @@ function register() {
         name : document.getElementById('inputName').value,
         password : document.getElementById('inputPassword').value
     };
-    console.log (document.getElementById('inputLogin').value);
-    console.log(document.getElementById('inputName').value);
-    console.log(document.getElementById('inputPassword').value);
     const requestConfig = {
         method: "POST",
         headers: headers,
-        body: JSON.stringify(body),
-        mode: "cors" 
+        body: JSON.stringify(body)
     };
     fetch('https://192.168.75.106/api/users' , requestConfig)
         .then((response) => {
