@@ -70,10 +70,7 @@ public class JwtService {
         final String userlogin = extractUserLogin(jwt);
         if (!isTokenExpired(jwt)){
             Optional<Jwt> jwt1 = jwtDao.findByValue(jwt);
-            if (jwt1.isPresent()){
-                    jwt1.setDesactive(true);
-                    jwtDao.update(jwt1, new String[]{"true", "true"});
-            }
+            jwt1.ifPresent(value -> jwtDao.update(value, new String[]{"true", "true"}));
         }
         return (userlogin.equals(userDetails.getUsername()) && !isTokenExpired(jwt));
     }
