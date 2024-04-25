@@ -233,87 +233,36 @@ function validateForm() {
     return true;
 }
 
-// Soumission du formulaire création utilisateur 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('formCreateUser').addEventListener('submit', function(event) {
-        event.preventDefault(); 
-
-        if (validateForm()) {
-            const name = document.getElementById('inputName').value;
-            const email = document.getElementById('inputEmail').value;
-            const password = document.getElementById('inputPassword').value;
-    
-            const newUser = {
-                name: name,
-                login: email,
-                password: password
-            };
-    
-            document.getElementById('formCreateUser').classList.add('disabled');
-
-            fetch('https://192.168.75.106/api/users ', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newUser)
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Erreur lors de la création de l\'utilisateur');
-                }
-            })
-            .then(data => {
-                document.getElementById('formCreateUser').classList.remove('disabled');    
-                console.log('Utilisateur créé avec succès:', data);
-                alert('Utilisateur créé avec succès.');
-            })
-            .catch(error => {
-                console.error('Erreur:', error.message);
-                document.getElementById('formCreateUser').classList.remove('disabled');
-                alert('Une erreur est survenue lors de la création de l\'utilisateur. Veuillez réessayer.');
-            });
-        }
-        
-    });
-});
-
-// Connection d'un utilisateur 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-        event.preventDefault(); 
-
-        const email = document.getElementById('loginEmail').value.trim();
-        const password = document.getElementById('loginPassword').value.trim();
-
-        
-        if (email === '' || password === '') {
-            alert('Veuillez remplir tous les champs.');
-            return;
-        }
-
-        fetch('https://192.168.75.106/api/users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email: email, password: password })
-        })
-        .then(response => {
-            if (response.ok) {
-                window.location.href = 'index.html';
+function register() {
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    const body = {
+        name : document.getElementById('inputName').value,
+        email : document.getElementById('inputEmail').value,
+        password : document.getElementById('inputPassword').value
+    };
+    const requestConfig = {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+        mode: "cors" 
+    };
+    fetch('https://192.168.75.106/api/users' , requestConfig)
+        .then((response) => {
+            if (response.status === 201) {
+                displayRequestResult("Utilisateur créé.", "alert-info");
+            } else if (response.status === 400) {
+                displayRequestResult("Paramètres de la requête non acceptables", "alert-warning");
+            } else if (response.status === 409) {
+                displayRequestResult("Un utilisateur avec ce login existe déjà", "alert-warning");
             } else {
-                throw new Error('Erreur lors de la connexion.');
+                displayRequestResult("Connexion refusée ou impossible, code erreur : " + response.status, "alert-danger");
+                throw new Error("Bad response code (" + response.status + ").");
             }
         })
-        .catch(error => {
-            console.error('Erreur:', error.message);
-            alert('Erreur lors de la connexion. Veuillez réessayer.');
-        });
-    });
-});
-
+        .catch((err) => {
+            console.error("Error to register : " + err);
+        })
+}
 
 
