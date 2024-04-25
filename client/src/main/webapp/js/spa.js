@@ -250,15 +250,19 @@ function register() {
         mode: "cors" 
     };
     fetch('https://192.168.75.106/api/users' , requestConfig)
-        .then((response) => {
-            if (response.status === 201) {
-                displayRequestResult("Utilisateur créé.", "alert-info");
+        .then(async(response) => {
+            if (response.status === 200) {
+                console.log("Utilisateur créé.");
+                //displayRequestResult("Utilisateur créé.", "alert-info");
             } else if (response.status === 400) {
-                displayRequestResult("Paramètres de la requête non acceptables", "alert-warning");
+                console.log("Paramètres de la requête non acceptables");
+                //displayRequestResult("Paramètres de la requête non acceptables", "alert-warning");
             } else if (response.status === 409) {
-                displayRequestResult("Un utilisateur avec ce login existe déjà", "alert-warning");
+                console.log("Un utilisateur avec ce login existe déjà");
+                //displayRequestResult("Un utilisateur avec ce login existe déjà", "alert-warning");
             } else {
-                displayRequestResult("Connexion refusée ou impossible, code erreur : " + response.status, "alert-danger");
+                console.log("Connexion refusée ou impossible, code erreur : ");
+                //displayRequestResult("Connexion refusée ou impossible, code erreur : " + response.status, "alert-danger");
                 throw new Error("Bad response code (" + response.status + ").");
             }
         })
