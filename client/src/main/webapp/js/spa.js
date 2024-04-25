@@ -286,7 +286,7 @@ function connect() {
             }else{
                 console.log("PAS DE TOKEN PB");
             }
-            if (response.status === 204) {
+            if (response.status === 200) {
                 displayConnected(true);
                 console.log("Connexion réussie");
                 //displayRequestResult("Connexion réussie", "alert-success");
