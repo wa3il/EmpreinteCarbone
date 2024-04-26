@@ -110,9 +110,9 @@ function displayConnected(isConnected) {
     }
 }
 
-window.addEventListener('hashchange', () => {
+/*window.addEventListener('hashchange', () => {
     show(window.location.hash);
-});
+});*/
 
 function getProperties(url) {
     const headers = new Headers();
