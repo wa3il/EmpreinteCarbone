@@ -55,11 +55,12 @@ public class AuthenticationService {
 
             } else if (user.isPresent()) {
                 Optional<Jwt> jwt = jwtDao.findTokenValidByUser(user.get());
-                if (jwt.isPresent() && !jwt.get().isExpire() && !jwt.get().isDesactive()) {
+                /*if (jwt.isPresent() && (jwt.get().isExpire() == false) && (!jwt.get().isDesactive()) {
                     return new AuthenticationResponse(jwt.get().getToken());
                 } else {
                     return new AuthenticationResponse(jwtService.generateToken(user.get()));
-                }
+                }*/
+                return new AuthenticationResponse(jwtService.generateToken(user.get()));
             } else {
                 throw new RuntimeException("User not found");
             }
