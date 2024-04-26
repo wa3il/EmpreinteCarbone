@@ -266,6 +266,8 @@ function connect() {
     fetch('https://192.168.75.106/api/users/login', requestConfig)
         .then((response) => {
             json = response.json();
+            console.log(response.json());
+            console.log(json);
             if (json != null){
                 bearerToken = JSON.parse(json);
                 console.log(bearerToken);
