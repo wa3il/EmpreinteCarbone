@@ -265,8 +265,9 @@ function connect() {
     };
     fetch('https://192.168.75.106/api/users/login', requestConfig)
         .then((response) => {
-            bearerToken = response.json();
-            if (bearerToken != null){
+            json = response.json();
+            if (json != null){
+                bearerToken = json.token;
                 parts = bearerToken.split('"');
                 token = parts[1];
                 localStorage.setItem("token", token);
