@@ -265,36 +265,28 @@ function connect() {
         mode: "cors" 
     };
     fetch(baseUrl+'/users/login', requestConfig)
-        .then((response) => {
-            /*json = response.json(async);
-            console.log(response.json());
-            console.log(json);
-            if (json != null){
-                bearerToken = JSON.parse(json);
-                console.log(bearerToken);
-                parts = bearerToken.split('"');
-                token = parts[1];
-                localStorage.setItem("token", token);
-                localStorage.setItem("login", body.login);
-                //headers.append("Authorization", token);
-            }else{
-                console.log("PAS DE TOKEN PB");
-            }*/
-            if (response.status === 200) {
-                //displayConnected(true);
-                console.log("Connexion réussie");
-                //displayRequestResult("Connexion réussie", "alert-success");
-                //console.log("In login: Authorization = " + response.headers.get("Authorization"));
-                //getProperties("users/"+localStorage.getItem("login")).then(res => {
-                //    document.getElementById("namePage").innerText = res.name;
-                //});
-
-                //location.hash = "#index";
-            } else {
+        .then(response => {
+            // Vérifier si la requête a réussi (status 200-299)
+            if (!response.ok) {
                 console.log("Connexion refusée impossible");
                 //displayRequestResult("Connexion refusée ou impossible", "alert-danger");
                 throw new Error("Bad response code (" + response.status + ").");
             }
+            // Extraire le token du corps de la réponse
+            return response.json();
+        })
+        .then(data => {
+            // Récupérer le token de la réponse JSON
+            var token = data.token;
+            localStorage.setItem("token", token);
+            localStorage.setItem("login", body.login);
+            headers.append("Authorization", token);
+            // Utiliser le token comme nécessaire
+            console.log("Token récupéré :", token);
+            console.log("status : ", data.status);
+            displayConnected(true);
+            console.log("Connexion réussie");
+            //displayRequestResult("Connexion réussie", "alert-success");
         })
         .catch((err) => {
             console.error("In login: " + err);
