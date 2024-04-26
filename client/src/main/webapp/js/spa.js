@@ -267,7 +267,8 @@ function connect() {
         .then((response) => {
             json = response.json();
             if (json != null){
-                bearerToken = json.token;
+                bearerToken = JSON.parse(json);
+                console.log(bearerToken);
                 parts = bearerToken.split('"');
                 token = parts[1];
                 localStorage.setItem("token", token);
