@@ -97,18 +97,18 @@ public class UserRessourceController {
      * @param contentType the content type
      * @return the response entity
      */
-    @PutMapping(value = "/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    @PutMapping(value = "/{login}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ResponseEntity<?> updateUser(
-            @PathVariable("id") final Integer id,
+            @PathVariable("login") final String id,
             @RequestBody String requestBody,
             @RequestHeader("Content-Type") String contentType) {
         try {
             Optional<UserRequestDto> requestDto = getUserDtoRequest(requestBody, contentType);
             if (requestDto.isPresent()) {
-                Optional<User> user = userdao.get(id);
+                Optional<User> user = userdao.findByLogin(id);
                 if (user.isPresent()) {
                     UserRequestDto userdto = requestDto.get();
-                    userdao.update(user.get(),new String[]{userdto.getName(), userdto.getPassword(), userdto.getLogin()});
+                    userdao.update(user.get(),new String[]{userdto.getName(), authService.encoderPassword(userdto.getPassword())});
                     return ResponseEntity.ok("Utilisateur mis à jour");
                 } else {
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");

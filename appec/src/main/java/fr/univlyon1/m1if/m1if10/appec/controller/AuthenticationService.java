@@ -71,4 +71,8 @@ public class AuthenticationService {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         this.jwtService.desactiveToken(user);
     }
+
+    public String encoderPassword(String password) {
+        return passwordEncoder.encode(password);
+    }
 }
