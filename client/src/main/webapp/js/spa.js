@@ -135,16 +135,15 @@ function getProperties(url) {
             console.error("In getProperties: " + err);
         });
 }
-
-function renderListAliment() {
+function renderListAliment(int) {
     getProperties("aliments").then( async (res) => {
         if(Array.isArray(res)) {
             document.getElementById("nbProduits").innerText = res.length;
-            let aliments = [];
-            console.log(res[0]);
-            console.log("nom legume : ");
-            console.log(res[0].nomLegume);
-            for (var i = 0; i < res.length; i++) {
+            let aliments = []
+            if (int>res.length) {
+                int = res.length
+            }
+            for (var i = 0; i < int; i++) {
                 let aliment = res[i];
                 aliments.push(aliment);
             }
@@ -167,7 +166,8 @@ function renderListAliment() {
     });
 }
 
-renderListAliment();
+
+renderListAliment(10);
 /*
 document.addEventListener('DOMContentLoaded', function() {
     function rechercherAliment() {
@@ -300,3 +300,56 @@ function connect() {
             console.error("In login: " + err);
         })
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const searchTermInput = document.getElementById("recherche");
+    var element = document.getElementById("btnrecherche");
+    var originalDisplayStyle = element.style.display;
+
+    searchTermInput.addEventListener("keyup", function(event) {
+
+        if (searchTermInput !== "") {
+            element.style.display = "none";
+        
+            getProperties("aliments").then( async (res) => {
+                if(Array.isArray(res)) {
+                    let aliments = [];
+                    console.log(res[0]);
+                    console.log("nom legume : ");
+                    console.log(res[0].nomLegume);
+    
+                    for (var i = 0; i < res.length; i++) {
+                        if (res[i].nomLegume.toLowerCase().startsWith(searchTermInput.value.trim().toLowerCase())) {
+                            console.log("vrai");
+                            let aliment = res[i];
+                            aliments.push(aliment);
+                        }
+                    }
+                    const template = document.getElementById('list_aliments_template');
+                    const templ = template.innerText;
+                    const rendered = Mustache.render(templ, { aliments: aliments});
+                    const elem = document.getElementById('listAliments');
+                    elem.innerHTML = rendered;          
+                }
+            }).catch((err) => {
+                console.error("In renderListAliment: " + err);
+            });
+        }
+        else{
+            element.style.display = originalDisplayStyle;
+            renderListAliment(10);
+    
+        }
+    });
+  
+
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    btn = document.getElementById("btnrecherche");
+    nb = 20
+    btn.addEventListener("click", function(event) {
+    renderListAliment(nb);
+    nb = nb+10
+    });
+});
