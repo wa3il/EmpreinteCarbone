@@ -1,7 +1,7 @@
 /**
  * Placez ici les scripts qui seront exécutés côté client pour rendre l'application côté client fonctionnelle.
  */
-const baseUrl = "https://192.168.75.106/api/";
+const baseUrl = "http://localhost:8080/appec/";
 
 // <editor-fold desc="Gestion de l'affichage">
 /**
@@ -228,7 +228,7 @@ function register() {
         headers: headers,
         body: JSON.stringify(body)
     };
-    fetch('https://192.168.75.106/api/users' , requestConfig)
+    fetch(baseUrl+'users' , requestConfig)
         .then((response) => {
             if (response.status === 200) {
                 console.log("Utilisateur créé.");
@@ -253,6 +253,7 @@ function register() {
 function connect() {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
+    headers.append("Accept", "application/json");
     const body = {
         login: document.getElementById("loginEmail").value,
         password: document.getElementById("loginPassword").value
@@ -263,9 +264,9 @@ function connect() {
         body: JSON.stringify(body),
         mode: "cors" 
     };
-    fetch('https://192.168.75.106/api/users/login', requestConfig)
+    fetch(baseUrl+'/users/login', requestConfig)
         .then((response) => {
-            json = response.json();
+            /*json = response.json(async);
             console.log(response.json());
             console.log(json);
             if (json != null){
@@ -275,20 +276,20 @@ function connect() {
                 token = parts[1];
                 localStorage.setItem("token", token);
                 localStorage.setItem("login", body.login);
-                headers.append("Authorization", token);
+                //headers.append("Authorization", token);
             }else{
                 console.log("PAS DE TOKEN PB");
-            }
+            }*/
             if (response.status === 200) {
-                displayConnected(true);
+                //displayConnected(true);
                 console.log("Connexion réussie");
                 //displayRequestResult("Connexion réussie", "alert-success");
                 //console.log("In login: Authorization = " + response.headers.get("Authorization"));
-                getProperties("users/"+localStorage.getItem("login")).then(res => {
-                    document.getElementById("namePage").innerText = res.name;
-                });
+                //getProperties("users/"+localStorage.getItem("login")).then(res => {
+                //    document.getElementById("namePage").innerText = res.name;
+                //});
 
-                location.hash = "#index";
+                //location.hash = "#index";
             } else {
                 console.log("Connexion refusée impossible");
                 //displayRequestResult("Connexion refusée ou impossible", "alert-danger");
