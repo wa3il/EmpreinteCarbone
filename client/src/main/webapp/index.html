@@ -366,10 +366,13 @@
             $("#div_mois").attr("hidden", true);
             $("#div_jour").attr("hidden", true);
         }
+        function hiddendiv(){
+       $("#div_date").attr("hidden", true);
+       }
 
         $(function () {
             hiddendiv();
-            for (let i = 2010; i < 2025; i++) {
+            for (let i = 2024; i >= 2000; i--) {
                 $("#annee").append(`<option value="${i}">${i}</option>`);
             }
             $('#slc_option').change(function () {
@@ -385,8 +388,9 @@
                 }
             });
         });
-    </script>
 
+
+    </script>
     <section id='sectionEmpreinte' class='inactive'>
         <div class="container-fluid py-5 mb-5">
             <div class="py-5 px-5">
@@ -397,67 +401,91 @@
                                 <div class="mb-3 border-bottom">
                                     <h1>Mes empreintes carbones precedentes</h1>
                                 </div>
-                            </div>   
+                            </div>
                         </div>
-                    </div>     
+                    </div>
                     <div class="col-lg-9 px-5">
                         <div class="compte">
                             <div class="rounded bg-primary p-5">
-                                <div class="nav-item dropdown">
-                                    <select id="slc_option" class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
-                                        <option selected>Rechercher</option>
-                                        <option value="1">Jour</option>
-                                        <option value="2">Mois</option>
-                                        <option value="3">Annee</option>
-                                    </select>
-                                </div>
+                                <div class="row"> <!-- Wrap all dropdowns inside this row -->
+                                    <div class="col-4"> <!-- Each dropdown takes 4 columns -->
+                                        <div class="nav-item dropdown" id="date">
+                                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
+                                                <!-- Options for day -->
 
-                                <div class="nav-item dropdown" id="div_jour">
-                                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
-                                        <option value="1">Lundi</option>
-                                        <option value="2">Mardi</option>
-                                        <option value="3">Mercredi</option>
-                                        <option value="4">Jeudi</option>
-                                        <option value="5">Vendredi</option>
-                                        <option value="6">Samedi</option>
-                                        <option value="7">Dimanche</option>
-                                    </select>
-                                </div>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                                <option value="24">24</option>
+                                                <option value="25">25</option>
+                                                <option value="26">26</option>
+                                                <option value="27">27</option>
+                                                <option value="28">28</option>
+                                                <option value="29">29</option>
+                                                <option value="30">30</option>
+                                                <option value="31">31</option>
 
-                                <div class="nav-item dropdown" id="div_mois">
-                                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm">
-                                        <option value="1">Janvier</option>
-                                        <option value="2">Fevrier</option>
-                                        <option value="3">Mars</option>
-                                        <option value="4">Avril</option>
-                                        <option value="5">Mai</option>
-                                        <option value="6">Juin</option>
-                                        <option value="7">Juillet</option>
-                                        <option value="8">Aout</option>
-                                        <option value="9">Septembre</option>
-                                        <option value="10">Octobre</option>
-                                        <option value="11">Novembre</option>
-                                        <option value="12">Decembre</option>
-                                    </select>
-                                </div>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="nav-item dropdown" id="div_mois">
+                                            <select class="form-select form-select-lg mb-2" aria-label=".form-select-sm">
+                                                <option value="1">Janvier</option>
+                                                <option value="2">Fevrier</option>
+                                                <option value="3">Mars</option>
+                                                <option value="4">Avril</option>
+                                                <option value="5">Mai</option>
+                                                <option value="6">Juin</option>
+                                                <option value="7">Juillet</option>
+                                                <option value="8">Aout</option>
+                                                <option value="9">Septembre</option>
+                                                <option value="10">Octobre</option>
+                                                <option value="11">Novembre</option>
+                                                <option value="12">Decembre</option>
 
-                                <div class="nav-item dropdown" id="div_annee">
-                                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm" id="annee">
-                                    </select>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="nav-item dropdown" id="div_annee">
+                                            <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm" id="annee">
+                                                <!-- Options for year -->
+                                            </select>
+                                        </div>
+                                        <div class="mx-auto">
+                                            <button type="submit"
+                                                    class="btn btn-primary border-2 border-secondary py-3 px-2 mx-0 rounded-pill text-white h-100"
+                                                    style="top: 0; right: 0%;">Calculer mon empreinte</button>
+                                        </div>
+                                    </div>
                                 </div>
-                    
-                                <div class="mx-auto">
-                                    <button type="submit"
-                                        class="btn btn-primary border-2 border-secondary py-3 px-1 rounded-pill text-white h-100"
-                                        style="top: 0; right: 0%;">Calculer mon empreinte</button>
-                                </div>  
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-                                                                        
     </section>
     <!-- page pour les empreintes precedentes End -->
 
