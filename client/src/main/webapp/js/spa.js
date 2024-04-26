@@ -279,11 +279,12 @@ function connect() {
     fetch('https://192.168.75.106/api/users/login', requestConfig)
         .then((response) => {
             bearerToken = response.json();
-            console.log(bearerToken);
             if (bearerToken != null){
-                localStorage.setItem("token", bearerToken);
+                parts = bearerToken.split('"');
+                token = parts[1];
+                localStorage.setItem("token", token);
                 localStorage.setItem("login", body.login);
-                headers.append("Authorization", bearerToken);
+                headers.append("Authorization", token);
             }else{
                 console.log("PAS DE TOKEN PB");
             }
