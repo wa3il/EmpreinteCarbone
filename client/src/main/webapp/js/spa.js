@@ -168,7 +168,7 @@ function renderListAliment() {
 }
 
 renderListAliment();
-
+/*
 document.addEventListener('DOMContentLoaded', function() {
     function rechercherAliment() {
         var recherche = document.querySelector('.form-control').value.trim().toLowerCase();
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     document.getElementById('rechercher').addEventListener('click', rechercherAliment);
-});
+});*/
 
 // Validation des Entrées Utilisateur
 function validateForm() {
