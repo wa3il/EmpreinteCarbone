@@ -308,7 +308,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     searchTermInput.addEventListener("keyup", function(event) {
 
-        if (searchTermInput !== "") {
+        if (searchTermInput.value.trim() !== "") {
             element.style.display = "none";
         
             getProperties("aliments").then( async (res) => {
