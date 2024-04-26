@@ -65,11 +65,6 @@ const baseUrl = "https://192.168.75.106/api/";
             showSection('sectionEmpreinte');
         });
 
-        document.getElementById('empreinte2').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionEmpreinte');
-        });
-
         document.getElementById('listes').addEventListener('click', () => {
             document.getElementById('secCompte2').classList.add('inactive');
             document.getElementById('secListe').classList.remove('inactive');
