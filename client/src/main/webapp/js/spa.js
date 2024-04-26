@@ -70,21 +70,13 @@ const baseUrl = "https://192.168.75.106/api/";
             showSection('sectionEmpreinte');
         });
 
-        document.getElementById('consommation').addEventListener('click', () => {
-            document.getElementById('secCompte2').classList.add('inactive');
-            document.getElementById('secListe').classList.add('inactive');
-            document.getElementById('secConsommation').classList.remove('inactive');
-        });
-
         document.getElementById('listes').addEventListener('click', () => {
             document.getElementById('secCompte2').classList.add('inactive');
             document.getElementById('secListe').classList.remove('inactive');
-            document.getElementById('secConsommation').classList.add('inactive');
         });
         document.getElementById('compte2').addEventListener('click', () => {
             document.getElementById('secCompte2').classList.remove('inactive');
             document.getElementById('secListe').classList.add('inactive');
-            document.getElementById('secConsommation').classList.add('inactive');
         });
 
         });
