@@ -352,11 +352,14 @@ function getUserProperty() {
     fetch(baseUrl + "users/"+log, requestConfig)
         .then(async(response) => {
             if (response.ok) {
-                console.log("coucou");
-                //return response.json();
+                return response.json();
             } else {
                 throw new Error("Response is error (" + response.status + ")");
             }
+        }).then(data=>{
+            const template = document.getElementById('name_update').innerHTML;
+            const rendered = Mustache.render(template, { name: data.name});
+            document.getElementById('nameUser').innerHTML = rendered;
         })
         .catch((err) => {
             console.error("In getUser: " + err);
