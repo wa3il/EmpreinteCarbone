@@ -47,7 +47,7 @@
                         <a href="#" id="produits" class="nav-item nav-link text-white">Produits</a>
                     </li>
                     <li class="requiresConnection">
-                        <a href="#" id="compte" class="nav-item nav-link text-white">Mon compte</a>
+                        <a href="#" id="compte" class="nav-item nav-link text-white" onclick=getUserProperty()>Mon compte</a>
                     </li>
                     <li class="requiresConnection">
                         <a href="#" id="empreinte" class="nav-item nav-link text-white">Mes empreintes</a>
@@ -295,8 +295,8 @@
                                     <h1 class="text-white"> Mes informations </h1>
                                 </div>
                                 <div class="info py-5">
-                                    <p class="text-dark fs-5 fw-bold mb-2">Prenom : Théo</p>
-                                    <p class="text-dark fs-5 fw-bold mb-2">Email : Théo@gmail.com</p>
+                                    <p class="text-dark fs-5 fw-bold mb-2">Login : <span id="login"><strong id="loginCompte">...</strong></span></p>
+                                    <p class="text-dark fs-5 fw-bold mb-2">Nom : Théo@gmail.com</p>
                                     <p class="text-dark fs-5 fw-bold mb-2">Changer de mot de passe : </p>
                                     <div class="form-input p-2 ps-5">
                                         <input type="password" placeholder="Ancien mot de passe" required />

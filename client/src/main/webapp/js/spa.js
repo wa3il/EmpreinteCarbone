@@ -1,7 +1,8 @@
 /**
  * Placez ici les scripts qui seront exécutés côté client pour rendre l'application côté client fonctionnelle.
  */
-const baseUrl = "https://192.168.75.106/api/";
+//const baseUrl = "https://192.168.75.106/api/";
+const baseUrl = "http://localhost:8080/appec/";
 
 // <editor-fold desc="Gestion de l'affichage">
 /**
@@ -168,26 +169,6 @@ function renderListAliment(int) {
 
 
 renderListAliment(10);
-/*
-document.addEventListener('DOMContentLoaded', function() {
-    function rechercherAliment() {
-        var recherche = document.querySelector('.form-control').value.trim().toLowerCase();
-        var aliments = document.querySelectorAll('.aliment');
-        
-        aliments.forEach(function(aliment) {
-            aliment.style.display = 'block';
-        });
-
-        aliments.forEach(function(aliment) {
-            var nomLegume = aliment.querySelector('.nomLegume').textContent.toLowerCase();
-            if (!nomLegume.includes(recherche)) {
-                aliment.style.display = 'none';
-            }
-        });
-    }
-
-    document.getElementById('rechercher').addEventListener('click', rechercherAliment);
-});*/
 
 // Validation des Entrées Utilisateur
 function validateForm() {
@@ -244,6 +225,18 @@ function register() {
                 //displayRequestResult("Connexion refusée ou impossible, code erreur : " + response.status, "alert-danger");
                 throw new Error("Bad response code (" + response.status + ").");
             }
+            return response.json();
+        }).then(data => {
+            // Récupérer le token de la réponse JSON
+            var token = 'Bearer '+data.token;
+            localStorage.setItem("token", token);
+            localStorage.setItem("login", body.login);
+            headers.append("Authorization", token);
+            // Utiliser le token comme nécessaire
+            console.log("Token récupéré :", token);
+            displayConnected(true);
+            console.log("Connexion réussie");
+            //displayRequestResult("Connexion réussie", "alert-success");
         })
         .catch((err) => {
             console.error("Error to register : " + err);
@@ -264,7 +257,7 @@ function connect() {
         body: JSON.stringify(body),
         mode: "cors" 
     };
-    fetch(baseUrl+'/users/login', requestConfig)
+    fetch(baseUrl+'users/login', requestConfig)
         .then(response => {
             // Vérifier si la requête a réussi (status 200-299)
             if (!response.ok) {
@@ -277,7 +270,7 @@ function connect() {
         })
         .then(data => {
             // Récupérer le token de la réponse JSON
-            var token = data.token;
+            var token = 'Bearer '+data.token;
             localStorage.setItem("token", token);
             localStorage.setItem("login", body.login);
             headers.append("Authorization", token);
@@ -306,9 +299,6 @@ document.addEventListener("DOMContentLoaded", function() {
             getProperties("aliments").then( async (res) => {
                 if(Array.isArray(res)) {
                     let aliments = [];
-                    console.log(res[0]);
-                    console.log("nom legume : ");
-                    console.log(res[0].nomLegume);
     
                     for (var i = 0; i < res.length; i++) {
                         if (res[i].nomLegume.toLowerCase().startsWith(searchTermInput.value.trim().toLowerCase())) {
@@ -345,3 +335,63 @@ document.addEventListener("DOMContentLoaded", function() {
     nb = nb+10
     });
 });
+
+function getUserProperty() {
+    const headers = new Headers();
+    headers.append("Accept", "application/json");
+    headers.append("Authorization", localStorage.getItem("token"));
+    
+    const requestConfig = {
+        method: "GET",
+        headers: headers,
+        mode: "cors" // pour le cas où vous utilisez un serveur différent pour l'API et le client.
+    };
+    log = localStorage.getItem("login");
+    document.getElementById("loginCompte").innerText = log;
+
+    fetch(baseUrl + "users/"+log, requestConfig)
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Response is error (" + response.status + ") or does not contain JSON (" + response.headers.get("Content-Type") + ").");
+            }
+        })
+        .catch((err) => {
+            console.error("In getUser: " + err);
+        });
+}
+
+function updateNameUser(){
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", localStorage.getItem("token"));
+    const body = {
+        name: document.getElementById("name_update_input").value,
+        password: document.getElementById("password_update_input").value
+    };
+    const requestConfig = {
+        method: "PUT",
+        headers: headers,
+        body: JSON.stringify(body),
+        mode: "cors",
+    };
+    log = localStorage.getItem("login");
+    fetch(baseUrl + "users/"+log, requestConfig).then(res =>{
+        if(res.status === 204) {
+            getProperties("users/"+localStorage.getItem("login")).then(res => {
+                document.getElementById("namePage").innerText = res.name;
+            });
+            if(location.hash === "#index"){
+                renderIndex();
+            }
+            displayRequestResult("Modification de votre nom réussie", "alert-success");
+        } else {
+            displayRequestResult("Modification de votre nom refusée ou impossible", "alert-danger");
+            throw new Error("Bad response code (" + res.status + ").");
+        }
+    })
+    .catch((err) => {
+        console.error("In updatePropertiesUser: " + err);
+    });
+}
