@@ -1,8 +1,8 @@
 /**
  * Placez ici les scripts qui seront exécutés côté client pour rendre l'application côté client fonctionnelle.
  */
-//const baseUrl = "https://192.168.75.106/api/";
-const baseUrl = "http://localhost:8080/appec/";
+const baseUrl = "https://192.168.75.106/api/";
+//const baseUrl = "http://localhost:8080/appec/";
 
 // <editor-fold desc="Gestion de l'affichage">
 /**
