@@ -27,6 +27,25 @@ public class UserBusinessController {
         this.authenticationService = authenticationService;
     }
 
+    /**
+     * Create a user.
+     *
+     * @param requestBody the request body
+     * @param contentType the content type
+     * @return the response entity
+     */
+    @PostMapping(
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<AuthenticationResponse> createUser(@RequestBody String requestBody, @RequestHeader("Content-Type") String contentType) throws JsonProcessingException {
+        Optional<UserRequestDto> userRequestDto = getUserDtoRequest(requestBody, contentType);
+        if (userRequestDto.isPresent()) {
+            return ResponseEntity.ok(authenticationService.register(userRequestDto.get()));
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
     @PostMapping(value = "/login",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})

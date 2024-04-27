@@ -43,29 +43,27 @@ public class AuthenticationService {
         return new AuthenticationResponse(jwtService.generateToken(user));
     }
 
-        public AuthenticationResponse authenticate(UserRequestDto userRequestDto) {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            userRequestDto.getLogin(),
-                            userRequestDto.getPassword()));
-            Optional<User> user = userDao.findByLogin(userRequestDto.getLogin());
+    public AuthenticationResponse authenticate(UserRequestDto userRequestDto) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        userRequestDto.getLogin(),
+                        userRequestDto.getPassword()));
+        Optional<User> user = userDao.findByLogin(userRequestDto.getLogin());
 
-            if (user.isEmpty()) {
-                throw new RuntimeException("User not found");
-
-            } else if (user.isPresent()) {
-                Optional<Jwt> jwt = jwtDao.findTokenValidByUser(user.get());
-                /*if (jwt.isPresent() && (jwt.get().isExpire() == false) && (!jwt.get().isDesactive()) {
-                    return new AuthenticationResponse(jwt.get().getToken());
-                } else {
-                    return new AuthenticationResponse(jwtService.generateToken(user.get()));
-                }*/
-                return new AuthenticationResponse(jwtService.generateToken(user.get()));
+        if (user.isEmpty()) {throw new RuntimeException("User not found");}
+        Optional<Jwt> jwt = jwtDao.findTokenValidByUser(user.get());
+        if (jwt.isPresent() ) {
+            if ( jwtService.isTokenValid(jwt.get().getToken(), user.get())){
+                return new AuthenticationResponse(jwt.get().getToken());
             } else {
-                throw new RuntimeException("User not found");
+                jwtDao.delete(jwt.get());
+                return new AuthenticationResponse(jwtService.generateToken(user.get()));
             }
-
+        } else {
+            return new AuthenticationResponse(jwtService.generateToken(user.get()));
         }
+
+    }
 
     public void deconnexion() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -3,10 +3,11 @@ package fr.univlyon1.m1if.m1if10.appec.dao;
 import fr.univlyon1.m1if.m1if10.appec.model.User;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Component
+@Repository
 public class UserDao extends JpaUserDao{
 
     /**

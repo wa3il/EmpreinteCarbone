@@ -51,7 +51,7 @@ public class JwtService {
                 .setClaims(ExtraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24)) // 1 day
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1h
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -66,12 +66,13 @@ public class JwtService {
     }
 
     public boolean isTokenValid(String jwt, UserDetails userDetails) {
-        final String userlogin = extractUserLogin(jwt);
-        if (!isTokenExpired(jwt)){
-            Optional<Jwt> jwt1 = jwtDao.findByValue(jwt);
-            jwt1.ifPresent(value -> jwtDao.update(value, new String[]{"true", "true"}));
+        try {
+            final String userlogin = extractUserLogin(jwt);
+            return (userlogin.equals(userDetails.getUsername()) && !isTokenExpired(jwt));
+        } catch (Exception e) {
+            return false;
         }
-        return (userlogin.equals(userDetails.getUsername()) && !isTokenExpired(jwt));
+
     }
 
     private boolean isTokenExpired(String jwt) {
@@ -94,6 +95,6 @@ public class JwtService {
 
     public void desactiveToken(User user) {
         Optional<Jwt> jwt = jwtDao.findTokenValidByUser(user);
-        jwt.ifPresent(value -> jwtDao.update(value, new String[]{"true", "true"}));
+        jwt.ifPresent(value -> jwtDao.delete(jwt.get()));
     }
 }
