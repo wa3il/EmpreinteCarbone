@@ -1,8 +1,8 @@
 /**
  * Placez ici les scripts qui seront exécutés côté client pour rendre l'application côté client fonctionnelle.
  */
-//const baseUrl = "https://192.168.75.106/api/";
-const baseUrl = "http://localhost:8080/appec/";
+const baseUrl = "https://192.168.75.106/api/";
+//const baseUrl = "http://localhost:8080/appec/";
 
 // <editor-fold desc="Gestion de l'affichage">
 /**
@@ -350,11 +350,12 @@ function getUserProperty() {
     document.getElementById("loginCompte").innerText = log;
 
     fetch(baseUrl + "users/"+log, requestConfig)
-        .then((response) => {
+        .then(async(response) => {
             if (response.ok) {
-                return response.json();
+                console.log("coucou");
+                //return response.json();
             } else {
-                throw new Error("Response is error (" + response.status + ") or does not contain JSON (" + response.headers.get("Content-Type") + ").");
+                throw new Error("Response is error (" + response.status + ")");
             }
         })
         .catch((err) => {
