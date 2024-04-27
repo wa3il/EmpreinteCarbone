@@ -298,14 +298,15 @@
                                     <p class="text-dark fs-5 fw-bold mb-2">Login : <span id="login"><strong id="loginCompte">...</strong></span></p>
                                     <p class="text-dark fs-5 fw-bold mb-2">Nom : 
                                         <script id="name_update" type="x-tmpl-mustache">
-                                            <td><input class="form-control" type="name" id="name_update_input" value={{ name }}> </td>
+                                            <input class="form-control" type="name" id="name_update_input" value={{ name }}>
                                         </script>
                                         <strong id="nameUser">...</strong>
+                                        <button type="button" class="btn btn-secondary" id="user_update_button" onclick="updateNameUser()">Modifier</button>
                                     </p>
                                     <p class="text-dark fs-5 fw-bold mb-2">Changer de mot de passe : </p>
                                     <div class="form-input p-2 ps-5">
                                         <input type="password" placeholder="Ancien mot de passe" required />
-                                        <input type="password" placeholder="Nouveau mot de passe" required />
+                                        <input type="password" placeholder="Nouveau mot de passe" id="password_update_input" required />
                                         <input type="password" placeholder="Confirmer mot de passe" required />
                                     </div>
                                     <div class="text-center pt-3">

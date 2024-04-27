@@ -371,6 +371,7 @@ function updateNameUser(){
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", localStorage.getItem("token"));
     const body = {
+        login: localStorage.getItem("login"),
         name: document.getElementById("name_update_input").value,
         password: document.getElementById("password_update_input").value
     };
@@ -382,16 +383,11 @@ function updateNameUser(){
     };
     log = localStorage.getItem("login");
     fetch(baseUrl + "users/"+log, requestConfig).then(res =>{
-        if(res.status === 204) {
-            getProperties("users/"+localStorage.getItem("login")).then(res => {
-                document.getElementById("namePage").innerText = res.name;
-            });
-            if(location.hash === "#index"){
-                renderIndex();
-            }
-            displayRequestResult("Modification de votre nom réussie", "alert-success");
+        if(res.ok) {
+            console.log("modification ok");
+            //displayRequestResult("Modification de votre nom réussie", "alert-success");
         } else {
-            displayRequestResult("Modification de votre nom refusée ou impossible", "alert-danger");
+            //displayRequestResult("Modification de votre nom refusée ou impossible", "alert-danger");
             throw new Error("Bad response code (" + res.status + ").");
         }
     })
