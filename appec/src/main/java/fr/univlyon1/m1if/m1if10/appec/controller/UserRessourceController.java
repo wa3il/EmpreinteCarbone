@@ -78,13 +78,13 @@ public class UserRessourceController {
      */
     @PutMapping(value = "/{login}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ResponseEntity<?> updateUser(
-            @PathVariable("login") final String id,
+            @PathVariable("login") final String login,
             @RequestBody String requestBody,
             @RequestHeader("Content-Type") String contentType) {
         try {
             Optional<UserRequestDto> requestDto = getUserDtoRequest(requestBody, contentType);
             if (requestDto.isPresent()) {
-                Optional<User> user = userdao.findByLogin(id);
+                Optional<User> user = userdao.findByLogin(login);
                 if (user.isPresent()) {
                     UserRequestDto userdto = requestDto.get();
                     userdao.update(user.get(), new String[]{userdto.getName(), authService.encoderPassword(userdto.getPassword())});
