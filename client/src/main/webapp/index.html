@@ -296,7 +296,12 @@
                                 </div>
                                 <div class="info py-5">
                                     <p class="text-dark fs-5 fw-bold mb-2">Login : <span id="login"><strong id="loginCompte">...</strong></span></p>
-                                    <p class="text-dark fs-5 fw-bold mb-2">Nom : Théo@gmail.com</p>
+                                    <p class="text-dark fs-5 fw-bold mb-2">Nom : 
+                                        <script id="name_update" type="x-tmpl-mustache">
+                                            <td><input class="form-control" type="name" id="name_update_input" value={{ name }}> </td>
+                                        </script>
+                                        <strong id="nameUser">...</strong>
+                                    </p>
                                     <p class="text-dark fs-5 fw-bold mb-2">Changer de mot de passe : </p>
                                     <div class="form-input p-2 ps-5">
                                         <input type="password" placeholder="Ancien mot de passe" required />
