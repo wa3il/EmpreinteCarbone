@@ -378,8 +378,7 @@ function updateNameUser(){
     const requestConfig = {
         method: "PUT",
         headers: headers,
-        body: JSON.stringify(body),
-        mode: "cors",
+        body: JSON.stringify(body)
     };
     log = localStorage.getItem("login");
     fetch(baseUrl + "users/"+log, requestConfig).then(res =>{
