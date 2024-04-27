@@ -1,8 +1,8 @@
 /**
  * Placez ici les scripts qui seront exécutés côté client pour rendre l'application côté client fonctionnelle.
  */
-const baseUrl = "https://192.168.75.106/api/";
-//const baseUrl = "http://localhost:8080/appec/";
+//const baseUrl = "https://192.168.75.106/api/";
+const baseUrl = "http://localhost:8080/appec/";
 
 // <editor-fold desc="Gestion de l'affichage">
 /**
@@ -370,18 +370,22 @@ function updateNameUser(){
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", localStorage.getItem("token"));
+
+    console.log(localStorage.getItem("token"));
     const body = {
         login: localStorage.getItem("login"),
         name: document.getElementById("name_update_input").value,
         password: document.getElementById("password_update_input").value
     };
+    console.log(document.getElementById("name_update_input").value);
     const requestConfig = {
         method: "PUT",
         headers: headers,
-        body: JSON.stringify(body)
+        body: JSON.stringify(body), 
+        mode: "cors"
     };
     log = localStorage.getItem("login");
-    fetch(baseUrl + "users/"+log, requestConfig).then(res =>{
+    fetch(baseUrl + "users/"+log, requestConfig).then(async(res) =>{
         if(res.ok) {
             console.log("modification ok");
             //displayRequestResult("Modification de votre nom réussie", "alert-success");
