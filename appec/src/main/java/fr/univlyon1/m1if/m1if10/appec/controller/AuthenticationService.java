@@ -67,7 +67,10 @@ public class AuthenticationService {
 
     public void deconnexion() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        this.jwtService.desactiveToken(user);
+        Optional<Jwt> jwt = jwtDao.findTokenValidByUser(user);
+        if (jwt.isPresent()){
+            jwtDao.delete(jwt.get());
+        }
     }
 
     public String encoderPassword(String password) {
