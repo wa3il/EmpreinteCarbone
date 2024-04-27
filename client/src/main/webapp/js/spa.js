@@ -371,6 +371,13 @@ function updateNameUser(){
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", localStorage.getItem("token"));
 
+    console.log(localStorage.getItem("token"));
+    const body = {
+        login: localStorage.getItem("login"),
+        name: document.getElementById("name_update_input").value,
+        password: document.getElementById("password_update_input").value
+    };
+    console.log(document.getElementById("name_update_input").value);
     const requestConfig = {
         method: "PUT",
         headers: headers,
