@@ -55,13 +55,13 @@ public class UserRessourceController {
     /**
      * Get a user by id.
      *
-     * @param id the user id
+     * @param login the user id
      * @return the user
      */
-    @GetMapping(value = "/{id}",
+    @GetMapping(value = "/{login}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<?> getUser(@PathVariable("id") final Integer id) {
-        Optional<User> user = userdao.get(id);
+    public ResponseEntity<?> getUser(@PathVariable("login") final String login) {
+        Optional<User> user = userdao.findByLogin(login);
         if (user.isPresent()) {
             return ResponseEntity.ok(user.get());
         }
