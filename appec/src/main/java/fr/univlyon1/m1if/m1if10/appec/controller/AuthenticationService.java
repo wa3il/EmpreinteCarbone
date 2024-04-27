@@ -53,7 +53,7 @@ public class AuthenticationService {
         if (user.isEmpty()) {throw new RuntimeException("User not found");}
         Optional<Jwt> jwt = jwtDao.findTokenValidByUser(user.get());
         if (jwt.isPresent() ) {
-            if ( jwtService.isTokenValid(jwt.get().getToken(), user.get())){
+            if (!jwt.get().isDesactive() && jwtService.isTokenValid(jwt.get().getToken(), user.get())){
                 return new AuthenticationResponse(jwt.get().getToken());
             } else {
                 jwtDao.delete(jwt.get());
