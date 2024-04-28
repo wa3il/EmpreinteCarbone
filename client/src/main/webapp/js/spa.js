@@ -10,72 +10,72 @@ const baseUrl = "https://192.168.75.106/api/";
  * Passe l'élément actif en inactif et l'élément correspondant au hash en actif.
  * @param hash une chaîne de caractères (trouvée a priori dans le hash) contenant un sélecteur CSS indiquant un élément à rendre visible.
  */
-        document.addEventListener('DOMContentLoaded', function() {
-            function showSection(sectionId) {
-            // Cacher toutes les sections
-            var sections = document.querySelectorAll('section');
-            sections.forEach(function(section) {
-                section.classList.add('inactive');
-            });
+function showSection(sectionId) {
+    // Cacher toutes les sections
+    var sections = document.querySelectorAll('section');
+    sections.forEach(function(section) {
+        section.classList.add('inactive');
+    });
 
-            // Afficher la section spécifique
-            var sectionToShow = document.getElementById(sectionId);
-            if (sectionToShow) {
-                sectionToShow.classList.remove('inactive');
-            }
-        } 
+    // Afficher la section spécifique
+    var sectionToShow = document.getElementById(sectionId);
+    if (sectionToShow) {
+        sectionToShow.classList.remove('inactive');
+    }
+} 
+document.addEventListener('DOMContentLoaded', function() {
 
-        // Ajouter des écouteurs d'événements pour les liens de la navbar
-        document.getElementById('accueil1').addEventListener('click', function(event) {
-            event.preventDefault(); // Empêche le comportement par défaut du lien (redirection)
-            showSection('sectionAccueil'); // Affiche la section Accueil
-        });
+    // Ajouter des écouteurs d'événements pour les liens de la navbar
+    document.getElementById('accueil1').addEventListener('click', function(event) {
+        event.preventDefault(); // Empêche le comportement par défaut du lien (redirection)
+        showSection('sectionAccueil'); // Affiche la section Accueil
+    });
 
-        document.getElementById('accueil2').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionAccueil'); 
-        });
+    document.getElementById('accueil2').addEventListener('click', function(event) {
+        event.preventDefault();
+        showSection('sectionAccueil'); 
+    });
 
-        document.getElementById('produits').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionProduits');
-        });
-    
-        document.getElementById('compte').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionCompte');
-        });
+    document.getElementById('produits').addEventListener('click', function(event) {
+        event.preventDefault();
+        showSection('sectionProduits');
+    });
 
-        document.getElementById('connexion1').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionConnexion');
-        });
+    document.getElementById('compte').addEventListener('click', function(event) {
+        event.preventDefault();
+        showSection('sectionCompte');
+    });
 
-        document.getElementById('connexion2').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionConnexion');
-        });
+    document.getElementById('connexion1').addEventListener('click', function(event) {
+        event.preventDefault();
+        showSection('sectionConnexion');
+    });
 
-        document.getElementById('inscription').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionInscription');
-        });
+    document.getElementById('connexion2').addEventListener('click', function(event) {
+        event.preventDefault();
+        showSection('sectionConnexion');
+    });
 
-        document.getElementById('empreinte').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionEmpreinte');
-        });
+    document.getElementById('inscription').addEventListener('click', function(event) {
+        event.preventDefault();
+        showSection('sectionInscription');
+    });
 
-        document.getElementById('listes').addEventListener('click', () => {
-            document.getElementById('secCompte2').classList.add('inactive');
-            document.getElementById('secListe').classList.remove('inactive');
-        });
-        document.getElementById('compte2').addEventListener('click', () => {
-            document.getElementById('secCompte2').classList.remove('inactive');
-            document.getElementById('secListe').classList.add('inactive');
-        });
+    document.getElementById('empreinte').addEventListener('click', function(event) {
+        event.preventDefault();
+        showSection('sectionEmpreinte');
+    });
 
-        });
+    document.getElementById('listes').addEventListener('click', () => {
+        document.getElementById('secCompte2').classList.add('inactive');
+        document.getElementById('secListe').classList.remove('inactive');
+    });
+    document.getElementById('compte2').addEventListener('click', () => {
+        document.getElementById('secCompte2').classList.remove('inactive');
+        document.getElementById('secListe').classList.add('inactive');
+    });
+
+});
 
 
 /**
@@ -110,10 +110,6 @@ function displayConnected(isConnected) {
         element.style.display = visibilityValue2;
     }
 }
-
-/*window.addEventListener('hashchange', () => {
-    show(window.location.hash);
-});*/
 
 function getProperties(url) {
     const headers = new Headers();
@@ -397,4 +393,33 @@ function updateNameUser(){
     .catch((err) => {
         console.error("In updatePropertiesUser: " + err);
     });
+}
+
+function deco() {
+    console.log("j'essaie de me déco");
+    const headers = new Headers();
+    headers.append("Authorization", localStorage.getItem("token"));
+    const requestConfig = {
+        method: "POST",
+        headers: headers,
+        mode: "cors" 
+    };
+    fetch(baseUrl+'users/logout', requestConfig)
+        .then(response => {
+            // Vérifier si la requête a réussi (status 200-299)
+            if (response.ok) {
+                console.log("Vous êtes déconnecté");
+                displayConnected(false);
+                showSection('sectionAccueil');
+                //displayRequestResult("Connexion refusée ou impossible", "alert-danger");
+                //throw new Error("Bad response code (" + response.status + ").");
+            } else {
+                throw new Error("Bad response code (" + response.status + ").");
+            }
+            // Extraire le token du corps de la réponse
+            //return response.json();
+        })
+        .catch((err) => {
+            console.error("In logout: " + err);
+        })
 }
