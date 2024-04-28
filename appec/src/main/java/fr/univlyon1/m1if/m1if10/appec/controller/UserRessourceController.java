@@ -87,7 +87,11 @@ public class UserRessourceController {
                 Optional<User> user = userdao.findByLogin(login);
                 if (user.isPresent()) {
                     UserRequestDto userdto = requestDto.get();
-                    userdao.update(user.get(), new String[]{userdto.getName(), authService.encoderPassword(userdto.getPassword())});
+                    if(!userdto.getPassword().equals("")){
+                        userdao.update(user.get(), new String[]{userdto.getName(), authService.encoderPassword(userdto.getPassword())});
+                    }else{
+                        userdao.update(user.get(), new String[]{userdto.getName()});
+                    }
                     return ResponseEntity.ok("Utilisateur mis à jour");
                 } else {
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");

@@ -377,7 +377,7 @@ function updateNameUser(){
     const body = {
         login: localStorage.getItem("login"),
         name: document.getElementById("name_update_input").value,
-        password: document.getElementById("password_update_input").value
+        password: ""
     };
     console.log(document.getElementById("name_update_input").value);
     const requestConfig = {
@@ -399,6 +399,43 @@ function updateNameUser(){
     .catch((err) => {
         console.error("In updatePropertiesUser: " + err);
     });
+}
+
+function updatePasswordUser(){
+    new_pass1 = document.getElementById("new_password1").value;
+    new_pass2 = document.getElementById("new_password2").value;
+
+    if (new_pass1 == new_pass2){
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        headers.append("Authorization", localStorage.getItem("token"));
+        const body = {
+            login: localStorage.getItem("login"),
+            name: "",
+            password: new_pass1
+        };
+        const requestConfig = {
+            method: "PUT",
+            headers: headers,
+            body: JSON.stringify(body), 
+            mode: "cors"
+        };
+        log = localStorage.getItem("login");
+        fetch(baseUrl + "users/"+log, requestConfig).then(async(res) =>{
+            if(res.ok) {
+                console.log("modification ok");
+                //displayRequestResult("Modification de votre nom réussie", "alert-success");
+            } else {
+                //displayRequestResult("Modification de votre nom refusée ou impossible", "alert-danger");
+                throw new Error("Bad response code (" + res.status + ").");
+            }
+        })
+        .catch((err) => {
+            console.error("In updatePropertiesUser: " + err);
+        });
+    } else {
+        console.log("les mdp ne sont pas les mêmes "); 
+    }
 }
 
 function deco() {
