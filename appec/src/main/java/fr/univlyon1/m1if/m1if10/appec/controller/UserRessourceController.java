@@ -85,13 +85,9 @@ public class UserRessourceController {
             Optional<UserRequestDto> requestDto = getUserDtoRequest(requestBody, contentType);
             if (requestDto.isPresent()) {
                 Optional<User> user = userdao.findByLogin(login);
-                if (user.isPresent()) {
+                if (user.isPresent() ) {
                     UserRequestDto userdto = requestDto.get();
-                    if(!userdto.getPassword().equals("")){
-                        userdao.update(user.get(), new String[]{userdto.getName(), authService.encoderPassword(userdto.getPassword())});
-                    }else{
-                        userdao.update(user.get(), new String[]{userdto.getName()});
-                    }
+                    userdao.update(user.get(), new String[]{userdto.getName(), authService.encoderPassword(userdto.getPassword())});
                     return ResponseEntity.ok("Utilisateur mis à jour");
                 } else {
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");
@@ -107,7 +103,7 @@ public class UserRessourceController {
     /**
      * Delete a user.
      *
-     * @param id the user id
+     * @param login the user id
      * @return the response entity
      */
     @DeleteMapping(value = "/{login}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})

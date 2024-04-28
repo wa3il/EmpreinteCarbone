@@ -40,11 +40,13 @@ public class JpaUserDao implements Dao<User> {
     @Override
     public void update(User user, String[] params) {
         Objects.requireNonNull(params, "Params cannot be null");
-        Objects.requireNonNull(params[0], "Name cannot be null");
-
-        if(!params[0].equals(""))
+        if (params.length == 0) {
+            throw new IllegalArgumentException("Params must contain at least one value");
+        }
+        if (!params[0].isEmpty() && params[0] != null) {
             user.setName(params[0]);
-        if(params.length>1){
+        }
+        if (params.length > 1 && !params[1].isEmpty()) {
             user.setPassword(params[1]);
         }
         entityManager.merge(user);
