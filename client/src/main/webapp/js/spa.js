@@ -10,72 +10,78 @@ const baseUrl = "https://192.168.75.106/api/";
  * Passe l'élément actif en inactif et l'élément correspondant au hash en actif.
  * @param hash une chaîne de caractères (trouvée a priori dans le hash) contenant un sélecteur CSS indiquant un élément à rendre visible.
  */
-        document.addEventListener('DOMContentLoaded', function() {
-            function showSection(sectionId) {
-            // Cacher toutes les sections
-            var sections = document.querySelectorAll('section');
-            sections.forEach(function(section) {
-                section.classList.add('inactive');
-            });
+function showSection(sectionId) {
+    // Cacher toutes les sections
+    var sections = document.querySelectorAll('section');
+    sections.forEach(function(section) {
+        section.classList.add('inactive');
+    });
 
-            // Afficher la section spécifique
-            var sectionToShow = document.getElementById(sectionId);
-            if (sectionToShow) {
-                sectionToShow.classList.remove('inactive');
-            }
-        } 
+    // Afficher la section spécifique
+    var sectionToShow = document.getElementById(sectionId);
+    if (sectionToShow) {
+        sectionToShow.classList.remove('inactive');
+    }
+} 
+document.addEventListener('DOMContentLoaded', function() {
 
-        // Ajouter des écouteurs d'événements pour les liens de la navbar
-        document.getElementById('accueil1').addEventListener('click', function(event) {
-            event.preventDefault(); // Empêche le comportement par défaut du lien (redirection)
-            showSection('sectionAccueil'); // Affiche la section Accueil
-        });
+    // Ajouter des écouteurs d'événements pour les liens de la navbar
+    document.getElementById('accueil1').addEventListener('click', function(event) {
+        event.preventDefault(); // Empêche le comportement par défaut du lien (redirection)
+        showSection('sectionAccueil'); // Affiche la section Accueil
+    });
 
-        document.getElementById('accueil2').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionAccueil'); 
-        });
+    document.getElementById('accueil2').addEventListener('click', function(event) {
+        event.preventDefault();
+        showSection('sectionAccueil'); 
+    });
 
-        document.getElementById('produits').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionProduits');
-        });
-    
-        document.getElementById('compte').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionCompte');
-        });
+    document.getElementById('produits').addEventListener('click', function(event) {
+        event.preventDefault();
+        showSection('sectionProduits');
+    });
 
-        document.getElementById('connexion1').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionConnexion');
-        });
+    document.getElementById('compte').addEventListener('click', function(event) {
+        event.preventDefault();
+        showSection('sectionCompte');
+    });
 
-        document.getElementById('connexion2').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionConnexion');
-        });
+    document.getElementById('connexion1').addEventListener('click', function(event) {
+        event.preventDefault();
+        showSection('sectionConnexion');
+    });
 
-        document.getElementById('inscription').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionInscription');
-        });
+    document.getElementById('connexion2').addEventListener('click', function(event) {
+        event.preventDefault();
+        showSection('sectionConnexion');
+    });
 
-        document.getElementById('empreinte').addEventListener('click', function(event) {
-            event.preventDefault();
-            showSection('sectionEmpreinte');
-        });
+    document.getElementById('inscription').addEventListener('click', function(event) {
+        event.preventDefault();
+        showSection('sectionInscription');
+    });
 
-        document.getElementById('listes').addEventListener('click', () => {
-            document.getElementById('secCompte2').classList.add('inactive');
-            document.getElementById('secListe').classList.remove('inactive');
-        });
-        document.getElementById('compte2').addEventListener('click', () => {
-            document.getElementById('secCompte2').classList.remove('inactive');
-            document.getElementById('secListe').classList.add('inactive');
-        });
+    document.getElementById('empreinte').addEventListener('click', function(event) {
+        event.preventDefault();
+        showSection('sectionEmpreinte');
+    });
 
-        });
+    document.getElementById('listes').addEventListener('click', () => {
+        document.getElementById('secCompte2').classList.add('inactive');
+        document.getElementById('secListe').classList.remove('inactive');
+    });
+    document.getElementById('compte2').addEventListener('click', () => {
+        document.getElementById('secCompte2').classList.remove('inactive');
+        document.getElementById('secListe').classList.add('inactive');
+    });
+    document.getElementById('deleteAccount').addEventListener('click', () => {
+        document.getElementById('secCompte2').classList.add('inactive');
+        document.getElementById('secListe').classList.add('inactive');
+        document.getElementById('secDelete').classList.remove('inactive');
+    });
+        
+
+});
 
 
 /**
@@ -110,10 +116,6 @@ function displayConnected(isConnected) {
         element.style.display = visibilityValue2;
     }
 }
-
-/*window.addEventListener('hashchange', () => {
-    show(window.location.hash);
-});*/
 
 function getProperties(url) {
     const headers = new Headers();
@@ -350,12 +352,16 @@ function getUserProperty() {
     document.getElementById("loginCompte").innerText = log;
 
     fetch(baseUrl + "users/"+log, requestConfig)
-        .then((response) => {
+        .then(async(response) => {
             if (response.ok) {
                 return response.json();
             } else {
-                throw new Error("Response is error (" + response.status + ") or does not contain JSON (" + response.headers.get("Content-Type") + ").");
+                throw new Error("Response is error (" + response.status + ")");
             }
+        }).then(data=>{
+            const template = document.getElementById('name_update').innerHTML;
+            const rendered = Mustache.render(template, { name: data.name});
+            document.getElementById('nameUser').innerHTML = rendered;
         })
         .catch((err) => {
             console.error("In getUser: " + err);
@@ -366,32 +372,124 @@ function updateNameUser(){
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", localStorage.getItem("token"));
+
+    console.log(localStorage.getItem("token"));
     const body = {
+        login: localStorage.getItem("login"),
         name: document.getElementById("name_update_input").value,
-        password: document.getElementById("password_update_input").value
+        password: ""
     };
+    console.log(document.getElementById("name_update_input").value);
     const requestConfig = {
         method: "PUT",
         headers: headers,
-        body: JSON.stringify(body),
-        mode: "cors",
+        body: JSON.stringify(body), 
+        mode: "cors"
     };
     log = localStorage.getItem("login");
-    fetch(baseUrl + "users/"+log, requestConfig).then(res =>{
-        if(res.status === 204) {
-            getProperties("users/"+localStorage.getItem("login")).then(res => {
-                document.getElementById("namePage").innerText = res.name;
-            });
-            if(location.hash === "#index"){
-                renderIndex();
-            }
-            displayRequestResult("Modification de votre nom réussie", "alert-success");
+    fetch(baseUrl + "users/"+log, requestConfig).then(async(res) =>{
+        if(res.ok) {
+            console.log("modification ok");
+            //displayRequestResult("Modification de votre nom réussie", "alert-success");
         } else {
-            displayRequestResult("Modification de votre nom refusée ou impossible", "alert-danger");
+            //displayRequestResult("Modification de votre nom refusée ou impossible", "alert-danger");
             throw new Error("Bad response code (" + res.status + ").");
         }
     })
     .catch((err) => {
         console.error("In updatePropertiesUser: " + err);
     });
+}
+
+function updatePasswordUser(){
+    new_pass1 = document.getElementById("new_password1").value;
+    new_pass2 = document.getElementById("new_password2").value;
+
+    if (new_pass1 == new_pass2){
+        const headers = new Headers();
+        headers.append("Content-Type", "application/json");
+        headers.append("Authorization", localStorage.getItem("token"));
+        const body = {
+            login: localStorage.getItem("login"),
+            name: "",
+            password: new_pass1
+        };
+        const requestConfig = {
+            method: "PUT",
+            headers: headers,
+            body: JSON.stringify(body), 
+            mode: "cors"
+        };
+        log = localStorage.getItem("login");
+        fetch(baseUrl + "users/"+log, requestConfig).then(async(res) =>{
+            if(res.ok) {
+                console.log("modification ok");
+                //displayRequestResult("Modification de votre nom réussie", "alert-success");
+            } else {
+                //displayRequestResult("Modification de votre nom refusée ou impossible", "alert-danger");
+                throw new Error("Bad response code (" + res.status + ").");
+            }
+        })
+        .catch((err) => {
+            console.error("In updatePropertiesUser: " + err);
+        });
+    } else {
+        console.log("les mdp ne sont pas les mêmes "); 
+    }
+}
+
+function deco() {
+    console.log("j'essaie de me déco");
+    const headers = new Headers();
+    headers.append("Authorization", localStorage.getItem("token"));
+    const requestConfig = {
+        method: "POST",
+        headers: headers,
+        mode: "cors" 
+    };
+    fetch(baseUrl+'users/logout', requestConfig)
+        .then(response => {
+            // Vérifier si la requête a réussi (status 200-299)
+            if (response.ok) {
+                console.log("Vous êtes déconnecté");
+                displayConnected(false);
+                showSection('sectionAccueil');
+                //displayRequestResult("Connexion refusée ou impossible", "alert-danger");
+                //throw new Error("Bad response code (" + response.status + ").");
+            } else {
+                throw new Error("Bad response code (" + response.status + ").");
+            }
+            // Extraire le token du corps de la réponse
+            //return response.json();
+        })
+        .catch((err) => {
+            console.error("In logout: " + err);
+        })
+}
+
+function deleteAccount() {
+    console.log("j'essaie de supprimer mon compte");
+    const headers = new Headers();
+    headers.append("Authorization", localStorage.getItem("token"));
+    const requestConfig = {
+        method: "DELETE",
+        headers: headers,
+        mode: "cors" 
+    };
+    fetch(baseUrl+'users/'+localStorage.getItem("login"), requestConfig)
+        .then(response => {
+            // Vérifier si la requête a réussi (status 200-299)
+            if (response.ok) {
+                console.log("Vous avez supprimé votre compte");
+                displayConnected(false);
+                showSection('sectionAccueil');
+                //displayRequestResult("Connexion refusée ou impossible", "alert-danger");
+                //throw new Error("Bad response code (" + response.status + ").");
+            } else {
+                throw new Error("Bad response code (" + response.status + ").");
+            }
+        })
+        .catch((err) => {
+            console.error("In deleteAccount: " + err);
+        })
 }

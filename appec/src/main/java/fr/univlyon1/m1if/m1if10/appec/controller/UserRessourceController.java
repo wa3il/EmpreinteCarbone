@@ -78,14 +78,14 @@ public class UserRessourceController {
      */
     @PutMapping(value = "/{login}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ResponseEntity<?> updateUser(
-            @PathVariable("login") final String id,
+            @PathVariable("login") final String login,
             @RequestBody String requestBody,
             @RequestHeader("Content-Type") String contentType) {
         try {
             Optional<UserRequestDto> requestDto = getUserDtoRequest(requestBody, contentType);
             if (requestDto.isPresent()) {
-                Optional<User> user = userdao.findByLogin(id);
-                if (user.isPresent()) {
+                Optional<User> user = userdao.findByLogin(login);
+                if (user.isPresent() ) {
                     UserRequestDto userdto = requestDto.get();
                     userdao.update(user.get(), new String[]{userdto.getName(), authService.encoderPassword(userdto.getPassword())});
                     return ResponseEntity.ok("Utilisateur mis à jour");
@@ -103,13 +103,13 @@ public class UserRessourceController {
     /**
      * Delete a user.
      *
-     * @param id the user id
+     * @param login the user id
      * @return the response entity
      */
-    @DeleteMapping(value = "/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-    public ResponseEntity<?> deleteUser(@PathVariable("id") final Integer id) {
+    @DeleteMapping(value = "/{login}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public ResponseEntity<?> deleteUser(@PathVariable("login") final String login) {
         try {
-            Optional<User> user = userdao.get(id);
+            Optional<User> user = userdao.findByLogin(login);
             if (user.isPresent()) {
                 userdao.delete(user.get());
                 return ResponseEntity.ok("Utilisateur supprimé");

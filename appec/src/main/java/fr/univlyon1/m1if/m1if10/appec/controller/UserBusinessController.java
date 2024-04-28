@@ -39,7 +39,7 @@ public class UserBusinessController {
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<AuthenticationResponse> createUser(@RequestBody String requestBody, @RequestHeader("Content-Type") String contentType) throws JsonProcessingException {
         Optional<UserRequestDto> userRequestDto = getUserDtoRequest(requestBody, contentType);
-        if (userRequestDto.isPresent()) {
+        if (userRequestDto.isPresent() && userRequestDto.get().getPassword() != null && userRequestDto.get().getName() != null){
             return ResponseEntity.ok(authenticationService.register(userRequestDto.get()));
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -51,7 +51,7 @@ public class UserBusinessController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ResponseEntity<AuthenticationResponse> login(@RequestBody String requestBody, @RequestHeader("Content-Type") String contentType) throws JsonProcessingException {
         Optional<UserRequestDto> userRequest = getUserDtoRequest(requestBody, contentType);
-        if (userRequest.isPresent()) {
+        if (userRequest.isPresent() && userRequest.get().getPassword() != null){
             return ResponseEntity.ok(authenticationService.authenticate(userRequest.get()));
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

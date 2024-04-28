@@ -1,9 +1,13 @@
 package fr.univlyon1.m1if.m1if10.appec.dto.user;
 
+import java.util.Date;
+
 public class AddEcRequestDto {
     private int alimentId;
     private String login;
     private float quantity;
+
+    private Date date;
 
     public AddEcRequestDto() {
     }
