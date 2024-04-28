@@ -1,8 +1,8 @@
 /**
  * Placez ici les scripts qui seront exécutés côté client pour rendre l'application côté client fonctionnelle.
  */
-const baseUrl = "https://192.168.75.106/api/";
-//const baseUrl = "http://localhost:8080/appec/";
+//const baseUrl = "https://192.168.75.106/api/";
+const baseUrl = "http://localhost:8080/appec/";
 
 // <editor-fold desc="Gestion de l'affichage">
 /**
@@ -74,6 +74,12 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('secCompte2').classList.remove('inactive');
         document.getElementById('secListe').classList.add('inactive');
     });
+    document.getElementById('deleteAccount').addEventListener('click', () => {
+        document.getElementById('secCompte2').classList.add('inactive');
+        document.getElementById('secListe').classList.add('inactive');
+        document.getElementById('secDelete').classList.remove('inactive');
+    });
+        
 
 });
 
@@ -421,5 +427,32 @@ function deco() {
         })
         .catch((err) => {
             console.error("In logout: " + err);
+        })
+}
+
+function deleteAccount() {
+    console.log("j'essaie de supprimer mon compte");
+    const headers = new Headers();
+    headers.append("Authorization", localStorage.getItem("token"));
+    const requestConfig = {
+        method: "DELETE",
+        headers: headers,
+        mode: "cors" 
+    };
+    fetch(baseUrl+'users/'+localStorage.getItem("login"), requestConfig)
+        .then(response => {
+            // Vérifier si la requête a réussi (status 200-299)
+            if (response.ok) {
+                console.log("Vous avez supprimé votre compte");
+                displayConnected(false);
+                showSection('sectionAccueil');
+                //displayRequestResult("Connexion refusée ou impossible", "alert-danger");
+                //throw new Error("Bad response code (" + response.status + ").");
+            } else {
+                throw new Error("Bad response code (" + response.status + ").");
+            }
+        })
+        .catch((err) => {
+            console.error("In deleteAccount: " + err);
         })
 }

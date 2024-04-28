@@ -106,10 +106,10 @@ public class UserRessourceController {
      * @param id the user id
      * @return the response entity
      */
-    @DeleteMapping(value = "/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-    public ResponseEntity<?> deleteUser(@PathVariable("id") final Integer id) {
+    @DeleteMapping(value = "/{login}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public ResponseEntity<?> deleteUser(@PathVariable("login") final String login) {
         try {
-            Optional<User> user = userdao.get(id);
+            Optional<User> user = userdao.findByLogin(login);
             if (user.isPresent()) {
                 userdao.delete(user.get());
                 return ResponseEntity.ok("Utilisateur supprimé");
