@@ -4,7 +4,6 @@ import fr.univlyon1.m1if.m1if10.appec.model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

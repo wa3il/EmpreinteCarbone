@@ -18,8 +18,13 @@ import java.util.Optional;
 @SuppressWarnings("checkstyle:HideUtilityClassConstructor")
 @Component
 public class Mapdata {
-
     private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    // Private constructor to hide the implicit public one
+    private Mapdata() {
+        // Do nothing, just to hide the constructor
+    }
+
     public static Map<String, String> extractFormData(String requestBody) {
         Map<String, String> formData = new HashMap<>();
         String[] pairs = requestBody.split("&");
