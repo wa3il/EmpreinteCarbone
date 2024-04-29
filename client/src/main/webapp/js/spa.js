@@ -79,7 +79,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('secListe').classList.add('inactive');
         document.getElementById('secDelete').classList.remove('inactive');
     });
-        
+    if(localStorage.getItem("token") !== null){
+        isConnected();
+    }
 
 });
 
@@ -237,9 +239,9 @@ function register() {
             headers.append("Authorization", token);
             // Utiliser le token comme nécessaire
             console.log("Token récupéré :", token);
-            displayConnected(true);
             console.log("Connexion réussie");
             //displayRequestResult("Connexion réussie", "alert-success");
+            isConnected()
         })
         .catch((err) => {
             console.error("Error to register : " + err);
@@ -280,9 +282,9 @@ function connect() {
             // Utiliser le token comme nécessaire
             console.log("Token récupéré :", token);
             console.log("status : ", data.status);
-            displayConnected(true);
             console.log("Connexion réussie");
             //displayRequestResult("Connexion réussie", "alert-success");
+            isConnected()
         })
         .catch((err) => {
             console.error("In login: " + err);
@@ -438,8 +440,6 @@ function deco() {
             // Vérifier si la requête a réussi (status 200-299)
             if (response.ok) {
                 console.log("Vous êtes déconnecté");
-                displayConnected(false);
-                showSection('sectionAccueil');
                 //displayRequestResult("Connexion refusée ou impossible", "alert-danger");
                 //throw new Error("Bad response code (" + response.status + ").");
             } else {
@@ -450,7 +450,12 @@ function deco() {
         })
         .catch((err) => {
             console.error("In logout: " + err);
-        })
+        }).finally(()=>{
+            localStorage.removeItem("login");
+             localStorage.removeItem("token");
+             displayConnected(false);
+             showSection('sectionAccueil');
+        });
 }
 
 function deleteAccount() {
@@ -478,4 +483,9 @@ function deleteAccount() {
         .catch((err) => {
             console.error("In deleteAccount: " + err);
         })
+}
+function isConnected(){
+        showSection('sectionCompte');
+        getUserProperty();
+        displayConnected(true);
 }
