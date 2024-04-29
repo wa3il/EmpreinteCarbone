@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
 
     private final AuthenticationManager authenticationManager;
-    private final JpaJwtDao JpajwtDao;
+    private final JpaJwtDao jpajwtDao;
 
     @Autowired
     public AuthenticationService(JpaUserDao jpaUserDao, PasswordEncoder passwordEncoder, JwtService jwtService,
@@ -34,7 +35,7 @@ public class AuthenticationService {
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
-        this.JpajwtDao = jpajwtDao;
+        this.jpajwtDao = jpajwtDao;
     }
 
     public AuthenticationResponse register(UserRequestDto userRequestDto) {
@@ -51,13 +52,13 @@ public class AuthenticationService {
                         userRequestDto.getPassword()));
         Optional<User> user = jpaUserDao.findByLogin(userRequestDto.getLogin());
 
-        if (user.isEmpty()) {throw new RuntimeException("User not found");}
-        Optional<Jwt> jwt = JpajwtDao.findTokenValidByUser(user.get());
+        if (user.isEmpty()) {throw new UsernameNotFoundException("User not found");}
+        Optional<Jwt> jwt = jpajwtDao.findTokenValidByUser(user.get());
         if (jwt.isPresent() ) {
             if (!jwt.get().isDesactive() && jwtService.isTokenValid(jwt.get().getToken(), user.get())){
                 return new AuthenticationResponse(jwt.get().getToken());
             } else {
-                JpajwtDao.delete(jwt.get());
+                jpajwtDao.delete(jwt.get());
                 return new AuthenticationResponse(jwtService.generateToken(user.get()));
             }
         } else {
@@ -68,9 +69,9 @@ public class AuthenticationService {
 
     public void deconnexion() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Optional<Jwt> jwt = JpajwtDao.findTokenValidByUser(user);
+        Optional<Jwt> jwt = jpajwtDao.findTokenValidByUser(user);
         if (jwt.isPresent()){
-            JpajwtDao.delete(jwt.get());
+            jpajwtDao.delete(jwt.get());
         }
     }
 

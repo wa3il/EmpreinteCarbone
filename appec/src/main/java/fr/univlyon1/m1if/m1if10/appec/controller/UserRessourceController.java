@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
 
 import static fr.univlyon1.m1if.m1if10.appec.controller.Mapdata.*;
@@ -36,6 +37,9 @@ public class UserRessourceController {
     private final JpaPossederDao jpaPossederDao;
     private final AuthenticationService authService;
 
+    private static final String USER_NOT_FOUND_MESSAGE = "Utilisateur non trouvé";
+
+
     @Autowired
     public UserRessourceController(@Qualifier("jpaUserDao") JpaUserDao jpaUserDao , JpaAlimentDao jpaAlimentDao, JpaPossederDao jpaPossederDao, AuthenticationService authService) {
         this.jpaUserDao = jpaUserDao;
@@ -50,7 +54,7 @@ public class UserRessourceController {
      * @return a list of users
      */
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<?> getAllUser() {
+    public ResponseEntity<List<User>> getAllUser() {
         return ResponseEntity.ok(jpaUserDao.getAll());
     }
 
@@ -62,12 +66,9 @@ public class UserRessourceController {
      */
     @GetMapping(value = "/{login}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<?> getUser(@PathVariable("login") final String login) {
+    public ResponseEntity<Object> getUser(@PathVariable("login") final String login) {
         Optional<User> user = jpaUserDao.findByLogin(login);
-        if (user.isPresent()) {
-            return ResponseEntity.ok(user.get());
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");
+        return user.<ResponseEntity<Object>>map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(USER_NOT_FOUND_MESSAGE));
     }
 
     /**
@@ -79,7 +80,7 @@ public class UserRessourceController {
      * @return the response entity
      */
     @PutMapping(value = "/{login}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-    public ResponseEntity<?> updateUser(
+    public ResponseEntity<String> updateUser(
             @PathVariable("login") final String login,
             @RequestBody String requestBody,
             @RequestHeader("Content-Type") String contentType) {
@@ -89,10 +90,14 @@ public class UserRessourceController {
                 Optional<User> user = jpaUserDao.findByLogin(login);
                 if (user.isPresent() ) {
                     UserRequestDto userdto = requestDto.get();
-                    jpaUserDao.update(user.get(), new String[]{userdto.getName(), authService.encoderPassword(userdto.getPassword())});
+                    if (userdto.getPassword().isBlank()) {
+                        jpaUserDao.update(user.get(), new String[]{userdto.getName(), ""});
+                    }else {
+                        jpaUserDao.update(user.get(), new String[]{userdto.getName(), authService.encoderPassword(userdto.getPassword())});
+                    }
                     return ResponseEntity.ok("Utilisateur mis à jour");
                 } else {
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(USER_NOT_FOUND_MESSAGE);
                 }
             } else {
                 return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body("Type de média non pris en charge.");
@@ -109,14 +114,14 @@ public class UserRessourceController {
      * @return the response entity
      */
     @DeleteMapping(value = "/{login}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-    public ResponseEntity<?> deleteUser(@PathVariable("login") final String login) {
+    public ResponseEntity<String> deleteUser(@PathVariable("login") final String login) {
         try {
             Optional<User> user = jpaUserDao.findByLogin(login);
             if (user.isPresent()) {
                 jpaUserDao.delete(user.get());
                 return ResponseEntity.ok("Utilisateur supprimé");
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(USER_NOT_FOUND_MESSAGE);
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur est survenue lors de la suppression de l'utilisateur");
@@ -125,12 +130,9 @@ public class UserRessourceController {
 
     @GetMapping(value = "/aliments",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<?> getAlimentsUser(@RequestParam("login") final String login) {
+    public ResponseEntity<Object> getAlimentsUser(@RequestParam("login") final String login) {
         Optional<User> user = jpaUserDao.findByLogin(login);
-        if (user.isPresent()) {
-            return ResponseEntity.ok(jpaPossederDao.findAlimentsByUser(user.get()));
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");
+        return user.<ResponseEntity<Object>>map(value -> ResponseEntity.ok(jpaPossederDao.findAlimentsByUser(value))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(USER_NOT_FOUND_MESSAGE));
     }
 
     @PostMapping(value = "/aliments",

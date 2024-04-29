@@ -80,7 +80,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('secListe').classList.add('inactive');
         document.getElementById('secDelete').classList.remove('inactive');
     });
-        
+    if(localStorage.getItem("token") !== null){
+        isConnected();
+    }
 
 });
 
@@ -111,11 +113,14 @@ function displayConnected(isConnected) {
     for (const element of elementsRequiringConnection) {
         element.style.visibility = visibilityValue;
     }
-    const elementsNotRequiringConnection = document.getElementsByClassName("notRequiresConnection");
-    const visibilityValue2 = isConnected ? "none" : "block";
-    for (const element of elementsNotRequiringConnection) {
-        element.style.display = visibilityValue2;
-    }
+   const visibilityValue2 = !isConnected ? "visible" : "collapse";
+    document.getElementById("connexion1").parentNode.style.visibility = visibilityValue2;
+//     const elementsNotRequiringConnection = document.getElementsByClassName("notRequiresConnection");
+//     // const visibilityValue2 = isConnected ? "none" : "block";
+//     for (const element of elementsNotRequiringConnection) {
+//         element.style.visibility = visibilityValue2;
+//         // element.style.display = visibilityValue2;
+  //  }
 }
 
 function getProperties(url) {
@@ -238,9 +243,9 @@ function register() {
             headers.append("Authorization", token);
             // Utiliser le token comme nécessaire
             console.log("Token récupéré :", token);
-            displayConnected(true);
             console.log("Connexion réussie");
             //displayRequestResult("Connexion réussie", "alert-success");
+            isConnected()
         })
         .catch((err) => {
             console.error("Error to register : " + err);
@@ -252,8 +257,8 @@ function connect() {
     headers.append("Content-Type", "application/json");
     headers.append("Accept", "application/json");
     const body = {
-        login: document.getElementById("loginEmail").value,
-        password: document.getElementById("loginPassword").value
+        login: document.getElementById("login").value,
+        password: document.getElementById("password").value
     };
     const requestConfig = {
         method: "POST",
@@ -281,9 +286,9 @@ function connect() {
             // Utiliser le token comme nécessaire
             console.log("Token récupéré :", token);
             console.log("status : ", data.status);
-            displayConnected(true);
             console.log("Connexion réussie");
             //displayRequestResult("Connexion réussie", "alert-success");
+            isConnected()
         })
         .catch((err) => {
             console.error("In login: " + err);
@@ -439,8 +444,6 @@ function deco() {
             // Vérifier si la requête a réussi (status 200-299)
             if (response.ok) {
                 console.log("Vous êtes déconnecté");
-                displayConnected(false);
-                showSection('sectionAccueil');
                 //displayRequestResult("Connexion refusée ou impossible", "alert-danger");
                 //throw new Error("Bad response code (" + response.status + ").");
             } else {
@@ -451,7 +454,12 @@ function deco() {
         })
         .catch((err) => {
             console.error("In logout: " + err);
-        })
+        }).finally(()=>{
+            localStorage.removeItem("login");
+             localStorage.removeItem("token");
+             displayConnected(false);
+             showSection('sectionAccueil');
+        });
 }
 
 function deleteAccount() {
@@ -479,4 +487,9 @@ function deleteAccount() {
         .catch((err) => {
             console.error("In deleteAccount: " + err);
         })
+}
+function isConnected(){
+        showSection('sectionAccueil');
+        getUserProperty();
+        displayConnected(true);
 }

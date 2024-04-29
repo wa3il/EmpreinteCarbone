@@ -62,8 +62,7 @@ public class JpaPossederDao implements Dao<Posseder>{
         );
 
         query.setParameter("username", user.getUsername());
-        List<Posseder> posseders = query.getResultList();
-        return posseders;
+        return query.getResultList();
     }
 
     @Transactional
@@ -75,8 +74,7 @@ public class JpaPossederDao implements Dao<Posseder>{
 
         query.setParameter("username", user.getUsername());
         query.setParameter("date", date);
-        List<Posseder> posseders = query.getResultList();
-        return posseders;
+        return query.getResultList();
     }
 
 }

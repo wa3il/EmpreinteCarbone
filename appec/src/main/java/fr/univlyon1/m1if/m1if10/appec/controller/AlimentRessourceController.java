@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,18 +28,15 @@ public class AlimentRessourceController {
      * @return a list of aliments
      */
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<?> getAllAliment() {
+    public ResponseEntity<List<Aliment>> getAllAliment() {
         return ResponseEntity.ok(jpaAlimentDao.getAll());
     }
 
     @GetMapping(value = "/{id}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<?> getAliment(@PathVariable("id") final Integer id) {
+    public ResponseEntity<Object> getAliment(@PathVariable("id") final Integer id) {
         Optional<Aliment> aliment = jpaAlimentDao.get(id);
-        if(aliment.isPresent()){
-            return ResponseEntity.ok(aliment.get());
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");
+        return aliment.<ResponseEntity<Object>>map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé"));
     }
 
 }
