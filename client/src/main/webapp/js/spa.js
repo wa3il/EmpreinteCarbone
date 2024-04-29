@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('compte2').addEventListener('click', () => {
         document.getElementById('secCompte2').classList.remove('inactive');
         document.getElementById('secListe').classList.add('inactive');
+        
     });
     document.getElementById('deleteAccount').addEventListener('click', () => {
         document.getElementById('secCompte2').classList.add('inactive');
