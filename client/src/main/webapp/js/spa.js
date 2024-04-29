@@ -251,8 +251,8 @@ function connect() {
     headers.append("Content-Type", "application/json");
     headers.append("Accept", "application/json");
     const body = {
-        login: document.getElementById("loginEmail").value,
-        password: document.getElementById("loginPassword").value
+        login: document.getElementById("login").value,
+        password: document.getElementById("password").value
     };
     const requestConfig = {
         method: "POST",
