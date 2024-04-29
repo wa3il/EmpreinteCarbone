@@ -20,7 +20,7 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
-    <script type="application/javascript" src="js/spa.js"></script>
+    <script type="application/javascript" src="js/spa.js" defer></script>
 
     <script crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script crossorigin="anonymous" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
@@ -290,37 +290,38 @@
 
                     <div class="col-lg-9 px-5">
                         <div id="secCompte2" class="active">
-                            <div class="p-5">
-                                <div class="text-center bg-secondary p-2 mt-n5 rounded">
+                            <div class="px-5" style="max-width: 600px; ">
+                                <div class="text-center bg-secondary p-2 mt-n4 mb-3 rounded" >
                                     <h1 class="text-white"> Mes informations </h1>
                                 </div>
+                                <div class="info py-3" id="monCompte">
+                                    <script id="info-user-Template" type="text/template">
+                                        <form>
+                                            <div class="form-group p-1" >
+                                                <label for="loginCompte">Login</label>
+                                                <input type="text" class="form-control" id="loginCompte" value="{{username}}" readonly>
+                                            </div>
+                                            <div class="form-group p-1" >
+                                                <label for="name_update">Name</label>
+                                                <input type="text" class="form-control" id="name_update"  value="{{ name }}">
+                                            </div>
+                                            <div class="form-group p-1">
+                                                <label for="new_password1">Password</label>
+                                                <input type="password" class="form-control" id="new_password1">
+                                            </div>
+                                            <div class="form-group p-1">
+                                                <label for="new_password2">Confirm Password</label>
+                                                <input type="password" class="form-control" id="new_password2">
+                                            </div>
+                                            <button type="button" class="btn btn-primary border-2 border-secondary py-2 px-3 rounded-pill text-white h-100"
+                                                    style="margin: 10px 0px;" onclick="updateUser()">Submit</button>
+                                            
+                                        </form>
+                                    </script>
+                                </div>   
                                 <div class="info py-5">
-                                    <p class="text-dark fs-5 fw-bold mb-2">Login : <span id="login"><strong id="loginCompte">...</strong></span></p>
-                                    
-                                    <div class="row">
-                                        <div class="col">
-                                            <p class="text-dark fs-5 fw-bold mb-2 d-flex align-items-center">Nom : 
-                                                <script id="name_update" type="x-tmpl-mustache">
-                                                    <input class="form-control me-2 mx-2" type="name" id="name_update_input" value="{{ name }}">
-                                                </script>
-                                                <strong id="nameUser">...</strong>
-                                                <button type="button" class="btn btn-primary border-2 border-secondary py-2 px-3 mx-3 rounded-pill text-white h-100"
-                                                        style="top: 0; right: 25%;" onclick="updateNameUser()">Modifier</button>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    
-                                    <p class="text-dark fs-5 fw-bold mb-2">Changer de mot de passe : </p>
-                                    <div class="form-input p-2 ps-5">
-                                        <input type="password" placeholder="Nouveau mot de passe" id="new_password1" required />
-                                        <input type="password" placeholder="Confirmer mot de passe" id="new_password2" required />
-                                        <button type="button"
-                                            class="btn btn-primary border-2 border-secondary py-2 px-3 rounded-pill text-white h-100"
-                                            style="top: 0; right: 25%;" onclick="updatePasswordUser()">Modifier</button>
-                                    </div>
-                                    <div class="info py-3">
-                                        <a class="btn btn-danger btn-lg" href="#" role="button" id="deleteAccount">Supprimer mon compte</a>
-                                    </div>
+                                    <button class="btn btn-danger border-secondary pt-2 px-3 rounded-pill text-white h-100" 
+                                        href="#" role="button" id="deleteAccount">Supprimer mon compte</button>
                                 </div>
                             </div>
                         </div>
