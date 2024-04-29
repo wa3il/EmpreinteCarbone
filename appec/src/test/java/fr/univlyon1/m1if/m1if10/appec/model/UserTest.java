@@ -9,29 +9,29 @@ class UserTest {
 
     @Test
     void getName() {
-        assertEquals(user.getName(), "toto");
+        assertEquals("toto",user.getName());
     }
 
     @Test
     void setName() {
         user.setName("Abc");
-        assertEquals(user.getName(), "Abc");
+        assertEquals("Abc", user.getName());
     }
 
     @Test
     void getPassword() {
-        assertEquals(user.getPassword(), "password");
+        assertEquals( "password", user.getPassword());
     }
 
     @Test
     void setPassword() {
         user.setPassword("password1");
-        assertEquals(user.getPassword(), "password1");
+        assertEquals("password1",user.getPassword());
     }
 
     @Test
     void getUserMain() {
-        assertEquals(user.getUsername(), "Xyz");
+        assertEquals("Xyz", user.getUsername());
     }
 
 }

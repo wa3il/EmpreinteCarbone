@@ -10,12 +10,12 @@ class AlimentTest {
 
     @Test
     void getNomLegume() {
-        assertEquals(aliment.getNomLegume(), "f");
+        assertEquals( "f", aliment.getNomLegume());
     }
 
     @Test
     void getEc() {
-        assertEquals(aliment.getEc(), 3.3F);
+        assertEquals( 3.3F,aliment.getEc());
     }
 
     @Test
@@ -25,6 +25,6 @@ class AlimentTest {
 
     @Test
     void getSousGroupe() {
-        assertEquals(aliment.getSousGroupe(), "b");
+        assertEquals( "b", aliment.getSousGroupe());
     }
 }
