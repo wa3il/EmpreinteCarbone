@@ -8,6 +8,7 @@ import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -61,6 +62,19 @@ public class JpaPossederDao implements Dao<Posseder>{
         );
 
         query.setParameter("username", user.getUsername());
+        List<Posseder> posseders = query.getResultList();
+        return posseders;
+    }
+
+    @Transactional
+    public List<Posseder> findAlimentsByUserAndDate(User user, Date date) {
+        Query query = entityManager.createQuery(
+                "SELECT p.user.login, p.aliment, p.quantity, p.date   FROM Posseder p " +
+                        "WHERE p.user.login = :username AND p.date >= :date"
+        );
+
+        query.setParameter("username", user.getUsername());
+        query.setParameter("date", date);
         List<Posseder> posseders = query.getResultList();
         return posseders;
     }
