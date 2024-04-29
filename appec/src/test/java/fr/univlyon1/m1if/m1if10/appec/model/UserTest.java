@@ -1,37 +1,43 @@
 package fr.univlyon1.m1if.m1if10.appec.model;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
-    private final User user = new User("toto", "password", "Xyz");
 
     @Test
-    void getName() {
-        assertEquals("toto",user.getName());
+     void testGetUsername() {
+        User user = new User("John", "password123", "john123");
+        assertEquals("john123", user.getUsername());
     }
 
     @Test
-    void setName() {
-        user.setName("Abc");
-        assertEquals("Abc", user.getName());
+     void testGetAuthorities() {
+        User user = new User("John", "password123", "john123");
+        assertTrue(user.getAuthorities().isEmpty());
     }
 
     @Test
-    void getPassword() {
-        assertEquals( "password", user.getPassword());
+     void testIsAccountNonExpired() {
+        User user = new User("John", "password123", "john123");
+        assertTrue(user.isAccountNonExpired());
     }
 
     @Test
-    void setPassword() {
-        user.setPassword("password1");
-        assertEquals("password1",user.getPassword());
+     void testIsAccountNonLocked() {
+        User user = new User("John", "password123", "john123");
+        assertTrue(user.isAccountNonLocked());
     }
 
     @Test
-    void getUserMain() {
-        assertEquals("Xyz", user.getUsername());
+     void testIsCredentialsNonExpired() {
+        User user = new User("John", "password123", "john123");
+        assertTrue(user.isCredentialsNonExpired());
     }
 
+    @Test
+     void testIsEnabled() {
+        User user = new User("John", "password123", "john123");
+        assertTrue(user.isEnabled());
+    }
 }
