@@ -1,6 +1,6 @@
 package fr.univlyon1.m1if.m1if10.appec.securite;
 
-import fr.univlyon1.m1if.m1if10.appec.dao.UserDao;
+import fr.univlyon1.m1if.m1if10.appec.dao.JpaUserDao;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,18 +12,21 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * Configuration of the application.
+ */
 @Configuration
 public class ApplicationConfig {
 
-    private final UserDao userDao;
+    private final JpaUserDao jpaUserDao;
 
-    public ApplicationConfig(UserDao userDao) {
-        this.userDao = userDao;
+    public ApplicationConfig(JpaUserDao jpaUserDao) {
+        this.jpaUserDao = jpaUserDao;
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username ->userDao.findByLogin(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return username ->jpaUserDao.findByLogin(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
     @Bean

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import fr.univlyon1.m1if.m1if10.appec.dao.JpaAlimentDao;
 import fr.univlyon1.m1if.m1if10.appec.dao.JpaPossederDao;
-import fr.univlyon1.m1if.m1if10.appec.dao.UserDao;
+import fr.univlyon1.m1if.m1if10.appec.dao.JpaUserDao;
 import fr.univlyon1.m1if.m1if10.appec.dto.user.AddEcRequestDto;
 import fr.univlyon1.m1if.m1if10.appec.dto.user.AuthenticationResponse;
 import fr.univlyon1.m1if.m1if10.appec.dto.user.UserRequestDto;
@@ -12,12 +12,14 @@ import fr.univlyon1.m1if.m1if10.appec.model.Aliment;
 import fr.univlyon1.m1if.m1if10.appec.model.Posseder;
 import fr.univlyon1.m1if.m1if10.appec.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.sql.Date;
 import java.util.Optional;
 
 import static fr.univlyon1.m1if.m1if10.appec.controller.Mapdata.*;
@@ -29,14 +31,14 @@ import static fr.univlyon1.m1if.m1if10.appec.controller.Mapdata.*;
 @RestController
 @RequestMapping("/users")
 public class UserRessourceController {
-    private final UserDao userdao;
+    private final JpaUserDao jpaUserDao;
     private final JpaAlimentDao jpaAlimentDao;
     private final JpaPossederDao jpaPossederDao;
     private final AuthenticationService authService;
 
     @Autowired
-    public UserRessourceController(UserDao userdao, JpaAlimentDao jpaAlimentDao, JpaPossederDao jpaPossederDao, AuthenticationService authService) {
-        this.userdao = userdao;
+    public UserRessourceController(@Qualifier("jpaUserDao") JpaUserDao jpaUserDao , JpaAlimentDao jpaAlimentDao, JpaPossederDao jpaPossederDao, AuthenticationService authService) {
+        this.jpaUserDao = jpaUserDao;
         this.jpaAlimentDao = jpaAlimentDao;
         this.jpaPossederDao = jpaPossederDao;
         this.authService = authService;
@@ -49,7 +51,7 @@ public class UserRessourceController {
      */
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<?> getAllUser() {
-        return ResponseEntity.ok(userdao.getAll());
+        return ResponseEntity.ok(jpaUserDao.getAll());
     }
 
     /**
@@ -61,7 +63,7 @@ public class UserRessourceController {
     @GetMapping(value = "/{login}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<?> getUser(@PathVariable("login") final String login) {
-        Optional<User> user = userdao.findByLogin(login);
+        Optional<User> user = jpaUserDao.findByLogin(login);
         if (user.isPresent()) {
             return ResponseEntity.ok(user.get());
         }
@@ -71,7 +73,7 @@ public class UserRessourceController {
     /**
      * Update a user.
      *
-     * @param id          the user id
+     * @param login          the user id
      * @param requestBody the request body
      * @param contentType the content type
      * @return the response entity
@@ -84,10 +86,10 @@ public class UserRessourceController {
         try {
             Optional<UserRequestDto> requestDto = getUserDtoRequest(requestBody, contentType);
             if (requestDto.isPresent()) {
-                Optional<User> user = userdao.findByLogin(login);
+                Optional<User> user = jpaUserDao.findByLogin(login);
                 if (user.isPresent() ) {
                     UserRequestDto userdto = requestDto.get();
-                    userdao.update(user.get(), new String[]{userdto.getName(), authService.encoderPassword(userdto.getPassword())});
+                    jpaUserDao.update(user.get(), new String[]{userdto.getName(), authService.encoderPassword(userdto.getPassword())});
                     return ResponseEntity.ok("Utilisateur mis à jour");
                 } else {
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");
@@ -109,9 +111,9 @@ public class UserRessourceController {
     @DeleteMapping(value = "/{login}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ResponseEntity<?> deleteUser(@PathVariable("login") final String login) {
         try {
-            Optional<User> user = userdao.findByLogin(login);
+            Optional<User> user = jpaUserDao.findByLogin(login);
             if (user.isPresent()) {
-                userdao.delete(user.get());
+                jpaUserDao.delete(user.get());
                 return ResponseEntity.ok("Utilisateur supprimé");
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé");
@@ -124,7 +126,7 @@ public class UserRessourceController {
     @GetMapping(value = "/aliments",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<?> getAlimentsUser(@RequestParam("login") final String login) {
-        Optional<User> user = userdao.findByLogin(login);
+        Optional<User> user = jpaUserDao.findByLogin(login);
         if (user.isPresent()) {
             return ResponseEntity.ok(jpaPossederDao.findAlimentsByUser(user.get()));
         }
@@ -136,13 +138,21 @@ public class UserRessourceController {
     public ResponseEntity<AuthenticationResponse> addEc(@RequestBody String requestBody, @RequestHeader("Content-Type") String contentType) throws JsonProcessingException {
         Optional<AddEcRequestDto> addEcRequestDto = getAddEcDtoRequest(requestBody, contentType);
         if (addEcRequestDto.isPresent()) {
-            Optional<User> user = userdao.findByLogin(addEcRequestDto.get().getLogin());
+            Optional<User> user = jpaUserDao.findByLogin(addEcRequestDto.get().getLogin());
             Optional<Aliment> aliment = jpaAlimentDao.get(addEcRequestDto.get().getAlimentId());
 
             if (user.isPresent() && aliment.isPresent()) {
-                Posseder posseder = new Posseder(user.get(), aliment.get(), addEcRequestDto.get().getQuantity());
+                Posseder posseder = new Posseder();
+                posseder.setUser(user.get());
+                posseder.setAliment(aliment.get());
+                posseder.setQuantity(addEcRequestDto.get().getQuantity());
+                if (addEcRequestDto.get().getDate() == null) {
+                    posseder.setDate(new Date(System.currentTimeMillis()));
+                }else{
+                    posseder.setDate(addEcRequestDto.get().getDate());
+                }
                 jpaPossederDao.save(posseder);
-                return ResponseEntity.ok(new AuthenticationResponse("Ajout effectué"));
+                return ResponseEntity.ok().build();
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }

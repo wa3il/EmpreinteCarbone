@@ -5,19 +5,20 @@ import jakarta.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "posseder")
+@Table(name = "possede")
 public class Posseder {
 
-    @EmbeddedId
-    private UserEcId userEcId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userecid")
+    private int userEcId;
 
     @ManyToOne(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
-    @MapsId("utilisateurId") // Associe "utilisateurId" à l'attribut "utilisateur" dans la classe composite
     @JoinColumn(name = "utilisateurid")
     private User user;
 
     @ManyToOne(cascade = {CascadeType.REMOVE, CascadeType.MERGE})
-    @MapsId("alimentId") // Associe "alimentId" à l'attribut "aliment" dans la classe composite
     @JoinColumn(name = "alimentid")
     private Aliment aliment;
 
@@ -27,20 +28,13 @@ public class Posseder {
     @Column(name = "dateconsomation")
     private Date date;
 
-    public Posseder() {
-        this.date = new Date(System.currentTimeMillis());
-    }
+    public Posseder() {}
 
-    public Posseder(User user, Aliment aliment, float quantity) {
+    public Posseder(User user, Aliment aliment, float quantity, Date date) {
         this.user = user;
         this.aliment = aliment;
         this.quantity = quantity;
-        this.date = new Date(System.currentTimeMillis());
-        this.userEcId = new UserEcId(user.getUid(), aliment.getAlimentId());
-    }
-
-    public UserEcId getId() {
-        return userEcId;
+        this.date = date;
     }
 
     public User getUser() {
@@ -71,6 +65,8 @@ public class Posseder {
         return date;
     }
 
+
+    public void setDate(Date date) {this.date = date;}
 
 }
 

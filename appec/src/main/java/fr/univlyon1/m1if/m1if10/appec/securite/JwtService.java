@@ -1,6 +1,6 @@
 package fr.univlyon1.m1if.m1if10.appec.securite;
 
-import fr.univlyon1.m1if.m1if10.appec.dao.JwtDao;
+import fr.univlyon1.m1if.m1if10.appec.dao.JpaJwtDao;
 import fr.univlyon1.m1if.m1if10.appec.model.Jwt;
 import fr.univlyon1.m1if.m1if10.appec.model.User;
 import io.jsonwebtoken.Claims;
@@ -25,7 +25,7 @@ public class JwtService {
     private static final String SECRET_KEY ="V90Y519EQB2B1BAC8WYFQ6ECOREL1CMO56IW29385CPP3F4152QFMFPAFVTJIABAA7UG2ZAAOMPYP6F9KK34B9136AQGD7VT8I9X5OLBWPRDTQJXYKCW0TT74CRHSHQC5AM2Q4174C9KMY69OMWOV8R5WYRLO8KPV29L5W3825Q51HUJ8FK88XA39BRFOBUVLP0WEA5YSXM3SLMW09M40PQKIXDFO95W8YB0OESZ1YMIGWSAQ3EWH49VB1ST0X64";
 
     @Autowired
-    private JwtDao jwtDao;
+    private JpaJwtDao JpajwtDao;
 
 
     public String extractUserLogin(String jwt) {
@@ -42,7 +42,7 @@ public class JwtService {
         final Jwt jwt = new Jwt();
         jwt.setToken(token);
         jwt.setUser(user);
-        jwtDao.save(jwt);
+        JpajwtDao.save(jwt);
         return token;
     }
 
@@ -89,12 +89,12 @@ public class JwtService {
     }
 
     public Jwt tokenByValue(String token) {
-        Optional<Jwt> jwt = jwtDao.findByValue(token);
+        Optional<Jwt> jwt = JpajwtDao.findByValue(token);
         return jwt.orElse(null);
     }
 
     public void desactiveToken(User user) {
-        Optional<Jwt> jwt = jwtDao.findTokenValidByUser(user);
-        jwt.ifPresent(value -> jwtDao.delete(jwt.get()));
+        Optional<Jwt> jwt = JpajwtDao.findTokenValidByUser(user);
+        jwt.ifPresent(value -> JpajwtDao.delete(jwt.get()));
     }
 }

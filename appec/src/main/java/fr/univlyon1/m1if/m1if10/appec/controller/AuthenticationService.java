@@ -1,13 +1,14 @@
 package fr.univlyon1.m1if.m1if10.appec.controller;
 
-import fr.univlyon1.m1if.m1if10.appec.dao.JwtDao;
-import fr.univlyon1.m1if.m1if10.appec.dao.UserDao;
+import fr.univlyon1.m1if.m1if10.appec.dao.JpaJwtDao;
+import fr.univlyon1.m1if.m1if10.appec.dao.JpaUserDao;
 import fr.univlyon1.m1if.m1if10.appec.dto.user.AuthenticationResponse;
 import fr.univlyon1.m1if.m1if10.appec.dto.user.UserRequestDto;
 import fr.univlyon1.m1if.m1if10.appec.model.Jwt;
 import fr.univlyon1.m1if.m1if10.appec.model.User;
 import fr.univlyon1.m1if.m1if10.appec.securite.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,27 +20,27 @@ import java.util.Optional;
 @Service
 public class AuthenticationService {
 
-    private final UserDao userDao;
+    private final JpaUserDao jpaUserDao;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
     private final AuthenticationManager authenticationManager;
-    private final JwtDao jwtDao;
+    private final JpaJwtDao JpajwtDao;
 
     @Autowired
-    public AuthenticationService(UserDao userDao, PasswordEncoder passwordEncoder, JwtService jwtService,
-            AuthenticationManager authenticationManager, JwtDao jwtDao) {
-        this.userDao = userDao;
+    public AuthenticationService(JpaUserDao jpaUserDao, PasswordEncoder passwordEncoder, JwtService jwtService,
+                                 AuthenticationManager authenticationManager, @Qualifier("jpaJwtDao") JpaJwtDao jpajwtDao) {
+        this.jpaUserDao = jpaUserDao;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
-        this.jwtDao = jwtDao;
+        this.JpajwtDao = jpajwtDao;
     }
 
     public AuthenticationResponse register(UserRequestDto userRequestDto) {
         User user = new User(userRequestDto.getName(), passwordEncoder.encode(userRequestDto.getPassword()),
                 userRequestDto.getLogin());
-        userDao.save(user);
+        jpaUserDao.save(user);
         return new AuthenticationResponse(jwtService.generateToken(user));
     }
 
@@ -48,15 +49,15 @@ public class AuthenticationService {
                 new UsernamePasswordAuthenticationToken(
                         userRequestDto.getLogin(),
                         userRequestDto.getPassword()));
-        Optional<User> user = userDao.findByLogin(userRequestDto.getLogin());
+        Optional<User> user = jpaUserDao.findByLogin(userRequestDto.getLogin());
 
         if (user.isEmpty()) {throw new RuntimeException("User not found");}
-        Optional<Jwt> jwt = jwtDao.findTokenValidByUser(user.get());
+        Optional<Jwt> jwt = JpajwtDao.findTokenValidByUser(user.get());
         if (jwt.isPresent() ) {
             if (!jwt.get().isDesactive() && jwtService.isTokenValid(jwt.get().getToken(), user.get())){
                 return new AuthenticationResponse(jwt.get().getToken());
             } else {
-                jwtDao.delete(jwt.get());
+                JpajwtDao.delete(jwt.get());
                 return new AuthenticationResponse(jwtService.generateToken(user.get()));
             }
         } else {
@@ -67,9 +68,9 @@ public class AuthenticationService {
 
     public void deconnexion() {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Optional<Jwt> jwt = jwtDao.findTokenValidByUser(user);
+        Optional<Jwt> jwt = JpajwtDao.findTokenValidByUser(user);
         if (jwt.isPresent()){
-            jwtDao.delete(jwt.get());
+            JpajwtDao.delete(jwt.get());
         }
     }
 

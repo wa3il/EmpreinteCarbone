@@ -4,6 +4,7 @@ import fr.univlyon1.m1if.m1if10.appec.model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,10 +44,10 @@ public class JpaUserDao implements Dao<User> {
         if (params.length == 0) {
             throw new IllegalArgumentException("Params must contain at least one value");
         }
-        if (!params[0].isEmpty() && params[0] != null) {
+        if (!params[0].isEmpty() && !params[0].isBlank()){
             user.setName(params[0]);
         }
-        if (params.length > 1 && !params[1].isEmpty()) {
+        if (params.length > 1 && !params[1].isEmpty() && !params[1].isBlank()) {
             user.setPassword(params[1]);
         }
         entityManager.merge(user);
@@ -56,6 +57,19 @@ public class JpaUserDao implements Dao<User> {
     @Override
     public void delete(User user) {
         entityManager.remove(user);
+    }
+
+    @Transactional
+    public Optional<User> findByLogin(String login) {
+        Query query = entityManager.createQuery(
+                "SELECT e FROM User e WHERE e.login = :login"
+        );
+        query.setParameter("login", login);
+        List<User> users = query.getResultList();
+        if (users.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(users.get(0));
     }
 
 }

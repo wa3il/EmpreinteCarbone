@@ -90,12 +90,16 @@ public class Mapdata {
             String login = formData.get("userLogin");
             String alimentId = formData.get("alimentId");
             String quantite = formData.get("quantite");
+            String date = formData.get("date");
 
 
             AddEcRequestDto addEcRequest = new AddEcRequestDto();
             addEcRequest.setAlimentId(Integer.parseInt(alimentId));
             addEcRequest.setLogin(login);
             addEcRequest.setQuantity(Float.parseFloat(quantite));
+            if (!date.isBlank()) {
+                addEcRequest.setDate(java.sql.Date.valueOf(date));
+            }
             if (Float.parseFloat(quantite) == 0 || login == null){
                 return Optional.empty();
             }

@@ -1,6 +1,6 @@
 package fr.univlyon1.m1if.m1if10.appec.dto.user;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class AddEcRequestDto {
     private int alimentId;
@@ -12,10 +12,11 @@ public class AddEcRequestDto {
     public AddEcRequestDto() {
     }
 
-    public AddEcRequestDto(int alimentId, float quantity, String login) {
+    public AddEcRequestDto(int alimentId, float quantity, String login, Date date) {
         this.alimentId = alimentId;
         this.quantity = quantity;
         this.login = login;
+        this.date = date;
     }
 
     public int getAlimentId() {
@@ -41,4 +42,8 @@ public class AddEcRequestDto {
     public void setLogin(String login) {
         this.login = login;
     }
+
+    public Date getDate() {return date;}
+
+    public void setDate(Date date) {this.date = date;}
 }
