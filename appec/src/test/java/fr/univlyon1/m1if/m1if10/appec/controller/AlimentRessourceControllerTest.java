@@ -30,7 +30,7 @@ class AlimentRessourceControllerTest {
     }
 
     @Test
-    public void testGetAllAliments() {
+     void testGetAllAliments() {
         // Prepare mock data
         List<Aliment> aliments = new ArrayList<>();
         aliments.add(new Aliment("Apple", 0.5f, "Fruit", "Apple Family"));
@@ -51,7 +51,7 @@ class AlimentRessourceControllerTest {
     }
 
     @Test
-    public void testGetAlimentById() {
+    void testGetAlimentById() {
         // Prepare mock data
         Aliment aliment = new Aliment("Apple", 0.5f, "Fruit", "Apple Family");
 

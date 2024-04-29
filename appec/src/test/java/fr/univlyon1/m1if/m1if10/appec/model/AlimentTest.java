@@ -20,7 +20,7 @@ class AlimentTest {
 
     @Test
     void getGroupe() {
-        assertEquals(aliment.getGroupe(), "a");
+        assertEquals("a", aliment.getGroupe());
     }
 
     @Test
