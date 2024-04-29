@@ -33,15 +33,21 @@ public class JpaAlimentDao implements Dao<Aliment> {
     @Transactional
     @Override
     public void save(Aliment aliment) {
+        // This method is intentionally left empty because the save operation is not needed
+
     }
 
     @Transactional
     @Override
     public void update(Aliment aliment, String[] params) {
+        // This method is intentionally left empty because the update operation is not needed
+
     }
 
     @Transactional
     @Override
     public void delete(Aliment aliment) {
+        // This method is intentionally left empty because the delete operation is not needed
     }
+
 }
