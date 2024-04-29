@@ -112,11 +112,14 @@ function displayConnected(isConnected) {
     for (const element of elementsRequiringConnection) {
         element.style.visibility = visibilityValue;
     }
-    const elementsNotRequiringConnection = document.getElementsByClassName("notRequiresConnection");
-    const visibilityValue2 = isConnected ? "none" : "block";
-    for (const element of elementsNotRequiringConnection) {
-        element.style.display = visibilityValue2;
-    }
+   const visibilityValue2 = !isConnected ? "visible" : "collapse";
+    document.getElementById("connexion1").parentNode.style.visibility = visibilityValue2;
+//     const elementsNotRequiringConnection = document.getElementsByClassName("notRequiresConnection");
+//     // const visibilityValue2 = isConnected ? "none" : "block";
+//     for (const element of elementsNotRequiringConnection) {
+//         element.style.visibility = visibilityValue2;
+//         // element.style.display = visibilityValue2;
+  //  }
 }
 
 function getProperties(url) {
@@ -485,7 +488,7 @@ function deleteAccount() {
         })
 }
 function isConnected(){
-        showSection('sectionCompte');
+        showSection('sectionAccueil');
         getUserProperty();
         displayConnected(true);
 }
