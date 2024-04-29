@@ -59,10 +59,10 @@ public class UserBusinessController {
     }
 
     @PostMapping(value = "/logout")
-    public ResponseEntity<?> logout() {
+    public ResponseEntity<String> logout() {
         try {
             authenticationService.deconnexion();
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok("Déconnexion réussie");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

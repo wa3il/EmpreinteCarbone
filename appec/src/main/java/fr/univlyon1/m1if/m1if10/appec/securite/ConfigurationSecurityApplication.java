@@ -53,6 +53,10 @@ public class ConfigurationSecurityApplication {
                         .requestMatchers(POST, "/users").permitAll()
                         .requestMatchers(POST, "/users/login").permitAll()
                         .requestMatchers(GET, "/aliments").permitAll()
+                        .requestMatchers(GET, "/aliments/**").permitAll()
+                        .requestMatchers( "/swagger-ui.html").permitAll()
+                        .requestMatchers( "/swagger-ui/**").permitAll()
+                        .requestMatchers( "/v3/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session

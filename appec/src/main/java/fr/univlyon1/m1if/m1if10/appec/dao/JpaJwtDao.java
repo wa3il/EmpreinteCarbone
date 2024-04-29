@@ -3,6 +3,7 @@ package fr.univlyon1.m1if.m1if10.appec.dao;
 import fr.univlyon1.m1if.m1if10.appec.model.Jwt;
 import fr.univlyon1.m1if.m1if10.appec.model.User;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
@@ -71,8 +72,17 @@ public class JpaJwtDao implements Dao<Jwt> {
                         "WHERE e.user = :user AND e.expire = false AND e.desactive = false"
         );
         query.setParameter("user", user);
-        return Optional.ofNullable((Jwt) query.getSingleResult());
+
+        List<Jwt> results = query.getResultList();
+        if (!results.isEmpty()) {
+            Jwt jwt = results.get(0);
+            return Optional.of(jwt);
+        } else {
+            return Optional.empty();
+        }
     }
+
+
 
 
 }
