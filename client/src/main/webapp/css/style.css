@@ -45,7 +45,6 @@
     visibility: collapse;
 }
 
-
 /* background color */
 
 .child1 {
@@ -256,13 +255,13 @@ input[type="date"] {
 }
 
 #searchModal .modal-content {
-    background: rgba(255, 255, 255, .8);
+    background: rgba(255, 255, 255, 0.8);
 }
 /*** Navbar End ***/
 
 /*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url(../img/planete.jpg);
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(206, 204, 204, 0.8)), url(../img/planete.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -301,18 +300,11 @@ input[type="date"] {
     margin-left: 20px;
 }
 
-.page-header {
-    position: relative;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/cart-page-header-img.jpg);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 @media (min-width: 992px) {
     .hero-header,
     .page-header {
-        margin-top: 152px !important;
+        margin-top: 150px !important;
+        margin-bottom: 60px !important;
     }
 }
 
