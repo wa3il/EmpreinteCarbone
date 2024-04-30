@@ -37,16 +37,12 @@ class AlimentRessourceControllerTest {
         aliments.add(new Aliment("Apple", 0.5f, "Fruit", "Apple Family"));
         aliments.add(new Aliment("Banana", 0.7f, "Fruit", "Banana Family"));
 
-        // Mock DAO behavior
         when(daoMock.getAll()).thenReturn(aliments);
 
-        // Call the controller method
         ResponseEntity<?> responseEntity = controller.getAllAliment();
 
-        // Verify that DAO method was called
         verify(daoMock, times(1)).getAll();
 
-        // Verify the response
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(aliments, responseEntity.getBody());
     }

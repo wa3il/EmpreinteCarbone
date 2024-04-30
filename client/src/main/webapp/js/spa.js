@@ -378,25 +378,25 @@ function getUserProperty() {
 
 function updateBody(){
     const nameInput = document.getElementById("name_update_input");
-        const newPasswordInput = document.getElementById("new_password1");
-        const newPasswordInput2 = document.getElementById("new_password2");
+    const newPasswordInput = document.getElementById("new_password1");
+    const newPasswordInput2 = document.getElementById("new_password2");
 
-        const name = nameInput ? nameInput.value : "";
-        const password = newPasswordInput ? newPasswordInput.value : "";
-        const password2 = newPasswordInput2 ? newPasswordInput2.value : "";
+    const name = nameInput ? nameInput.value : "";
+    const password = newPasswordInput ? newPasswordInput.value : "";
+    const password2 = newPasswordInput2 ? newPasswordInput2.value : "";
 
-        if (password !== password2) {
-            alert("Les mots de passe ne correspondent pas");
-            return;
-        }
+    if (password !== password2) {
+        alert("Les mots de passe ne correspondent pas");
+        return;
+    }
 
-        const body = {
-            login: localStorage.getItem("login"),
-            name: name,
-            password: password
-        };
+    const body = {
+        login: localStorage.getItem("login"),
+        name: name,
+        password: password
+    };
 
-        return body;
+    return body;
 }
 
 function updateUser(){
@@ -465,6 +465,7 @@ function deco() {
 function deleteAccount() {
     console.log("j'essaie de supprimer mon compte");
     const headers = new Headers();
+    headers.append("Content-Type", "application/json");
     headers.append("Authorization", localStorage.getItem("token"));
     const requestConfig = {
         method: "DELETE",

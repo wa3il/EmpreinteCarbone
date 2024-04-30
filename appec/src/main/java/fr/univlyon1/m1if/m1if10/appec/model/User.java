@@ -47,7 +47,9 @@ public class User implements UserDetails {
     public void setUsername(String login) {
         this.login = login;
     }
-
+    public void setuid(int id) {
+        this.uid = id;
+    }
     public String getName() {
         return name;
     }

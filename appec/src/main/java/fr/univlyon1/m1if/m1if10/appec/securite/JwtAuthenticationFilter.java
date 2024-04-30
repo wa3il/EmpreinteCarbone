@@ -53,7 +53,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     userDetails = this.userDetailsService.loadUserByUsername(userLogin);
 
                     if (jwtService.isTokenValid(jwt, userDetails) && Objects.equals(jwtTokenBDD.getUser().getUsername(), userLogin)
-                            && jwtTokenBDD.isDesactive() == false && jwtTokenBDD.isExpire() == false){
+                            && !jwtTokenBDD.isDesactive() && !jwtTokenBDD.isExpire()){
                         // Création de l'objet UsernamePasswordAuthenticationToken
                         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                         authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

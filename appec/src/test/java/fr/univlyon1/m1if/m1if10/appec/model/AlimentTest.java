@@ -10,21 +10,21 @@ class AlimentTest {
 
     @Test
     void getNomLegume() {
-        assertEquals(aliment.getNomLegume(), "f");
+        assertEquals( "f", aliment.getNomLegume());
     }
 
     @Test
     void getEc() {
-        assertEquals(aliment.getEc(), 3.3F);
+        assertEquals( 3.3F,aliment.getEc());
     }
 
     @Test
     void getGroupe() {
-        assertEquals(aliment.getGroupe(), "a");
+        assertEquals("a", aliment.getGroupe());
     }
 
     @Test
     void getSousGroupe() {
-        assertEquals(aliment.getSousGroupe(), "b");
+        assertEquals( "b", aliment.getSousGroupe());
     }
 }

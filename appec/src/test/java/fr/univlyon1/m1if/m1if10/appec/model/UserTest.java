@@ -1,37 +1,66 @@
 package fr.univlyon1.m1if.m1if10.appec.model;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class UserTest {
-    private final User user = new User("toto", "password", "Xyz");
+ class UserTest {
 
     @Test
-    void getName() {
-        assertEquals(user.getName(), "toto");
+     void testGetAndSetUsername() {
+        User user = new User();
+        user.setUsername("john123");
+        assertEquals("john123", user.getUsername());
     }
 
     @Test
-    void setName() {
-        user.setName("Abc");
-        assertEquals(user.getName(), "Abc");
+     void testGetAndSetName() {
+        User user = new User();
+        user.setName("John");
+        assertEquals("John", user.getName());
     }
 
     @Test
-    void getPassword() {
-        assertEquals(user.getPassword(), "password");
+    public void testGetAndSetPassword() {
+        User user = new User();
+        user.setPassword("password123");
+        assertEquals("password123", user.getPassword());
     }
 
     @Test
-    void setPassword() {
-        user.setPassword("password1");
-        assertEquals(user.getPassword(), "password1");
+    public void testGetUid() {
+        User user = new User();
+        user.setuid(1);
+        assertEquals(1, user.getUid());
     }
 
     @Test
-    void getUserMain() {
-        assertEquals(user.getUsername(), "Xyz");
+     void testGetAuthorities() {
+        User user = new User("John", "password123", "john123");
+        assertTrue(user.getAuthorities().isEmpty());
     }
 
+    @Test
+     void testIsAccountNonExpired() {
+        User user = new User("John", "password123", "john123");
+        assertTrue(user.isAccountNonExpired());
+    }
+
+    @Test
+     void testIsAccountNonLocked() {
+        User user = new User("John", "password123", "john123");
+        assertTrue(user.isAccountNonLocked());
+    }
+
+    @Test
+     void testIsCredentialsNonExpired() {
+        User user = new User("John", "password123", "john123");
+        assertTrue(user.isCredentialsNonExpired());
+    }
+
+    @Test
+     void testIsEnabled() {
+        User user = new User("John", "password123", "john123");
+        assertTrue(user.isEnabled());
+    }
 }
