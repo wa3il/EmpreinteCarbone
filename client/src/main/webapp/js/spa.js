@@ -497,14 +497,13 @@ function isConnected(){
 }
 
 function addProduct() {
-    console.log("j'ajoute un aliment");
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", localStorage.getItem("token"));
     const body = {
         login: localStorage.getItem("login"),
         alimentId: document.getElementById("idProduit").innerText,
-        quantity: document.getElementById("quantity").value,
+        quantity: document.getElementById("quantity").value * parseFloat(document.getElementById("ec").innerText.match(/[\d\.]+/)[0]),
         date: document.getElementById("date").value
     };
     const requestConfig = {
