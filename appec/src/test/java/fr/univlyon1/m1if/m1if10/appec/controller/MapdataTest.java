@@ -63,7 +63,7 @@ class MapdataTest {
 
     @Test
     void testGetAddEcDtoRequestForm() throws JsonProcessingException {
-        String requestBody = "login=testLogin&alimentId=1&quantite=2.0&date=2022-01-01";
+        String requestBody = "login=testLogin&alimentId=1&quantity=2.0&date=2022-01-01";
         String contentType = "application/x-www-form-urlencoded";
 
         Optional<AddEcRequestDto> addEcRequestDto = Mapdata.getAddEcDtoRequest(requestBody, contentType);
