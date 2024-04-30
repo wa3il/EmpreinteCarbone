@@ -433,49 +433,35 @@
                     <div class="m-4">
                         <div class="rounded bg-primary p-5">
                             <div class="row"> <!-- Wrap all dropdowns inside this row -->
-                                <div class="col-4"> <!-- Each dropdown takes 4 columns -->
-                                    <div class="nav-item dropdown" id="date">
-                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm"
-                                            id="slcjour">
-                                        </select>
-                                    </div>
+                                <div class="col-3"> <!-- Each dropdown takes 4 columns -->
+                                    
+                                        <select class="form-select" id="select-jour"></select>
+                                    
                                 </div>
-                                <div class="col-4">
-                                    <div class="nav-item dropdown" id="div_mois">
-                                        <select class="form-select form-select-lg mb-2" aria-label=".form-select-sm">
-                                            <option value="1">Janvier</option>
-                                            <option value="2">Fevrier</option>
-                                            <option value="3">Mars</option>
-                                            <option value="4">Avril</option>
-                                            <option value="5">Mai</option>
-                                            <option value="6">Juin</option>
-                                            <option value="7">Juillet</option>
-                                            <option value="8">Aout</option>
-                                            <option value="9">Septembre</option>
-                                            <option value="10">Octobre</option>
-                                            <option value="11">Novembre</option>
-                                            <option value="12">Decembre</option>
-
-                                        </select>
-                                    </div>
+                                <div class="col-3">
+                                    <select class="form-select" id="select-mois"></select>
                                 </div>
-                                <div class="col-4">
-                                    <div class="nav-item dropdown" id="div_annee">
-                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm"
-                                            id="annee">
-                                            <!-- Options for year -->
-                                        </select>
-                                    </div>
+                                <div class="col-3">
+                                    <select class="form-select" id="select-annee"></select>
+                                </div>
+                                <div class="col-3">
                                     <div class="mx-auto">
                                         <button type="submit"
-                                            class="btn btn-primary border-2 border-secondary py-3 px-2 mx-0 rounded-pill text-white h-100"
-                                            style="top: 0; right: 0%;">Calculer mon empreinte</button>
+                                            class="btn btn-primary border-2 border-secondary px-2 mx-0 rounded-pill text-white h-100"
+                                            style="top: 0; right: 0%;" onclick="getSelectedDate()">Calculer mon empreinte</button>
                                     </div>
                                 </div>
-
+                            </div>
+                            
+                        </div>
+                        <div class="m-4 p-4 right-0" id="resultat" style="display: none;">
+                            <div class="mb-3 border-bottom">
+                                <h4>
+                                    <a href="#" id="" class="text-dark"> Votre émission de carbone du <strong id="date"></strong> est <strong id="consoJour">...</strong> gCO2</a>
+                                </h4>
                             </div>
                         </div>
-
+                        
                     </div>
                 </div>
             </div>
