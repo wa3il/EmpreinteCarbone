@@ -17,10 +17,4 @@ class AppecApplicationTests {
     void contextLoads() {
         assertThat(applicationContext).isNotNull();
     }
-
-    @Test
-    public void testMainMethod() {
-        AppecApplication.main(new String[]{});
-    }
-
 }

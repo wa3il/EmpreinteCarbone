@@ -73,21 +73,11 @@ class JpaAlimentDaoTest {
     }
 
     @Test
-    void save() {
-
-    }
-
-    @Test
     void update() {
 
         String[] params = {"newName"};
         alimentDao.update(aliment, params);
         assertEquals("newName", aliment.getNomLegume());
         verify(entityManager, times(1)).merge(aliment);
-    }
-
-    @Test
-    void delete() {
-
     }
 }

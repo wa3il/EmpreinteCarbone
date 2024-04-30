@@ -80,18 +80,7 @@ class UserRessourceControllerTest {
         assertEquals(200, response.getStatusCodeValue());
         verify(jpaUserDao, times(1)).findByLogin(anyString());
     }
-
-
-    @Test
-    void updateUser() throws JsonProcessingException {
-
-    }
-
-    @Test
-    void addEc() throws JsonProcessingException {
-
-    }
-
+    
     @Test
     void deleteUser() {
         ResponseEntity<String> response = userRessourceController.deleteUser(user.getUsername());
