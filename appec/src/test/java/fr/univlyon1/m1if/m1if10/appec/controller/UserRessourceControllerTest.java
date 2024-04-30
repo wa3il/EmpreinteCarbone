@@ -1,12 +1,8 @@
 package fr.univlyon1.m1if.m1if10.appec.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.univlyon1.m1if.m1if10.appec.dao.JpaAlimentDao;
 import fr.univlyon1.m1if.m1if10.appec.dao.JpaPossederDao;
 import fr.univlyon1.m1if.m1if10.appec.dao.JpaUserDao;
-import fr.univlyon1.m1if.m1if10.appec.dto.user.AuthenticationResponse;
-import fr.univlyon1.m1if.m1if10.appec.dto.user.UserRequestDto;
-import fr.univlyon1.m1if.m1if10.appec.model.Aliment;
 import fr.univlyon1.m1if.m1if10.appec.model.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
