@@ -130,9 +130,17 @@ public class UserRessourceController {
 
     @GetMapping(value = "/aliments",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<Object> getAlimentsUser(@RequestParam("login") final String login) {
+    public ResponseEntity<List<Posseder>> getAlimentsUser(@RequestParam("login") final String login, @RequestParam(value = "date", required = false) String date) {
         Optional<User> user = jpaUserDao.findByLogin(login);
-        return user.<ResponseEntity<Object>>map(value -> ResponseEntity.ok(jpaPossederDao.findAlimentsByUser(value))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(USER_NOT_FOUND_MESSAGE));
+        if (user.isPresent()) {
+            if (date != null && !date.isEmpty()) {
+                return ResponseEntity.ok(jpaPossederDao.findAlimentsByUserAndDate(user.get(), Date.valueOf(date)));
+            } else {
+                return ResponseEntity.ok(jpaPossederDao.findAlimentsByUser(user.get()));
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @PostMapping(value = "/aliments",
