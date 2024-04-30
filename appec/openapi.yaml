@@ -176,16 +176,25 @@ paths:
           required: true
           schema:
             type: string
+        - name: date
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                type: object
+                type: array
+                items:
+                  $ref: '#/components/schemas/Posseder'
             application/xml:
               schema:
-                type: object
+                type: array
+                items:
+                  $ref: '#/components/schemas/Posseder'
     post:
       tags:
         - user-ressource-controller
@@ -249,10 +258,10 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                $ref: '#/components/schemas/Aliment'
             application/xml:
               schema:
-                type: object
+                $ref: '#/components/schemas/Aliment'
 components:
   schemas:
     AuthenticationResponse:
@@ -279,16 +288,16 @@ components:
           type: boolean
         username:
           type: string
+        accountNonExpired:
+          type: boolean
+        credentialsNonExpired:
+          type: boolean
         accountNonLocked:
           type: boolean
         authorities:
           type: array
           items:
             $ref: '#/components/schemas/GrantedAuthority'
-        credentialsNonExpired:
-          type: boolean
-        accountNonExpired:
-          type: boolean
     Aliment:
       type: object
       properties:
@@ -304,3 +313,20 @@ components:
           type: string
         sousGroupe:
           type: string
+        alimentid:
+          type: integer
+          format: int32
+          writeOnly: true
+    Posseder:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        aliment:
+          $ref: '#/components/schemas/Aliment'
+        quantity:
+          type: number
+          format: float
+        date:
+          type: string
+          format: date-time

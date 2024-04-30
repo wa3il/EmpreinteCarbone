@@ -69,7 +69,7 @@ public class JpaPossederDao implements Dao<Posseder>{
     public List<Posseder> findAlimentsByUserAndDate(User user, Date date) {
         Query query = entityManager.createQuery(
                 "SELECT p.user.login, p.aliment, p.quantity, p.date   FROM Posseder p " +
-                        "WHERE p.user.login = :username AND p.date >= :date"
+                        "WHERE p.user.login = :username AND p.date = :date"
         );
 
         query.setParameter("username", user.getUsername());
