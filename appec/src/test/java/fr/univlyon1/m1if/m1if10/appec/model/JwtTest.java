@@ -57,4 +57,16 @@ class JwtTest {
 
         assertEquals("abc123", jwt.getToken());
     }
+    @Test
+    void testConstructors() {
+        Jwt jwt1 = new Jwt();
+        assertFalse(jwt1.isDesactive());
+        assertFalse(jwt1.isExpire());
+        
+        User user = new User();
+        Jwt jwt2 = new Jwt(true, true, user);
+        assertTrue(jwt2.isDesactive());
+        assertTrue(jwt2.isExpire());
+        assertEquals(user, jwt2.getUser());
+    }
 }
