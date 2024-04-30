@@ -494,3 +494,36 @@ function isConnected(){
         getUserProperty();
         displayConnected(true);
 }
+
+function addProduct() {
+    console.log("j'ajoute un aliment");
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("Authorization", localStorage.getItem("token"));
+    const body = {
+        login: localStorage.getItem("login"),
+        alimentId: document.getElementById("idProduit").innerText,
+        quantity: document.getElementById("quantity").value,
+        date: document.getElementById("date").value
+    };
+    console.log(body); 
+    const requestConfig = {
+        method: "POST",
+        headers: headers,
+        mode: "cors" 
+    };
+    fetch(baseUrl+'users/aliments', requestConfig)
+        .then(response => {
+            // Vérifier si la requête a réussi (status 200-299)
+            if (response.ok) {
+                alert("Produit ajouté");
+                //displayRequestResult("Connexion refusée ou impossible", "alert-danger");
+                //throw new Error("Bad response code (" + response.status + ").");
+            } else {
+                throw new Error("Bad response code (" + response.status + ").");
+            }
+        })
+        .catch((err) => {
+            console.error("In addProduct: " + err);
+        })
+}
