@@ -688,3 +688,122 @@ function getSelectedDate() {
 remplirListeJours();
 remplirListeMois();
 remplirListeAnnees();
+
+updateChart();
+
+function updateChart() {
+    const year = document.getElementById("year").value;
+    const month = document.getElementById("month").value;
+  
+    // Destroy existing chart if it exists
+    const existingChart = Chart.getChart("myChart");
+    if (existingChart) {
+      existingChart.destroy();
+    }
+  
+    const ctx = document.getElementById("myChart").getContext("2d");
+    getListProducts().then((res) => {
+      let data = [];
+      let labels = [];
+  
+      if (month == "-") {
+        labels = [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ];
+  
+        data = Array.from({ length: 12 }, () => 0);
+  
+        for (let i = 0; i < res.length; i++) {
+          const dateString = res[i][3]; // Assuming you have a date string in the format "YYYY-MM-DD"
+          const date = new Date(dateString);
+          const val = date.getMonth(); // Adding 1 to get 1-based index
+          data[val] += res[i][2];
+        }
+      } else {
+        const daysInMonth = new Date(year, month, 0).getDate();
+        labels = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+        data = Array.from({ length: daysInMonth }, () => 0);
+  
+        for (let i = 0; i < res.length; i++) {
+          const dateString = res[i][3]; // Assuming you have a date string in the format "YYYY-MM-DD"
+          const date = new Date(dateString);
+          const val = date.getMonth() + 1; // Adding 1 to get 1-based index
+          const day = date.getDate(); // This will return the day of the month
+  
+          if (month == val) {
+            data[day - 1] += res[i][2];
+          }
+        }
+      }
+  
+      const myChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "EC Values",
+              data: data,
+              backgroundColor: "rgba(54, 162, 235, 0.2)",
+              borderColor: "rgba(54, 162, 235, 1)",
+              borderWidth: 2,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: false,
+              title: {
+                display: true,
+                text: "gC02 / kg",
+                font: {
+                  size: 16,
+                  weight: "bold",
+                },
+              },
+            },
+            x: {
+              title: {
+                display: true,
+                text: "Days",
+                font: {
+                  size: 16,
+                  weight: "bold",
+                },
+              },
+            },
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: "EC Values Over Time",
+              font: {
+                size: 20,
+                weight: "bold",
+              },
+            },
+            legend: {
+              display: true,
+              labels: {
+                font: {
+                  size: 12,
+                },
+              },
+            },
+          },
+        },
+      });
+    });
+  }

@@ -22,7 +22,7 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
     <script type="application/javascript" src="js/spa.js" defer></script>
 
     <script crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -412,6 +412,12 @@
                 $("#slcjour").append(`<option value="${i}">${i}</option>`);
             }
         });
+        $(function () {
+            for (let i = 2024; i >= 2000; i--) {
+                $("#year").append(`<option value="${i}">${i}</option>`);
+            }
+        });
+
     </script>
     <section id='sectionEmpreinte' class='inactive'>
         <div class="container-fluid py-3 mb-5" style="margin-top: 150px;">
@@ -419,7 +425,28 @@
                 <div class="align-items-center position-relative mx-auto">
                     <div class="text-center p-2 mt-n5">
                         <h1 class="mb-5 display-3 text-dark">Mes empreintes carbones précédentes</h1>
-                    </div>
+                        <label for="month">Select Month:</label>
+                        <select id="month" onchange="updateChart()">
+                            <option value="-" selected>-</option>
+                            <option value="1">Janvier</option>
+                            <option value="2">Fevrier</option>
+                            <option value="3">Mars</option>
+                            <option value="4">Avril</option>
+                            <option value="5">Mai</option>
+                            <option value="6">Juin</option>
+                            <option value="7">Juillet</option>
+                            <option value="8">Aout</option>
+                            <option value="9">Septembre</option>
+                            <option value="10">Octobre</option>
+                            <option value="11">Novembre</option>
+                            <option value="12">Decembre</option>
+                        </select>
+
+                    <label for="year">Select Year:</label>
+                    <select id="year" onchange="updateChart()">
+                    </select>
+                    <canvas id="myChart" width="200" height="200"></canvas>
+                </div>
 
                     <div class="m-4 p-4 right-0">
                         <div class="mb-3 border-bottom">
@@ -454,6 +481,7 @@
                             </div>
                             
                         </div>
+                        
                         <div class="m-4 p-4 right-0" id="resultat" style="display: none;">
                             <div class="mb-3 border-bottom">
                                 <h4>
