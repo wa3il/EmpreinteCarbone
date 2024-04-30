@@ -27,4 +27,10 @@ class AlimentTest {
     void getSousGroupe() {
         assertEquals( "b", aliment.getSousGroupe());
     }
+    @Test
+    void testGetid() {
+       Aliment aliment = new Aliment();
+       aliment.setAlimentid(1);
+       assertEquals(1, aliment.getAlimentId());
+   }
 }

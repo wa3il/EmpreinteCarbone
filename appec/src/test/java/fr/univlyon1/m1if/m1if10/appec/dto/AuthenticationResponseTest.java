@@ -6,10 +6,10 @@ import fr.univlyon1.m1if.m1if10.appec.dto.user.AuthenticationResponse;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AuthenticationResponseTest {
+ class AuthenticationResponseTest {
 
     @Test
-    public void testConstructorAndGetters() {
+     void testConstructorAndGetters() {
         // Arrange
         String expectedToken = "testToken";
         
@@ -21,7 +21,7 @@ public class AuthenticationResponseTest {
     }
 
     @Test
-    public void testSettersAndGetters() {
+     void testSettersAndGetters() {
         // Arrange
         AuthenticationResponse response = new AuthenticationResponse();
         String expectedToken = "newToken";

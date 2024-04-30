@@ -8,10 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.sql.Date;
 
-public class AddEcRequestDtoTest {
+ class AddEcRequestDtoTest {
 
     @Test
-    public void testConstructorAndGetters() {
+     void testConstructorAndGetters() {
         // Create a Date object
         Date date = new Date(System.currentTimeMillis());
 
@@ -26,7 +26,7 @@ public class AddEcRequestDtoTest {
     }
 
     @Test
-    public void testSetters() {
+     void testSetters() {
         // Create a Date object
         Date date = new Date(System.currentTimeMillis());
 

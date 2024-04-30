@@ -65,5 +65,8 @@ public class Aliment {
     public void setNomLegume(String nomLegume) {
         this.nomLegume = nomLegume;
     }
+    public void setAlimentid(Integer alimentId) {
+        this.alimentId = alimentId;
+    }
 
 }
