@@ -6,10 +6,10 @@ import fr.univlyon1.m1if.m1if10.appec.dto.user.UserRequestDto;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class UserRequestDtoTest {
+ class UserRequestDtoTest {
 
     @Test
-    public void testConstructorAndGetters() {
+     void testConstructorAndGetters() {
         String login = "user123";
         String password = "password123";
         String name = "John Doe";
@@ -22,7 +22,7 @@ public class UserRequestDtoTest {
     }
 
     @Test
-    public void testSetters() {
+     void testSetters() {
         UserRequestDto user = new UserRequestDto();
 
         String login = "newUser123";
