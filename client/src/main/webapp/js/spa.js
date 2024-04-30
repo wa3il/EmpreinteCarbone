@@ -421,7 +421,10 @@ function updateUser(){
     fetch(baseUrl + "users/"+log, requestConfig).then(async(res) =>{
         if(res.ok) {
             alert("Modification réussie");
-        } else {
+        } 
+        else if(res.status === 415){
+            alert("Veuillez remplir tous les champs");
+        }else {
             //displayRequestResult("Modification de votre nom refusée ou impossible", "alert-danger");
             throw new Error("Bad response code (" + res.status + ").");
         }
