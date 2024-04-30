@@ -530,28 +530,45 @@ function addProduct() {
 }
 
 function renderListAlimentUser() {
-    getProperties("aliments/"+localStorage.getItem("login")).then( async (res) => {
-        if(Array.isArray(res)) {
-            let produits = []
-            for (var i = 0; i < int; i++) {
-                let prod = res[i];
-                produits.push(prod);
+    const headers = new Headers();
+
+    headers.append("Authorization", localStorage.getItem("token"));
+    const requestConfig = {
+        method: "GET",
+        headers: headers,
+        mode: "cors"
+    };
+    
+    return fetch(baseUrl +'users/aliments', requestConfig)
+        .then((response) => {
+            if(response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Response is error (" + response.status + ") or does not contain JSON (" + response.headers.get("Content-Type") + ").");
             }
-            const template = document.getElementById('list_produit');
-            if (!template){
-                console.error("l'élément n'existe pas...");
-                return;
+        }).then(res => {
+            if(Array.isArray(res)) {
+                let produits = []
+                for (var i = 0; i < int; i++) {
+                    let prod = res[i];
+                    produits.push(prod);
+                }
+                const template = document.getElementById('list_produit');
+                if (!template){
+                    console.error("l'élément n'existe pas...");
+                    return;
+                }
+                const templ = template.innerText;
+                const rendered = Mustache.render(templ, { produits: produits});
+                const elem = document.getElementById('listProduits');
+                if (!elem){
+                    console.error("l'élément n'existe pas...");
+                    return;
+                }
+                elem.innerHTML = rendered;          
             }
-            const templ = template.innerText;
-            const rendered = Mustache.render(templ, { produits: produits});
-            const elem = document.getElementById('listProduits');
-            if (!elem){
-                console.error("l'élément n'existe pas...");
-                return;
-            }
-            elem.innerHTML = rendered;          
-        }
-    }).catch((err) => {
-        console.error("In renderListAlimentUser: " + err);
-    });
+        })
+        .catch((err) => {
+            console.error("In renderListAlimentUser: " + err);
+        });
 }
