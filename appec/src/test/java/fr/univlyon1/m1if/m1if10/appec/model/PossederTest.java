@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.sql.Date;
 
-public class PossederTest {
+class PossederTest {
 
     private Posseder posseder;
     private User user;
@@ -15,7 +15,7 @@ public class PossederTest {
     private Date date;
 
     @BeforeEach
-    public void setUp() {
+     void setUp() {
         user = new User("John", "password", "john@example.com"); // Create a User object for testing
         aliment = new Aliment("Carrot", 0.5f, "Vegetable", "Root"); // Create an Aliment object for testing
         date = new Date(System.currentTimeMillis()); // Current date for testing
@@ -23,7 +23,7 @@ public class PossederTest {
     }
 
     @Test
-    public void testGetters() {
+     void testGetters() {
         assertEquals(user, posseder.getUser());
         assertEquals(aliment, posseder.getAliment());
         assertEquals(10.0f, posseder.getQuantity(), 0.001); // Check with delta for float comparison
@@ -31,7 +31,7 @@ public class PossederTest {
     }
 
     @Test
-    public void testSetters() {
+     void testSetters() {
         User newUser = new User("Jane", "password", "jane@example.com");
         Aliment newAliment = new Aliment("Apple", 0.3f, "Fruit", "Pome");
         Date newDate = new Date(0); // Some arbitrary date for testing
@@ -48,7 +48,7 @@ public class PossederTest {
     }
 
     @Test
-    public void testConstructor() {
+     void testConstructor() {
         assertNotNull(posseder);
         assertEquals(user, posseder.getUser());
         assertEquals(aliment, posseder.getAliment());
