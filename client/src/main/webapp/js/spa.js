@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         showSection('sectionEmpreinte');
     });
 
-    document.getElementById('listes').addEventListener('click', () => {
+    document.getElementById('liste_produits').addEventListener('click', () => {
         document.getElementById('secCompte2').classList.add('inactive');
         document.getElementById('secListe').classList.remove('inactive');
     });
@@ -539,7 +539,7 @@ function renderListAlimentUser() {
         mode: "cors"
     };
     
-    return fetch(baseUrl +'users/aliments', requestConfig)
+    return fetch(baseUrl +'users/aliments?login=' + localStorage.getItem("login"), requestConfig)
         .then((response) => {
             if(response.ok) {
                 return response.json();
@@ -549,7 +549,7 @@ function renderListAlimentUser() {
         }).then(res => {
             if(Array.isArray(res)) {
                 let produits = []
-                for (var i = 0; i < int; i++) {
+                for (var i = 0; i < res.length; i++) {
                     let prod = res[i];
                     produits.push(prod);
                 }
