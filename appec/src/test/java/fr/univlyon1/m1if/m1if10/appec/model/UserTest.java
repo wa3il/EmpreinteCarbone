@@ -21,14 +21,14 @@ import static org.junit.jupiter.api.Assertions.*;
     }
 
     @Test
-    public void testGetAndSetPassword() {
+     void testGetAndSetPassword() {
         User user = new User();
         user.setPassword("password123");
         assertEquals("password123", user.getPassword());
     }
 
     @Test
-    public void testGetUid() {
+     void testGetUid() {
         User user = new User();
         user.setuid(1);
         assertEquals(1, user.getUid());
