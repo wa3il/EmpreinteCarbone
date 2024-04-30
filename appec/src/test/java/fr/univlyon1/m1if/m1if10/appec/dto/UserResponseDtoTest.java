@@ -1,15 +1,14 @@
 package fr.univlyon1.m1if.m1if10.appec.dto;
 
-import org.junit.jupiter.api.Test;
-
 import fr.univlyon1.m1if.m1if10.appec.dto.user.UserResponseDto;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
- class UserResponseDtoTest {
+class UserResponseDtoTest {
 
     @Test
-     void testConstructorAndGetters() {
+    void testConstructorAndGetters() {
         String login = "testLogin";
         String name = "testName";
         UserResponseDto userResponseDto = new UserResponseDto(login, name);
@@ -19,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
     }
 
     @Test
-     void testSetters() {
+    void testSetters() {
         UserResponseDto userResponseDto = new UserResponseDto();
 
         String login = "newLogin";
@@ -33,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
     }
 
     @Test
-     void testDefaultConstructor() {
+    void testDefaultConstructor() {
         UserResponseDto userResponseDto = new UserResponseDto();
 
         assertEquals(null, userResponseDto.getLogin());

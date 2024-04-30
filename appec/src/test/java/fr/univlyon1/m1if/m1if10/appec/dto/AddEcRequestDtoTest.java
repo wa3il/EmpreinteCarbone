@@ -1,17 +1,16 @@
 package fr.univlyon1.m1if.m1if10.appec.dto;
 
-import org.junit.jupiter.api.Test;
-
 import fr.univlyon1.m1if.m1if10.appec.dto.user.AddEcRequestDto;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 import java.sql.Date;
 
- class AddEcRequestDtoTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class AddEcRequestDtoTest {
 
     @Test
-     void testConstructorAndGetters() {
+    void testConstructorAndGetters() {
         // Create a Date object
         Date date = new Date(System.currentTimeMillis());
 
@@ -26,7 +25,7 @@ import java.sql.Date;
     }
 
     @Test
-     void testSetters() {
+    void testSetters() {
         // Create a Date object
         Date date = new Date(System.currentTimeMillis());
 

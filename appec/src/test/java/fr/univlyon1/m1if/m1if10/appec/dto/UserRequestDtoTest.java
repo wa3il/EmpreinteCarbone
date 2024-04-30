@@ -1,15 +1,14 @@
 package fr.univlyon1.m1if.m1if10.appec.dto;
 
+import fr.univlyon1.m1if.m1if10.appec.dto.user.UserRequestDto;
 import org.junit.jupiter.api.Test;
 
-import fr.univlyon1.m1if.m1if10.appec.dto.user.UserRequestDto;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
-
- class UserRequestDtoTest {
+class UserRequestDtoTest {
 
     @Test
-     void testConstructorAndGetters() {
+    void testConstructorAndGetters() {
         String login = "user123";
         String password = "password123";
         String name = "John Doe";
@@ -22,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
     }
 
     @Test
-     void testSetters() {
+    void testSetters() {
         UserRequestDto user = new UserRequestDto();
 
         String login = "newUser123";
