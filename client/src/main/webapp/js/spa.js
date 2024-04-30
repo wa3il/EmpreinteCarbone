@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('compte').addEventListener('click', function(event) {
         event.preventDefault();
         showSection('sectionCompte');
+        getUserProperty(); 
     });
 
     document.getElementById('connexion1').addEventListener('click', function(event) {
@@ -64,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('empreinte').addEventListener('click', function(event) {
         event.preventDefault();
         showSection('sectionEmpreinte');
+        getConsoTotal(); 
     });
 
     document.getElementById('liste_produits').addEventListener('click', () => {
@@ -528,9 +530,8 @@ function addProduct() {
         })
 }
 
-function renderListAlimentUser() {
+function getListProducts(){
     const headers = new Headers();
-
     headers.append("Authorization", localStorage.getItem("token"));
     const requestConfig = {
         method: "GET",
@@ -545,7 +546,13 @@ function renderListAlimentUser() {
             } else {
                 throw new Error("Response is error (" + response.status + ") or does not contain JSON (" + response.headers.get("Content-Type") + ").");
             }
-        }).then(res => {
+        }).catch((err) => {
+            console.error("In getListProducts: " + err);
+        });
+}
+
+function renderListAlimentUser() {
+    getListProducts().then(res => {
             if(Array.isArray(res)) {
                 let produits = []
                 for (var i = 0; i < res.length; i++) {
@@ -571,4 +578,21 @@ function renderListAlimentUser() {
         .catch((err) => {
             console.error("In renderListAlimentUser: " + err);
         });
+}
+
+function getConsoTotal(){
+    getListProducts().then(res => {
+        let somme = 0; 
+        if(Array.isArray(res)) {
+            for (var i = 0; i < res.length; i++) {
+                somme += res[i][2];
+                console.log(somme); 
+            }
+           console.log("la somme est "+somme);    
+        }
+        document.getElementById("consoTotal").innerText = somme;
+    })
+    .catch((err) => {
+        console.error("In getConsoTotal: " + err);
+    });
 }
