@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
- class AppecApplicationTests {
+class AppecApplicationTests {
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -16,6 +16,11 @@ import static org.assertj.core.api.Assertions.assertThat;
     @Test
     void contextLoads() {
         assertThat(applicationContext).isNotNull();
+    }
+
+    @Test
+    public void testMainMethod() {
+        AppecApplication.main(new String[]{});
     }
 
 }
