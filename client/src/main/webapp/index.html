@@ -126,23 +126,25 @@
             {{#aliments}}
                 <div class="col-md-6 col-lg-4 col-xl-3">
                     <div class="rounded position-relative fruite-item">
-                        <div id="idProduit" style="display: none;">{{alimentId}}</div>
+                        <div class="idProduit">{{alimentId}}</div>
                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                             style="top: 10px; left: 10px;">{{sousGroupe}}
                         </div>
                         <div class="p-4 border border-secondary rounded-bottom">
-                            <h4 style="margin-top: 25px;" id="nom_legume">{{nomLegume}}</h4>
+                            <h4 style="margin-top: 25px;" class="nom_legume">{{nomLegume}}</h4>
                             <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-6 fw-bold mb-2" id="ec">{{ec}} gC02 / kg</p>
-                                <input type="number" id="quantity" name="quantity" min="0" step="0.1" placeholder="Quantité en kg" required> <br>
-                                <input id="date" type="date"></input>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addProduct()">
-                                <i class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma liste </a>
+                                <p class="text-dark fs-6 fw-bold mb-2 ec">{{ec}} gC02 / kg</p>
+                                <input type="number" class="quantity" name="quantity" min="0" step="0.1" placeholder="Quantité en kg" required> <br>
+                                <input class="date" type="date"></input>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addProduct(this)">
+                                    <i class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma liste
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             {{/aliments}}
+
         </script>
         <div class="container px-0 py-3">
             <div id="tab-1" class="tab-pane fade show p-0">

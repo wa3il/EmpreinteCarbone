@@ -498,15 +498,21 @@ function isConnected(){
         displayConnected(true);
 }
 
-function addProduct() {
+function addProduct(element) {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", localStorage.getItem("token"));
+
+    var parentDiv = element.closest('.fruite-item');
+    var alimentId = parentDiv.querySelector('.idProduit').innerText;
+    var quantity = parentDiv.querySelector('.quantity').value * parseFloat(parentDiv.querySelector('.ec').innerText.match(/[\d\.]+/)[0]);
+    var date = parentDiv.querySelector('.date').value;
+
     const body = {
         login: localStorage.getItem("login"),
-        alimentId: document.getElementById("idProduit").innerText,
-        quantity: document.getElementById("quantity").value * parseFloat(document.getElementById("ec").innerText.match(/[\d\.]+/)[0]),
-        date: document.getElementById("date").value
+        alimentId: alimentId,
+        quantity: quantity,
+        date: date
     };
     const requestConfig = {
         method: "POST",
