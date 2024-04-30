@@ -34,9 +34,12 @@ public class AlimentRessourceController {
 
     @GetMapping(value = "/{id}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<Object> getAliment(@PathVariable("id") final Integer id) {
+    public ResponseEntity<Aliment> getAliment(@PathVariable("id") final Integer id) {
+        if (id == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
         Optional<Aliment> aliment = jpaAlimentDao.get(id);
-        return aliment.<ResponseEntity<Object>>map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utilisateur non trouvé"));
+        return aliment.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
 }

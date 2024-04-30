@@ -62,4 +62,8 @@ public class Aliment {
         return sousGroupe;
     }
 
+    public void setNomLegume(String nomLegume) {
+        this.nomLegume = nomLegume;
+    }
+
 }

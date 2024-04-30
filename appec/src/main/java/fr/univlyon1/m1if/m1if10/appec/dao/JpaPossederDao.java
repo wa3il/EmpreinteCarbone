@@ -25,7 +25,7 @@ public class JpaPossederDao implements Dao<Posseder>{
     @Transactional
     @Override
     public Optional<Posseder> get(Integer id) {
-        return Optional.empty();
+        return Optional.ofNullable(entityManager.find(Posseder.class, id));
     }
 
     @Transactional

@@ -14,9 +14,10 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-public class AlimentRessourceControllerTest {
+class AlimentRessourceControllerTest {
 
     @Mock
     private Dao<Aliment> daoMock;
@@ -30,7 +31,7 @@ public class AlimentRessourceControllerTest {
     }
 
     @Test
-    public void testGetAllAliments() {
+    void testGetAllAliments() {
         // Prepare mock data
         List<Aliment> aliments = new ArrayList<>();
         aliments.add(new Aliment("Apple", 0.5f, "Fruit", "Apple Family"));
@@ -51,28 +52,28 @@ public class AlimentRessourceControllerTest {
     }
 
     @Test
-    public void testGetAlimentById() {
-        // Prepare mock data
+    void testGetAlimentById() {
         Aliment aliment = new Aliment("Apple", 0.5f, "Fruit", "Apple Family");
 
-        // Mock DAO behavior
         when(daoMock.get(1)).thenReturn(Optional.of(aliment));
         when(daoMock.get(2)).thenReturn(Optional.empty());
 
-        // Call the controller method
         ResponseEntity<?> responseEntityFound = controller.getAliment(1);
         ResponseEntity<?> responseEntityNotFound = controller.getAliment(2);
 
-        // Verify that DAO method was called
         verify(daoMock, times(1)).get(1);
         verify(daoMock, times(1)).get(2);
 
-        // Verify the response for found aliment
         assertEquals(HttpStatus.OK, responseEntityFound.getStatusCode());
         assertEquals(aliment, responseEntityFound.getBody());
 
-        // Verify the response for not found aliment
         assertEquals(HttpStatus.NOT_FOUND, responseEntityNotFound.getStatusCode());
-        assertEquals("Utilisateur non trouvé", responseEntityNotFound.getBody());
+    }
+
+    @Test
+    void testGetAlimentByIdNull() {
+        ResponseEntity<?> responseEntity = controller.getAliment(null);
+
+        assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
     }
 }

@@ -1,111 +1,154 @@
-/*package fr.univlyon1.m1if.m1if10.appec.dao;
+package fr.univlyon1.m1if.m1if10.appec.dao;
 
 import fr.univlyon1.m1if.m1if10.appec.model.Jwt;
 import fr.univlyon1.m1if.m1if10.appec.model.User;
-import fr.univlyon1.m1if.m1if10.appec.securite.JwtService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class JpaJwtDaoTest {
 
-    @Autowired
-    private JpaJwtDao jpaJwtDao;
+    @Mock
+    private EntityManager entityManager;
 
-    @Autowired
-    private JpaUserDao jpaUserDao;
+    @Mock
+    private Query query;
 
-    @Autowired
-    private JwtService jwtService;
+    @InjectMocks
+    private JpaJwtDao jwtDao;
 
     private Jwt jwt;
     private User user;
 
     @BeforeEach
     void setUp() {
-        user = new User(); // Initialize user with your own values
-        user.setUsername("testUnitaire");
+        MockitoAnnotations.openMocks(this);
+
+        user = new User();
         user.setName("test");
-        user.setPassword("test");
-        jpaUserDao.save(user);
-        jwtService.generateToken(user);
+        user.setUsername("testLogin");
+        user.setPassword("testPassword");
+
+        jwt = new Jwt();
+        jwt.setUser(user);
+        jwt.setToken("token");
+        jwt.setExpire(false);
+        jwt.setDesactive(false);
+
+        // Save the jwt
+        when(entityManager.find(Jwt.class, 1)).thenReturn(jwt);
     }
 
     @AfterEach
     void tearDown() {
-        jpaJwtDao.delete(jwt);
-        jpaUserDao.delete(user);
+        // Delete the jwt
+        jwtDao.delete(jwt);
     }
 
     @Test
-    void whenGetById_thenReturnJwt() {
-        Optional<Jwt> found = jpaJwtDao.findTokenValidByUser(user);
+    void getReturnsJwtWhenJwtExists() {
+        Optional<Jwt> result = jwtDao.get(1);
 
-        assertThat(found.isPresent()).isTrue();
-        assertThat(found.get().getJwtId()).isEqualTo(jwt.getJwtId());
+        assertTrue(result.isPresent());
+        assertSame(jwt, result.get());
     }
 
     @Test
-    void whenGetAll_thenReturnAllJwts() {
-        List<Jwt> jwts = jpaJwtDao.getAll();
+    void getReturnsEmptyOptionalWhenJwtDoesNotExist() {
+        when(entityManager.find(Jwt.class, 1)).thenReturn(null);
 
-        assertThat(jwts).isNotEmpty();
-        assertThat(jwts).contains(jwt);
+        Optional<Jwt> result = jwtDao.get(1);
+
+        assertFalse(result.isPresent());
     }
 
     @Test
-    void whenSave_thenJwtIsPersisted() {
-        Jwt newJwt = new Jwt(); // Initialize newJwt with your own values
-        newJwt.setUser(user);
-        jpaJwtDao.save(newJwt);
+    void getAllReturnsAllJwts() {
+        Jwt jwt1 = new Jwt();
+        Jwt jwt2 = new Jwt();
+        List<Jwt> expectedJwts = Arrays.asList(jwt1, jwt2);
+        when(entityManager.createQuery("SELECT e FROM Jwt e")).thenReturn(query);
+        when(query.getResultList()).thenReturn(expectedJwts);
 
-        Optional<Jwt> found = jpaJwtDao.get(newJwt.getJwtId());
-        assertThat(found.isPresent()).isTrue();
-        assertThat(found.get()).isEqualTo(newJwt);
+        List<Jwt> result = jwtDao.getAll();
+
+        assertEquals(expectedJwts, result);
     }
 
     @Test
-    void whenUpdate_thenJwtIsUpdated() {
-        String[] params = {"true", "false"}; // Initialize params with your own values
-        jpaJwtDao.update(jwt, params);
-
-        Optional<Jwt> found = jpaJwtDao.get(jwt.getJwtId());
-        assertThat(found.isPresent()).isTrue();
-        // Add assertions to check if the jwt has been updated with the new params
+    void savePersistsJwt() {
+        jwtDao.save(jwt);
+        verify(entityManager, times(1)).persist(jwt);
     }
 
     @Test
-    void whenDelete_thenJwtIsDeleted() {
-        jpaJwtDao.delete(jwt);
-
-        Optional<Jwt> found = jpaJwtDao.get(jwt.getJwtId());
-        assertThat(found.isPresent()).isFalse();
+    void updateUpdatesJwt() {
+        String[] params = {"true", "true"};
+        jwtDao.update(jwt, params);
+        assertTrue(jwt.isDesactive());
+        assertTrue(jwt.isExpire());
+        verify(entityManager, times(1)).merge(jwt);
     }
 
     @Test
-    void whenFindByValue_thenReturnJwt() {
-        Optional<Jwt> found = jpaJwtDao.findByValue(jwt.getToken());
-
-        assertThat(found.isPresent()).isTrue();
-        assertThat(found.get()).isEqualTo(jwt);
+    void deleteRemovesJwt() {
+        jwtDao.delete(jwt);
+        verify(entityManager, times(1)).remove(jwt);
     }
 
     @Test
-    void whenFindTokenValidByUser_thenReturnJwt() {
-        Optional<Jwt> found = jpaJwtDao.findTokenValidByUser(user);
+    void findByValueReturnsJwtWhenJwtExists() {
+        when(entityManager.createQuery("SELECT e FROM Jwt e WHERE e.token = :token")).thenReturn(query);
+        when(query.getSingleResult()).thenReturn(jwt);
 
-        assertThat(found.isPresent()).isTrue();
-        assertThat(found.get()).isEqualTo(jwt);
+        Optional<Jwt> result = jwtDao.findByValue("token");
+
+        assertTrue(result.isPresent());
+        assertSame(jwt, result.get());
+    }
+
+    @Test
+    void findByValueReturnsEmptyOptionalWhenJwtDoesNotExist() {
+        when(entityManager.createQuery("SELECT e FROM Jwt e WHERE e.token = :token")).thenReturn(query);
+        when(query.getSingleResult()).thenReturn(null);
+
+        Optional<Jwt> result = jwtDao.findByValue("token");
+
+        assertFalse(result.isPresent());
+    }
+
+    @Test
+    void findTokenValidByUserReturnsJwtWhenJwtExists() {
+        when(entityManager.createQuery("SELECT e FROM Jwt e WHERE e.user = :user AND e.expire = false AND e.desactive = false")).thenReturn(query);
+        when(query.getResultList()).thenReturn(Arrays.asList(jwt));
+
+        Optional<Jwt> result = jwtDao.findTokenValidByUser(user);
+
+        assertTrue(result.isPresent());
+        assertSame(jwt, result.get());
+    }
+
+    @Test
+    void findTokenValidByUserReturnsEmptyOptionalWhenJwtDoesNotExist() {
+        when(entityManager.createQuery("SELECT e FROM Jwt e WHERE e.user = :user AND e.expire = false AND e.desactive = false")).thenReturn(query);
+        when(query.getResultList()).thenReturn(Arrays.asList());
+
+        Optional<Jwt> result = jwtDao.findTokenValidByUser(user);
+
+        assertFalse(result.isPresent());
     }
 }
-*/

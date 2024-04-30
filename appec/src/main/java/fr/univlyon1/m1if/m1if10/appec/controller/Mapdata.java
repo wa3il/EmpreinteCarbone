@@ -56,7 +56,7 @@ public class Mapdata {
     public static Optional<UserRequestDto> getUserDtoRequest(String requestBody, String contentType) throws JsonProcessingException {
         if (contentType.contains(MediaType.APPLICATION_JSON_VALUE)) {
             UserRequestDto userRequest = objectMapper.readValue(requestBody, UserRequestDto.class);
-            if (userRequest.getLogin() == null || userRequest.getPassword() == null) {
+            if (userRequest.getLogin().isBlank() || userRequest.getLogin() == null || userRequest.getPassword().isBlank() || userRequest.getPassword() == null) {
                 return Optional.empty();
             } else {
                 return Optional.of(userRequest);
@@ -73,6 +73,9 @@ public class Mapdata {
             userRequest.setPassword(password);
             userRequest.setName(name);
             if (login == null || password == null) {
+                return Optional.empty();
+            }
+            if(login.isBlank() || password.isBlank()){
                 return Optional.empty();
             }
             return Optional.of(userRequest);

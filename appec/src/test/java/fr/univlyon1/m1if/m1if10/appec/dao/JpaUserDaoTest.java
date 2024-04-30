@@ -3,12 +3,12 @@ package fr.univlyon1.m1if.m1if10.appec.dao;
 import fr.univlyon1.m1if.m1if10.appec.model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
@@ -31,16 +31,29 @@ class JpaUserDaoTest {
     @InjectMocks
     private JpaUserDao userDao;
 
+    private User user;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+
+        user = new User();
+        user.setName("test");
+        user.setUsername("testLogin");
+        user.setPassword("testPassword");
+
+        // Save the user
+        when(entityManager.find(User.class, 1)).thenReturn(user);
+    }
+
+    @AfterEach
+    void tearDown() {
+        // Delete the user
+        userDao.delete(user);
     }
 
     @Test
     void getReturnsUserWhenUserExists() {
-        User user = new User();
-        when(entityManager.find(User.class, 1)).thenReturn(user);
-
         Optional<User> result = userDao.get(1);
 
         assertTrue(result.isPresent());
@@ -71,14 +84,12 @@ class JpaUserDaoTest {
 
     @Test
     void savePersistsUser() {
-        User user = new User();
         userDao.save(user);
         verify(entityManager, times(1)).persist(user);
     }
 
     @Test
     void updateUpdatesUser() {
-        User user = new User();
         String[] params = {"newName", "newPassword"};
         userDao.update(user, params);
         assertEquals("newName", user.getName());
@@ -88,14 +99,12 @@ class JpaUserDaoTest {
 
     @Test
     void deleteRemovesUser() {
-        User user = new User();
         userDao.delete(user);
         verify(entityManager, times(1)).remove(user);
     }
 
     @Test
     void findByLoginReturnsUserWhenUserExists() {
-        User user = new User();
         when(entityManager.createQuery("SELECT e FROM User e WHERE e.login = :login")).thenReturn(query);
         when(query.getResultList()).thenReturn(Arrays.asList(user));
 
