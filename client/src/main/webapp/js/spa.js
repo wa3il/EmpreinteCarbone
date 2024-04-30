@@ -443,6 +443,7 @@ function deco() {
         .then(response => {
             // Vérifier si la requête a réussi (status 200-299)
             if (response.ok) {
+                localStorage.removeItem('token'); 
                 console.log("Vous êtes déconnecté");
                 //displayRequestResult("Connexion refusée ou impossible", "alert-danger");
                 //throw new Error("Bad response code (" + response.status + ").");
@@ -506,10 +507,10 @@ function addProduct() {
         quantity: document.getElementById("quantity").value,
         date: document.getElementById("date").value
     };
-    console.log(body); 
     const requestConfig = {
         method: "POST",
         headers: headers,
+        body: JSON.stringify(body),
         mode: "cors" 
     };
     fetch(baseUrl+'users/aliments', requestConfig)

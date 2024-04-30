@@ -95,9 +95,9 @@ public class Mapdata {
         }
         if (contentType.contains(MediaType.APPLICATION_FORM_URLENCODED_VALUE)) {
             Map<String, String> formData = extractFormData(requestBody);
-            String login = formData.get("userLogin");
+            String login = formData.get("login");
             String alimentId = formData.get("alimentId");
-            String quantite = formData.get("quantite");
+            String quantite = formData.get("quantity");
             String date = formData.get("date");
 
 
