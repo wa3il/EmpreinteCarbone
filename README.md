@@ -31,6 +31,8 @@
 
 Pour construire l'application, exécutez la commande suivante :
 
+```mvn package```
+
 Cela générera un fichier `.war` dans le dossier `target`. Vous pouvez ensuite déployer ce fichier `.war` dans le répertoire `webapps` de votre serveur Tomcat.
 
 ---
@@ -51,6 +53,4 @@ Nginx est utilisé comme reverse proxy pour rediriger les requêtes vers l'appli
 
 Vous pouvez accéder à l'application à l'adresse suivante : https://192.168.75.106
 
---- 
 
-N'oubliez pas de personnaliser ce README avec des informations spécifiques à votre projet et à votre infrastructure.
