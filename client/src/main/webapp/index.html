@@ -342,20 +342,23 @@
                                     {{#produits}}
                                         <div class="col-md-6 col-lg-4 col-xl-3">
                                             <div class="rounded position-relative fruite-item">
-                                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                                    style="top: 10px; left: 10px;">{{sousGroupe}}
-                                                </div>
+                                                {{#1}}
+                                                    <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                                        style="top: 10px; left: 10px;">{{sousGroupe}}
+                                                    </div>
+                                                {{/1}}
                                                 <div class="p-4 border border-secondary rounded-bottom">
-                                                    <h4 style="margin-top: 25px;">{{nomLegume}}</h4>
+                                                    {{#1}}
+                                                        <h4 style="margin-top: 25px;">{{nomLegume}}</h4>
+                                                    {{/1}}
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
-                                                        <p class="text-dark fs-6 fw-bold mb-2">{{ec}} gC02 / kg</p>
-                                                        <p>{{quantity}} kg</p>
-                                                        <p>{{date}}</p>
+                                                        <p class="text-dark fs-6 fw-bold mb-2">{{2}} gC02 / kg</p>
+                                                        <p>{{3}}</p>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        {{/produits}}
+                                    {{/produits}}
                                 </script> 
                                 <div id="listProduits" class="row g-3">
                             

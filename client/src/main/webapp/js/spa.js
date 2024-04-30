@@ -551,6 +551,7 @@ function renderListAlimentUser() {
                 let produits = []
                 for (var i = 0; i < res.length; i++) {
                     let prod = res[i];
+                    console.log(prod); 
                     produits.push(prod);
                 }
                 const template = document.getElementById('list_produit');
