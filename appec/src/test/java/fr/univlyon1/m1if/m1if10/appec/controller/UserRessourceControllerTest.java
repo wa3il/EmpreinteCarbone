@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.univlyon1.m1if.m1if10.appec.dao.JpaAlimentDao;
 import fr.univlyon1.m1if.m1if10.appec.dao.JpaPossederDao;
 import fr.univlyon1.m1if.m1if10.appec.dao.JpaUserDao;
+import fr.univlyon1.m1if.m1if10.appec.model.Posseder;
 import fr.univlyon1.m1if.m1if10.appec.model.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -99,11 +101,14 @@ class UserRessourceControllerTest {
     }
 
     @Test
-    void getAlimentsUser() {
-        ResponseEntity<Object> response = userRessourceController.getAlimentsUser(user.getUsername());
+    void getAlimentsUserAndDate() {
+        List<Posseder> posseders = new ArrayList<>();
+        when(jpaPossederDao.findAlimentsByUserAndDate(any(User.class), any(Date.class))).thenReturn(posseders);
+
+        ResponseEntity<List<Posseder>> response = userRessourceController.getAlimentsUser(user.getUsername(), "2022-01-01");
 
         assertEquals(200, response.getStatusCodeValue());
-        verify(jpaPossederDao, times(1)).findAlimentsByUser(any(User.class));
+        verify(jpaPossederDao, times(1)).findAlimentsByUserAndDate(any(User.class), any(Date.class));
     }
 
 
