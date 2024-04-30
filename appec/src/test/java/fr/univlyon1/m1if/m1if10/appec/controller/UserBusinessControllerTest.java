@@ -63,4 +63,13 @@ class UserBusinessControllerTest {
         assertEquals(200, response.getStatusCodeValue());
         verify(authenticationService, times(1)).deconnexion();
     }
+
+    @Test
+    void logoutReturnsUnauthorizedWhenExceptionIsThrown() {
+        doThrow(new RuntimeException()).when(authenticationService).deconnexion();
+
+        ResponseEntity<String> response = userBusinessController.logout();
+
+        assertEquals(401, response.getStatusCodeValue());
+    }
 }
