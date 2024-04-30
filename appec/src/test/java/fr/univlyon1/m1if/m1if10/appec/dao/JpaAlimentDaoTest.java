@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class JpaAlimentDaoTest {
@@ -70,5 +70,24 @@ class JpaAlimentDaoTest {
         List<Aliment> result = alimentDao.getAll();
 
         assertEquals(expectedAliments, result);
+    }
+
+    @Test
+    void save() {
+
+    }
+
+    @Test
+    void update() {
+
+        String[] params = {"newName"};
+        alimentDao.update(aliment, params);
+        assertEquals("newName", aliment.getNomLegume());
+        verify(entityManager, times(1)).merge(aliment);
+    }
+
+    @Test
+    void delete() {
+
     }
 }

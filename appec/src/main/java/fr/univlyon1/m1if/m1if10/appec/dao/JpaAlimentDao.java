@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -40,7 +41,11 @@ public class JpaAlimentDao implements Dao<Aliment> {
     @Transactional
     @Override
     public void update(Aliment aliment, String[] params) {
-        // This method is intentionally left empty because the update operation is not needed
+        Objects.requireNonNull(params, "Params cannot be null");
+        if (!params[0].isEmpty() && !params[0].isBlank()){
+            aliment.setNomLegume(params[0]);
+        }
+        entityManager.merge(aliment);
 
     }
 
