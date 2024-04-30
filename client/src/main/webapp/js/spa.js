@@ -605,3 +605,86 @@ function getConsoTotal(){
         console.error("In getConsoTotal: " + err);
     });
 }
+
+// Fonction pour remplir la liste déroulante des jours
+function remplirListeJours() {
+    var selectJour = document.getElementById("select-jour");
+    for (var i = 1; i <= 31; i++) {
+        var option = document.createElement("option");
+        option.text = i;
+        option.value = i;
+        selectJour.appendChild(option);
+    }
+}
+
+// Fonction pour remplir la liste déroulante des mois
+function remplirListeMois() {
+    var selectMois = document.getElementById("select-mois");
+    var mois = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+    for (var i = 0; i < mois.length; i++) {
+        var option = document.createElement("option");
+        option.text = mois[i];
+        option.value = i + 1;
+        selectMois.appendChild(option);
+    }
+}
+
+// Fonction pour remplir la liste déroulante des années
+function remplirListeAnnees() {
+    var selectAnnee = document.getElementById("select-annee");
+    var anneeActuelle = new Date().getFullYear();
+    for (var i = anneeActuelle; i >= 1900; i--) {
+        var option = document.createElement("option");
+        option.text = i;
+        option.value = i;
+        selectAnnee.appendChild(option);
+    }
+}
+
+// Fonction pour récupérer la date sélectionnée
+function getSelectedDate() {
+    var jour = document.getElementById("select-jour").value;
+    var mois = document.getElementById("select-mois").value;
+    var annee = document.getElementById("select-annee").value;
+    var dateSelectionnee = new Date(annee, mois - 1, jour); // Attention : les mois sont indexés à partir de 0 (janvier = 0, février = 1, etc.)
+    var dateFormatee = dateSelectionnee.getFullYear() + '-' + 
+    ('0' + (dateSelectionnee.getMonth() + 1)).slice(-2) + '-' + 
+    ('0' + dateSelectionnee.getDate()).slice(-2);
+
+    document.getElementById("date").innerText = dateFormatee;
+    const headers = new Headers();
+    headers.append("Authorization", localStorage.getItem("token"));
+    const requestConfig = {
+        method: "GET",
+        headers: headers,
+        mode: "cors"
+    };
+    
+    return fetch(baseUrl +'users/aliments?login=' + localStorage.getItem("login") +'&date='+dateFormatee, requestConfig)
+        .then((response) => {
+            if(response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Response is error (" + response.status + ") or does not contain JSON (" + response.headers.get("Content-Type") + ").");
+            }
+        }).then(res => {
+            let somme = 0; 
+            if(Array.isArray(res)) {
+                for (var i = 0; i < res.length; i++) {
+                    somme += res[i][2];
+                    console.log(somme); 
+                }
+            }
+            document.getElementById("consoJour").innerText = somme;
+            document.getElementById("resultat").style.display = "block";
+        })
+        .catch((err) => {
+            console.error("In getSelectedDate: " + err);
+        });
+    
+}
+
+// Appeler les fonctions pour remplir les listes déroulantes
+remplirListeJours();
+remplirListeMois();
+remplirListeAnnees();
