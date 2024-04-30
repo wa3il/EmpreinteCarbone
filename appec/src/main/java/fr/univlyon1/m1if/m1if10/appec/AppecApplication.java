@@ -11,8 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SuppressWarnings("checkstyle:HideUtilityClassConstructor")
 public class AppecApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AppecApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AppecApplication.class, args);
+    }
 
 }

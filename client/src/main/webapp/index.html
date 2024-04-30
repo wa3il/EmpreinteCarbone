@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,9 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
+        rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
@@ -22,12 +25,16 @@
 
     <script type="application/javascript" src="js/spa.js" defer></script>
 
-    <script crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script crossorigin="anonymous" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
-    <script crossorigin="anonymous" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
-    <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+    <script type="application/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
 
-    
+
 </head>
 
 <body>
@@ -89,19 +96,30 @@
         <div class="center-container"> <!-- Ajout d'une classe pour le conteneur central -->
             <div class="justify-content-center container px-0">
                 <div class="align-items-center position-relative mx-auto">
-                    <input class="form-control border-2 border-secondary w-100 py-3 px-4 rounded-pill" type="text"
-                        placeholder="Rechercher...">
-                    <button type="submit"
-                        class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100"
-                        style="top: 0; right: 0%;">Rechercher</button>
+                    <p style="text-align: justify">
+                        Chaque bouchée que nous prenons a un impact profond sur notre planète. L'alimentation est bien
+                        plus qu'une simple nécessité pour nourrir notre corps. C'est également l'un des principaux
+                        contributeurs aux émissions de dioxyde de carbone responsables du changement climatique. De la
+                        production agricole aux processus de transformation, du transport à la distribution, chaque
+                        étape de la chaîne alimentaire génère des émissions de CO2.
+                    </p>
+                    <p style="text-align: justify">
+                        En moyenne, l'alimentation représente environ 25% des émissions de CO2 d'une personne, soit
+                        environ 2 000 gCO2 par jour par personne. Cependant, ces chiffres peuvent varier
+                        considérablement en fonction des choix alimentaires individuels. Par exemple, la consommation de
+                        viande rouge et de produits laitiers, souvent associée à des méthodes intensives d'élevage et de
+                        production de nourriture pour le bétail, peut contribuer de manière disproportionnée aux
+                        émissions de CO2. En revanche, une alimentation à base de plantes, avec une forte proportion de
+                        fruits, de légumes, de céréales complètes et de légumineuses, est généralement associée à des
+                        émissions de CO2 plus faibles.
+                    </p>
+                    <p style="text-align: justify">
+                        Afin de mieux comprendre l'impact de votre consommation alimentaire, nous avons développé une
+                        application où vous pouvez enregistrer tous les aliments que vous consommez. Avec une base de
+                        données comprenant plus de <strong id="nbProduits"></strong> produits, vous pourrez ainsi suivre
+                        votre consommation quotidienne et visualiser son impact sur l'environnement.
+                    </p>
                 </div>
-            </div>
-        </div>
-
-        <div class="container-fluid">
-            <div class="container px-0 py-3">
-                <!-- TODO Nombre de produits qui correspond à la recherche(totalité des produits si pas de recherche)-->
-                <p><strong id="nbProduits"></strong> produits.</p>
             </div>
         </div>
     </section>
@@ -113,11 +131,11 @@
         <div class="container-fluid py-3 mb-5" style="margin-top: 150px;">
             <div class="justify-content-center container px-0">
                 <div class="align-items-center position-relative mx-auto">
-                    <input  id ="recherche"class="form-control border-2 border-secondary w-100 py-3 px-4 rounded-pill" type="text"
-                        placeholder="Rechercher...">
+                    <input id="recherche" class="form-control border-2 border-secondary w-100 py-3 px-4 rounded-pill"
+                        type="text" placeholder="Rechercher...">
                     <button type="submit"
-                            class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100"
-                            style="top: 0; right: 0%;">Rechercher
+                        class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100"
+                        style="top: 0; right: 0%;">Rechercher
                     </button>
                 </div>
             </div>
@@ -151,14 +169,13 @@
                 <div class="row g-4">
                     <div class="col-lg-12">
                         <div id="listAliments" class="row g-3">
-                            
+
                         </div>
                     </div>
                 </div>
                 <button id="btnrecherche"
-                        class="btn btn-primary border-2 border-secondary py-2 px-3 m-2 rounded-pill text-white h-100"
-                        style="top: 0; right: 0%;"
-                        role="button">Voir plus</button>
+                    class="btn btn-primary border-2 border-secondary py-2 px-3 m-2 rounded-pill text-white h-100"
+                    style="top: 0; right: 0%;" role="button">Voir plus</button>
             </div>
         </div>
     </section>
@@ -188,14 +205,15 @@
                                                 </div>
                                                 <div class="form-input p-2">
                                                     <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
-                                                    <input type="password" id="password" placeholder="Mot de passe" required />
+                                                    <input type="password" id="password" placeholder="Mot de passe"
+                                                        required />
                                                 </div>
                                                 <div class="row justify-content-center py-4">
                                                     <div class=" col-8 mx-auto">
                                                         <button type="button"
                                                             class="btn btn-primary border-2 border-secondary py-1 px-4 rounded-pill text-white h-100"
-                                                            style="top: 0; right: 25%;" 
-                                                            onclick="connect()">Je me connecte</button>
+                                                            style="top: 0; right: 25%;" onclick="connect()">Je me
+                                                            connecte</button>
                                                     </div>
                                                     <div class="pt-2 ps-1">
                                                         <p>pas encore inscrit? <a href="#" id="inscription">Créer mon
@@ -213,7 +231,7 @@
             </div>
         </div>
     </section>
-    <!-- Page de connexion End -->   
+    <!-- Page de connexion End -->
 
     <!-- Page d'inscription Start -->
     <section id='sectionInscription' class='ma-section1 inactive'>
@@ -243,14 +261,15 @@
                                                 </div>
                                                 <div class="form-input p-2 ps-5">
                                                     <i class="fa fa-lock fa-2x" aria-hidden="true"></i>
-                                                    <input type="password" id="inputPassword" placeholder="Mot de passe" required />
+                                                    <input type="password" id="inputPassword" placeholder="Mot de passe"
+                                                        required />
                                                 </div>
                                                 <div class="row justify-content-center py-4 ps-4">
                                                     <div class=" col-8 mx-auto">
                                                         <button type="button"
                                                             class="btn btn-primary border-2 border-secondary py-1 px-4 rounded-pill text-white h-100"
-                                                            style="top: 0; right: 25%;" 
-                                                            onclick="register()">Je crée mon compte</button>
+                                                            style="top: 0; right: 25%;" onclick="register()">Je crée mon
+                                                            compte</button>
                                                     </div>
                                                     <div class="pt-2 text-center">
                                                         <p>déjà utilisateur ? <a href="#" id="connexion2">Me
@@ -287,9 +306,10 @@
                             <div class="col-lg-12">
                                 <div class="mb-3 border-bottom">
                                     <h4>
-                                        <a href="#" id="liste_produits" class="text-dark" onclick="renderListAlimentUser()">Ma liste</a>
+                                        <a href="#" id="liste_produits" class="text-dark"
+                                            onclick="renderListAlimentUser()">Ma liste</a>
                                     </h4>
-                                </div>                               
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -297,7 +317,7 @@
                     <div class="col-lg-9 px-5">
                         <div id="secCompte2" class="active">
                             <div class="px-5" style="max-width: 600px; ">
-                                <div class="text-center bg-secondary p-2 mt-n4 mb-3 rounded" >
+                                <div class="text-center bg-secondary p-2 mt-n4 mb-3 rounded">
                                     <h1 class="text-white"> Mes informations </h1>
                                 </div>
                                 <script id="info-user-Template" type="text/template">
@@ -324,10 +344,11 @@
                                     </form>
                                 </script>
                                 <div class="info py-3" id="monCompte">
-                                    
-                                </div>   
+
+                                </div>
                                 <div class="info py-5">
-                                    <button class="btn btn-danger border-secondary pt-2 px-3 rounded-pill text-white h-100" 
+                                    <button
+                                        class="btn btn-danger border-secondary pt-2 px-3 rounded-pill text-white h-100"
                                         href="#" role="button" id="deleteAccount">Supprimer mon compte</button>
                                 </div>
                             </div>
@@ -335,7 +356,8 @@
                         <div id='secDelete' class='inactive'>
                             <h2>Supression du compte</h2>
                             <p>Si vous êtes sûre de vouloir supprimer votre compte, cliquez ici :
-                                <button type="button" class="btn btn-danger" onclick="deleteAccount()">Supprimer définitivement</button>
+                                <button type="button" class="btn btn-danger" onclick="deleteAccount()">Supprimer
+                                    définitivement</button>
                             </p>
                         </div>
                         <div id="secListe" class="inactive">
@@ -366,10 +388,10 @@
                                             </div>
                                         </div>
                                     {{/produits}}
-                                </script> 
+                                </script>
                                 <div id="listProduits" class="row g-3">
-                            
-                                </div>   
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -399,10 +421,11 @@
                         <h1 class="mb-5 display-3 text-dark">Mes empreintes carbones précédentes</h1>
                     </div>
 
-                    <div class="m-4 p-4 right-0" >
+                    <div class="m-4 p-4 right-0">
                         <div class="mb-3 border-bottom">
                             <h4>
-                                <a href="#" id="" class="text-dark">Votre empreinte carbone total est <strong id="consoTotal">...</strong> gCO2</a>
+                                <a href="#" id="" class="text-dark">Votre empreinte carbone total est <strong
+                                        id="consoTotal">...</strong> gCO2</a>
                             </h4>
                         </div>
                     </div>
@@ -412,7 +435,8 @@
                             <div class="row"> <!-- Wrap all dropdowns inside this row -->
                                 <div class="col-4"> <!-- Each dropdown takes 4 columns -->
                                     <div class="nav-item dropdown" id="date">
-                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm" id="slcjour">
+                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm"
+                                            id="slcjour">
                                         </select>
                                     </div>
                                 </div>
@@ -437,29 +461,43 @@
                                 </div>
                                 <div class="col-4">
                                     <div class="nav-item dropdown" id="div_annee">
-                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm" id="annee">
+                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm"
+                                            id="annee">
                                             <!-- Options for year -->
                                         </select>
                                     </div>
                                     <div class="mx-auto">
                                         <button type="submit"
-                                                class="btn btn-primary border-2 border-secondary py-3 px-2 mx-0 rounded-pill text-white h-100"
-                                                style="top: 0; right: 0%;">Calculer mon empreinte</button>
+                                            class="btn btn-primary border-2 border-secondary py-3 px-2 mx-0 rounded-pill text-white h-100"
+                                            style="top: 0; right: 0%;">Calculer mon empreinte</button>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-                            
+
                     </div>
                 </div>
             </div>
         </div>
-                                                                        
-    </section>
 
-   
+    </section>
     <!-- page pour les empreintes precedentes End -->
+
+    <!-- Footer Start -->
+    <div class="container-fluid copyright bg-dark py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    Groupe12, All right reserved.</span>
+                </div>
+                <div class="col-md-6 my-auto text-center text-md-end text-white">
+                    Designed By Groupe12
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
@@ -482,4 +520,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
-
