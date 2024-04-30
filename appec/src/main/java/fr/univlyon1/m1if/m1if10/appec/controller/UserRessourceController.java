@@ -1,7 +1,6 @@
 package fr.univlyon1.m1if.m1if10.appec.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-
 import fr.univlyon1.m1if.m1if10.appec.dao.JpaAlimentDao;
 import fr.univlyon1.m1if.m1if10.appec.dao.JpaPossederDao;
 import fr.univlyon1.m1if.m1if10.appec.dao.JpaUserDao;
@@ -18,12 +17,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static fr.univlyon1.m1if.m1if10.appec.controller.Mapdata.*;
+import static fr.univlyon1.m1if.m1if10.appec.controller.Mapdata.getAddEcDtoRequest;
+import static fr.univlyon1.m1if.m1if10.appec.controller.Mapdata.getUserDtoRequest;
 
 /**
  * Controller for user resource.
@@ -41,7 +40,7 @@ public class UserRessourceController {
 
 
     @Autowired
-    public UserRessourceController(@Qualifier("jpaUserDao") JpaUserDao jpaUserDao , JpaAlimentDao jpaAlimentDao, JpaPossederDao jpaPossederDao, AuthenticationService authService) {
+    public UserRessourceController(@Qualifier("jpaUserDao") JpaUserDao jpaUserDao, JpaAlimentDao jpaAlimentDao, JpaPossederDao jpaPossederDao, AuthenticationService authService) {
         this.jpaUserDao = jpaUserDao;
         this.jpaAlimentDao = jpaAlimentDao;
         this.jpaPossederDao = jpaPossederDao;
@@ -74,7 +73,7 @@ public class UserRessourceController {
     /**
      * Update a user.
      *
-     * @param login          the user id
+     * @param login       the user id
      * @param requestBody the request body
      * @param contentType the content type
      * @return the response entity
@@ -88,11 +87,11 @@ public class UserRessourceController {
             Optional<UserRequestDto> requestDto = getUserDtoRequest(requestBody, contentType);
             if (requestDto.isPresent()) {
                 Optional<User> user = jpaUserDao.findByLogin(login);
-                if (user.isPresent() ) {
+                if (user.isPresent()) {
                     UserRequestDto userdto = requestDto.get();
                     if (userdto.getPassword().isBlank()) {
                         jpaUserDao.update(user.get(), new String[]{userdto.getName(), ""});
-                    }else {
+                    } else {
                         jpaUserDao.update(user.get(), new String[]{userdto.getName(), authService.encoderPassword(userdto.getPassword())});
                     }
                     return ResponseEntity.ok("Utilisateur mis à jour");
@@ -150,7 +149,7 @@ public class UserRessourceController {
                 posseder.setQuantity(addEcRequestDto.get().getQuantity());
                 if (addEcRequestDto.get().getDate() == null) {
                     posseder.setDate(new Date(System.currentTimeMillis()));
-                }else{
+                } else {
                     posseder.setDate(addEcRequestDto.get().getDate());
                 }
                 jpaPossederDao.save(posseder);

@@ -86,6 +86,11 @@ class UserRessourceControllerTest {
     }
 
     @Test
+    void addEc() throws JsonProcessingException {
+
+    }
+
+    @Test
     void deleteUser() {
         ResponseEntity<String> response = userRessourceController.deleteUser(user.getUsername());
 
