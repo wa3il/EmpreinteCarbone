@@ -1,5 +1,6 @@
 package fr.univlyon1.m1if.m1if10.appec.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import fr.univlyon1.m1if.m1if10.appec.dao.JpaAlimentDao;
 import fr.univlyon1.m1if.m1if10.appec.dao.JpaPossederDao;
 import fr.univlyon1.m1if.m1if10.appec.dao.JpaUserDao;
@@ -80,23 +81,11 @@ class UserRessourceControllerTest {
         verify(jpaUserDao, times(1)).findByLogin(anyString());
     }
 
-    /*@Test
+
+    @Test
     void updateUser() throws JsonProcessingException {
-        UserRequestDto userRequestDto = new UserRequestDto();
-        userRequestDto.setLogin(user.getUsername());
-        userRequestDto.setPassword(user.getPassword());
-        userRequestDto.setName(user.getName());
 
-        ResponseEntity<String> response = userRessourceController.updateUser(user.getUsername(), "{\"name\" : \"nameUpdated\", \"password\" : \"passwordUpdated\"}", MediaType.APPLICATION_JSON_VALUE);
-
-        if (response.getStatusCodeValue() == 500) {
-            System.out.println(response.getBody());
-        }
-
-        assertEquals(200, response.getStatusCodeValue());
-        verify(jpaUserDao, times(1)).update(any(User.class), any(String[].class));
     }
-    */
 
     @Test
     void deleteUser() {

@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('compte').addEventListener('click', function(event) {
         event.preventDefault();
         showSection('sectionCompte');
+        getUserProperty(); 
     });
 
     document.getElementById('connexion1').addEventListener('click', function(event) {
@@ -64,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('empreinte').addEventListener('click', function(event) {
         event.preventDefault();
         showSection('sectionEmpreinte');
+        getConsoTotal(); 
     });
 
     document.getElementById('liste_produits').addEventListener('click', () => {
@@ -419,7 +421,10 @@ function updateUser(){
     fetch(baseUrl + "users/"+log, requestConfig).then(async(res) =>{
         if(res.ok) {
             alert("Modification réussie");
-        } else {
+        } 
+        else if(res.status === 415){
+            alert("Veuillez remplir tous les champs");
+        }else {
             //displayRequestResult("Modification de votre nom refusée ou impossible", "alert-danger");
             throw new Error("Bad response code (" + res.status + ").");
         }
@@ -496,16 +501,21 @@ function isConnected(){
         displayConnected(true);
 }
 
-function addProduct() {
-    console.log("j'ajoute un aliment");
+function addProduct(element) {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", localStorage.getItem("token"));
+
+    var parentDiv = element.closest('.fruite-item');
+    var alimentId = parentDiv.querySelector('.idProduit').innerText;
+    var quantity = parentDiv.querySelector('.quantity').value * parseFloat(parentDiv.querySelector('.ec').innerText.match(/[\d\.]+/)[0]);
+    var date = parentDiv.querySelector('.date').value;
+
     const body = {
         login: localStorage.getItem("login"),
-        alimentId: document.getElementById("idProduit").innerText,
-        quantity: document.getElementById("quantity").value,
-        date: document.getElementById("date").value
+        alimentId: alimentId,
+        quantity: quantity,
+        date: date
     };
     const requestConfig = {
         method: "POST",
@@ -529,9 +539,8 @@ function addProduct() {
         })
 }
 
-function renderListAlimentUser() {
+function getListProducts(){
     const headers = new Headers();
-
     headers.append("Authorization", localStorage.getItem("token"));
     const requestConfig = {
         method: "GET",
@@ -546,7 +555,13 @@ function renderListAlimentUser() {
             } else {
                 throw new Error("Response is error (" + response.status + ") or does not contain JSON (" + response.headers.get("Content-Type") + ").");
             }
-        }).then(res => {
+        }).catch((err) => {
+            console.error("In getListProducts: " + err);
+        });
+}
+
+function renderListAlimentUser() {
+    getListProducts().then(res => {
             if(Array.isArray(res)) {
                 let produits = []
                 for (var i = 0; i < res.length; i++) {
@@ -572,4 +587,21 @@ function renderListAlimentUser() {
         .catch((err) => {
             console.error("In renderListAlimentUser: " + err);
         });
+}
+
+function getConsoTotal(){
+    getListProducts().then(res => {
+        let somme = 0; 
+        if(Array.isArray(res)) {
+            for (var i = 0; i < res.length; i++) {
+                somme += res[i][2];
+                console.log(somme); 
+            }
+           console.log("la somme est "+somme);    
+        }
+        document.getElementById("consoTotal").innerText = somme;
+    })
+    .catch((err) => {
+        console.error("In getConsoTotal: " + err);
+    });
 }

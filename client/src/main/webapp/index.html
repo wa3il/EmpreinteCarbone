@@ -49,7 +49,7 @@
                         <a href="#" id="produits" class="nav-item nav-link text-white">Produits</a>
                     </li>
                     <li class="requiresConnection">
-                        <a href="#" id="compte" class="nav-item nav-link text-white" onclick=getUserProperty()>Mon compte</a>
+                        <a href="#" id="compte" class="nav-item nav-link text-white">Mon compte</a>
                     </li>
                     <li class="requiresConnection">
                         <a href="#" id="empreinte" class="nav-item nav-link text-white">Mes empreintes</a>
@@ -126,23 +126,25 @@
             {{#aliments}}
                 <div class="col-md-6 col-lg-4 col-xl-3">
                     <div class="rounded position-relative fruite-item">
-                        <div id="idProduit" style="display: none;">{{alimentId}}</div>
+                        <div class="idProduit"style="display: none;">{{alimentId}}</div>
                         <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                             style="top: 10px; left: 10px;">{{sousGroupe}}
                         </div>
                         <div class="p-4 border border-secondary rounded-bottom">
-                            <h4 style="margin-top: 25px;" id="nom_legume">{{nomLegume}}</h4>
+                            <h4 style="margin-top: 25px;" class="nom_legume">{{nomLegume}}</h4>
                             <div class="d-flex justify-content-between flex-lg-wrap">
-                                <p class="text-dark fs-6 fw-bold mb-2" id="ec">{{ec}} gC02 / kg</p>
-                                <input type="number" id="quantity" name="quantity" min="0" step="0.1" placeholder="Quantité en kg" required> <br>
-                                <input id="date" type="date"></input>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary" onclick="addProduct()">
-                                <i class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma liste </a>
+                                <p class="text-dark fs-6 fw-bold mb-2 ec">{{ec}} gC02 / kg</p>
+                                <input type="number" class="quantity requiresConnection" name="quantity" min="0" step="0.1" placeholder="Quantité en kg" required> <br>
+                                <input class="date requiresConnection" type="date"></input>
+                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary requiresConnection" onclick="addProduct(this)">
+                                    <i class="fa fa-shopping-bag me-2 text-primary"></i> Ajouter à ma liste
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             {{/aliments}}
+
         </script>
         <div class="container px-0 py-3">
             <div id="tab-1" class="tab-pane fade show p-0">
@@ -153,7 +155,10 @@
                         </div>
                     </div>
                 </div>
-                <button id="btnrecherche"class="button-41 " role="button">Ajouter 10</button>
+                <button id="btnrecherche"
+                        class="btn btn-primary border-2 border-secondary py-2 px-3 m-2 rounded-pill text-white h-100"
+                        style="top: 0; right: 0%;"
+                        role="button">Voir plus</button>
             </div>
         </div>
     </section>
@@ -335,8 +340,10 @@
                         </div>
                         <div id="secListe" class="inactive">
                             <div class="p-5">
-                                <div class="text-center bg-secondary p-2 mt-n5 rounded">
-                                    <h1 class="text-white">Ma liste</h1>
+                                <div class="mb-5">
+                                    <div class="text-center bg-secondary p-1 mt-n5 rounded">
+                                        <h1 class="text-white">Ma liste</h1>
+                                    </div>
                                 </div>
                                 <script id="list_produit" type="x-tmpl-mustache">
                                     {{#produits}}
@@ -385,80 +392,65 @@
         });
     </script>
     <section id='sectionEmpreinte' class='inactive'>
-    <div class="container-fluid py-5 mb-5">
-                        <div class="py-5 px-5">
-                            <div class="row g-4 py-5">
-                                <div class="col-lg-3">
-                                    <div class="row g-4">
-                                        <div class="col-12 mt-4">
-                                            <div class="mb-3 border-bottom">
-                                                <h1>Mes empreintes carbones precedentes</h1>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9 px-5">
-                                    <div class="compte">
-                                        <div class="rounded bg-primary p-5">
-                                            <div class="row"> <!-- Wrap all dropdowns inside this row -->
-                                                <div class="col-4"> <!-- Each dropdown takes 4 columns -->
-                                                    <div class="nav-item dropdown" id="date">
-                                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm" id="slcjour">
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="nav-item dropdown" id="div_mois">
-                                                        <select class="form-select form-select-lg mb-2" aria-label=".form-select-sm">
-                                                            <option value="1">Janvier</option>
-                                                            <option value="2">Fevrier</option>
-                                                            <option value="3">Mars</option>
-                                                            <option value="4">Avril</option>
-                                                            <option value="5">Mai</option>
-                                                            <option value="6">Juin</option>
-                                                            <option value="7">Juillet</option>
-                                                            <option value="8">Aout</option>
-                                                            <option value="9">Septembre</option>
-                                                            <option value="10">Octobre</option>
-                                                            <option value="11">Novembre</option>
-                                                            <option value="12">Decembre</option>
+        <div class="container-fluid py-3 mb-5" style="margin-top: 150px;">
+            <div class="justify-content-center container px-0">
+                <div class="align-items-center position-relative mx-auto">
+                    <div class="text-center p-2 mt-n5">
+                        <h1 class="mb-5 display-3 text-dark">Mes empreintes carbones précédentes</h1>
+                    </div>
 
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="nav-item dropdown" id="div_annee">
-                                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm" id="annee">
-                                                            <!-- Options for year -->
-                                                        </select>
-                                                    </div>
-                                                    <div class="mx-auto">
-                                                        <button type="submit"
-                                                                class="btn btn-primary border-2 border-secondary py-3 px-2 mx-0 rounded-pill text-white h-100"
-                                                                style="top: 0; right: 0%;">Calculer mon empreinte</button>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            </div>
-                                        </div>
-                                            <div class="p-4 right-0" >
-                                                <div class="col-4">
-                                                    <div class="mb-3 border-bottom">
-                                                        <h4>
-                                                            <a href="#" id="" class="text-dark">Votre empreinte Carbonne est </a>
-                                                        </h4>
-                                                    </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
+                    <div class="m-4 p-4 right-0" >
+                        <div class="mb-3 border-bottom">
+                            <h4>
+                                <a href="#" id="" class="text-dark">Votre empreinte carbone total est <strong id="consoTotal">...</strong> gCO2</a>
+                            </h4>
                         </div>
                     </div>
 
+                    <div class="m-4">
+                        <div class="rounded bg-primary p-5">
+                            <div class="row"> <!-- Wrap all dropdowns inside this row -->
+                                <div class="col-4"> <!-- Each dropdown takes 4 columns -->
+                                    <div class="nav-item dropdown" id="date">
+                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm" id="slcjour">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="nav-item dropdown" id="div_mois">
+                                        <select class="form-select form-select-lg mb-2" aria-label=".form-select-sm">
+                                            <option value="1">Janvier</option>
+                                            <option value="2">Fevrier</option>
+                                            <option value="3">Mars</option>
+                                            <option value="4">Avril</option>
+                                            <option value="5">Mai</option>
+                                            <option value="6">Juin</option>
+                                            <option value="7">Juillet</option>
+                                            <option value="8">Aout</option>
+                                            <option value="9">Septembre</option>
+                                            <option value="10">Octobre</option>
+                                            <option value="11">Novembre</option>
+                                            <option value="12">Decembre</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="nav-item dropdown" id="div_annee">
+                                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-sm" id="annee">
+                                            <!-- Options for year -->
+                                        </select>
+                                    </div>
+                                    <div class="mx-auto">
+                                        <button type="submit"
+                                                class="btn btn-primary border-2 border-secondary py-3 px-2 mx-0 rounded-pill text-white h-100"
+                                                style="top: 0; right: 0%;">Calculer mon empreinte</button>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
+                            
                     </div>
                 </div>
             </div>
