@@ -53,4 +53,3 @@ Nginx est utilisé comme reverse proxy pour rediriger les requêtes vers l'appli
 
 Vous pouvez accéder à l'application à l'adresse suivante : https://192.168.75.106
 
-
