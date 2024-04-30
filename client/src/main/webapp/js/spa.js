@@ -528,3 +528,30 @@ function addProduct() {
             console.error("In addProduct: " + err);
         })
 }
+
+function renderListAlimentUser() {
+    getProperties("aliments/"+localStorage.getItem("login")).then( async (res) => {
+        if(Array.isArray(res)) {
+            let produits = []
+            for (var i = 0; i < int; i++) {
+                let prod = res[i];
+                produits.push(prod);
+            }
+            const template = document.getElementById('list_produit');
+            if (!template){
+                console.error("l'élément n'existe pas...");
+                return;
+            }
+            const templ = template.innerText;
+            const rendered = Mustache.render(templ, { produits: produits});
+            const elem = document.getElementById('listProduits');
+            if (!elem){
+                console.error("l'élément n'existe pas...");
+                return;
+            }
+            elem.innerHTML = rendered;          
+        }
+    }).catch((err) => {
+        console.error("In renderListAlimentUser: " + err);
+    });
+}
